@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(name = "/admin/")
+@RequestMapping
 @CrossOrigin
 public class ForfaitController {
 
@@ -17,17 +17,17 @@ public class ForfaitController {
         this.forfaitRepository = forfaitRepository;
     }
 
-    @GetMapping("listerForfaits")
+    @GetMapping("/listerForfaits")
     public List<Forfait> getAllForfait(){
         return forfaitRepository.findAll();
     }
 
-    @PostMapping("creerForfait")
+    @PostMapping("/creerForfait")
     public Forfait createForfait(@RequestBody Forfait forfait){
         return forfaitRepository.save(forfait);
     }
 
-    @PutMapping("modifierForfait")
+    @PutMapping("/modifierForfait")
     public Forfait updateForfait(@RequestBody Forfait forfait) throws Exception {
         if(forfait.getIdForfait() == null){
             throw new Exception("Forfait non existante");

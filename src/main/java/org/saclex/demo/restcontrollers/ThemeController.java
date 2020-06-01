@@ -1,5 +1,6 @@
 package org.saclex.demo.restcontrollers;
 
+import org.saclex.demo.entities.Categorie;
 import org.saclex.demo.entities.Theme;
 import org.saclex.demo.repositories.ThemeRepository;
 import org.springframework.http.ResponseEntity;
@@ -22,6 +23,11 @@ public class ThemeController {
     @GetMapping("/listerTheme")
     public List<Theme> getAllTheme(){
         return themeRepository.findAll();
+    }
+
+    @GetMapping("/categoriesParTheme/{idTheme}")
+    public List<Categorie> getCategories(@PathVariable Long idTheme){
+        return themeRepository.findById(idTheme).get().getCategories();
     }
 
     @PostMapping("/admin/creerTheme")
