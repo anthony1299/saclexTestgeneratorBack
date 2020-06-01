@@ -28,10 +28,7 @@ public class CategorieController {
     }
 
     @PutMapping("modifierCategorie")
-    public Categorie updateCategorie(@RequestBody Categorie categorie) throws Exception {
-        if(categorie.getIdCategorie() == null){
-            throw new Exception("Categorie non existante");
-        }
+    public Categorie updateCategorie(@RequestBody Categorie categorie) {
 
         return categorieRepository.save(categorie);
     }

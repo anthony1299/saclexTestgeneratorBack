@@ -2,7 +2,7 @@ package org.saclex.demo.restcontrollers;
 
 import org.saclex.demo.entities.Utilisateur;
 import org.saclex.demo.repositories.UtilisateurRepository;
-import org.springframework.security.crypto.password.PasswordEncoder;
+//import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -15,12 +15,11 @@ import java.util.List;
 @CrossOrigin
 public class UtilisateurController {
     private final UtilisateurRepository utilisateurRepository;
-    private PasswordEncoder encoder;
+    //private PasswordEncoder encoder;
 
 
-    public UtilisateurController(UtilisateurRepository utilisateurRepository, PasswordEncoder encoder) {
+    public UtilisateurController(UtilisateurRepository utilisateurRepository) {
         this.utilisateurRepository = utilisateurRepository;
-        this.encoder = encoder;
     }
 
     @RequestMapping("/login")
@@ -44,7 +43,7 @@ public class UtilisateurController {
     @PostMapping("/all/creerUtilisateur")
     public Utilisateur createUtilisateur(@RequestBody Utilisateur utilisateur){
 
-        utilisateur.setPassword(encoder.encode(utilisateur.getPassword()));
+       // utilisateur.setPassword(encoder.encode(utilisateur.getPassword()));
         return utilisateurRepository.save(utilisateur);
     }
 

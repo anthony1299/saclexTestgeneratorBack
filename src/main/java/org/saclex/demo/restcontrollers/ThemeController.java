@@ -2,9 +2,11 @@ package org.saclex.demo.restcontrollers;
 
 import org.saclex.demo.entities.Theme;
 import org.saclex.demo.repositories.ThemeRepository;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping
@@ -17,7 +19,7 @@ public class ThemeController {
         this.themeRepository = themeRepository;
     }
 
-    @GetMapping("listerTheme")
+    @GetMapping("/listerTheme")
     public List<Theme> getAllTheme(){
         return themeRepository.findAll();
     }
@@ -28,11 +30,7 @@ public class ThemeController {
     }
 
     @PutMapping("/admin/modifierTheme")
-    public Theme updateTheme(@RequestBody Theme theme) throws Exception {
-        if(theme.getId_theme() == null){
-            throw new Exception("Theme non existante");
-        }
-
+    public Theme updateTheme(@RequestBody Theme theme){
         return themeRepository.save(theme);
     }
 

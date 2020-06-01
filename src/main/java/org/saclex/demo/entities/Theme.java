@@ -1,5 +1,7 @@
 package org.saclex.demo.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
@@ -35,6 +37,7 @@ public class Theme implements Serializable {
     @JoinColumn(name = "utilisateur")
     private Utilisateur utilisateur;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "theme",fetch=FetchType.LAZY)
     private List<Categorie> categories = new ArrayList<>();
 

@@ -1,5 +1,7 @@
 package org.saclex.demo.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
@@ -31,6 +33,7 @@ public class Categorie implements Serializable {
     @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     private Date dateCreation;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "categorie",fetch=FetchType.LAZY)
     private List<Question> questions = new ArrayList<>();
 

@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(name = "")
+@RequestMapping
 @CrossOrigin
 public class CarteMentaleController {
 
@@ -17,7 +17,7 @@ public class CarteMentaleController {
         this.carteMentaleRepository = carteMentaleRepository;
     }
 
-    @GetMapping("listerCartes")
+    @GetMapping("/listerCartes")
     public List<CarteMentale> getAllCarte(){
         return carteMentaleRepository.findAll();
     }
@@ -28,11 +28,7 @@ public class CarteMentaleController {
     }
 
     @PutMapping("/responsable/modifierCarte")
-    public CarteMentale updateCarte(@RequestBody CarteMentale carteMentale) throws Exception {
-        if(carteMentale.getIdCarte() == null){
-            throw new Exception("Carte non existante");
-        }
-
+    public CarteMentale updateCarte(@RequestBody CarteMentale carteMentale) {
         return carteMentaleRepository.save(carteMentale);
     }
 
