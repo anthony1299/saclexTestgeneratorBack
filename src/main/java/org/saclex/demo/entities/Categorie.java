@@ -99,5 +99,13 @@ public class Categorie implements Serializable {
     public void setDateModification(Date dateModification) {
         this.dateModification = dateModification;
     }
+
+    public List<Question> getQuestions() {
+        return questions;
+    }
+
+    public void setQuestions(List<Question> questions) {
+        this.questions = questions;
+    }
 }
 
