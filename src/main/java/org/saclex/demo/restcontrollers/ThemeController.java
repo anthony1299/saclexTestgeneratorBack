@@ -30,8 +30,10 @@ public class ThemeController {
     }
 
     @GetMapping("/categoriesParTheme/{idTheme}")
-    public List<Categorie> getCategories(@PathVariable Long idTheme){
-        return themeRepository.findById(idTheme).get().getCategories();
+    public int getCategories(@PathVariable Long idTheme){
+        Theme th= themeRepository.findById(idTheme).get();
+        int i = th.getCategories().size();
+        return i;
     }
 
     @GetMapping("/questionsParTheme/{idTheme}")
