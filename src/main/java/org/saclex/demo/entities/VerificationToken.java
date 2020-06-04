@@ -4,6 +4,7 @@ import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.UUID;
 
 @Entity
 public class VerificationToken  {
@@ -31,11 +32,12 @@ public class VerificationToken  {
     public VerificationToken() {
     }
 
-    public VerificationToken(String token, Utilisateur utilisateur, Date dateExpiration) {
-        this.token = token;
+    public VerificationToken(Utilisateur utilisateur) {
         this.utilisateur = utilisateur;
-        this.dateExpiration = dateExpiration;
+        this.token= UUID.randomUUID().toString();
+        this.dateExpiration=new Date();
     }
+
 
     public static int getExpiration() {
         return Expiration;

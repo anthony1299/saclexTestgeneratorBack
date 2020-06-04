@@ -24,17 +24,13 @@ public class Utilisateur implements Serializable {
     @Column(name = "email",nullable = false)
     private String email;
 
-    private String telephone;
-
-    @Column(name = "date_de_naissance",nullable = false)
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date dateDeNaissance;
-    @Column(name = "adresse")
-    private String adresse;
     @Column(name = "login")
     private String login;
     @Column(name = "password")
     private String password;
+
+    @Column(name = "description")
+    private String description;
 
     @Column(nullable = false)
     private boolean isActive;
@@ -62,13 +58,10 @@ public class Utilisateur implements Serializable {
     public Utilisateur() {
     }
 
-    public Utilisateur(String nom, String prenom, String email, String telephone, Date dateDeNaissance, String adresse, String login, String password, boolean isActive, Role role, Sexe sexe, Forfait forfait) {
+    public Utilisateur(String nom, String prenom, String email,String login, String password, boolean isActive, Role role, Sexe sexe, Forfait forfait) {
         this.nom = nom;
         this.prenom = prenom;
         this.email = email;
-        this.telephone = telephone;
-        this.dateDeNaissance = dateDeNaissance;
-        this.adresse = adresse;
         this.login = login;
         this.password = password;
         this.isActive = false;
@@ -107,30 +100,6 @@ public class Utilisateur implements Serializable {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getTelephone() {
-        return telephone;
-    }
-
-    public void setTelephone(String telephone) {
-        this.telephone = telephone;
-    }
-
-    public Date getDateDeNaissance() {
-        return dateDeNaissance;
-    }
-
-    public void setDateDeNaissance(Date dateDeNaissance) {
-        this.dateDeNaissance = dateDeNaissance;
-    }
-
-    public String getAdresse() {
-        return adresse;
-    }
-
-    public void setAdresse(String adresse) {
-        this.adresse = adresse;
     }
 
     public String getLogin() {
