@@ -57,7 +57,7 @@ public class UtilisateurController {
     }
     @PostMapping("/all/creerApprenant")
     public String createApprennant(@RequestBody Utilisateur utilisateur){
-
+        utilisateur.setRole(Utilisateur.Role.apprenant);
         utilisateurRepository.save(utilisateur);
         VerificationToken verificationToken = new VerificationToken(utilisateur);
         verificationTokenRepository.save(verificationToken);
