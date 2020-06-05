@@ -1,6 +1,5 @@
 package org.saclex.demo.entities;
 
-import org.springframework.format.annotation.DateTimeFormat;
 //import org.springframework.security.core.GrantedAuthority;
 //import org.springframework.security.core.userdetails.UserDetails;
 
@@ -23,6 +22,11 @@ public class Utilisateur implements Serializable {
     private String prenom;
     @Column(name = "email",nullable = false)
     private String email;
+
+
+    @Column(name = "date_naissance", nullable = true)
+    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
+    private Date dateNaissance;
 
     @Column(name = "login")
     private String login;
@@ -58,16 +62,34 @@ public class Utilisateur implements Serializable {
     public Utilisateur() {
     }
 
-    public Utilisateur(String nom, String prenom, String email,String login, String password, boolean isActive, Role role, Sexe sexe, Forfait forfait) {
+    public Utilisateur(String nom, String prenom, String email, Date dateNaissance, String login, String password, String description, Role role, Sexe sexe, Forfait forfait) {
         this.nom = nom;
         this.prenom = prenom;
         this.email = email;
+        this.dateNaissance = dateNaissance;
         this.login = login;
         this.password = password;
+        this.description = description;
         this.isActive = false;
         this.role = role;
         this.sexe = sexe;
         this.forfait = forfait;
+    }
+
+    public Date getDateNaissance() {
+        return dateNaissance;
+    }
+
+    public void setDateNaissance(Date dateNaissance) {
+        this.dateNaissance = dateNaissance;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public Long getId() {
