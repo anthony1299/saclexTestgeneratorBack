@@ -28,8 +28,7 @@ public class Utilisateur implements Serializable {
 
     @Column(name = "date_naissance", nullable = true)
     @Temporal(TemporalType.DATE)
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date dateNaissance;
+    private java.sql.Date dateNaissance;
 
     @Column(name = "login")
     private String login;
@@ -65,7 +64,7 @@ public class Utilisateur implements Serializable {
     public Utilisateur() {
     }
 
-    public Utilisateur(String nom, String prenom, String email, Date dateNaissance, String login, String password, String description, Role role, Sexe sexe, Forfait forfait) {
+    public Utilisateur(String nom, String prenom, String email, java.sql.Date dateNaissance, String login, String password, String description, Role role, Sexe sexe, Forfait forfait) {
         this.nom = nom;
         this.prenom = prenom;
         this.email = email;
@@ -73,7 +72,6 @@ public class Utilisateur implements Serializable {
         this.login = login;
         this.password = password;
         this.description = description;
-        this.isActive = false;
         this.role = role;
         this.sexe = sexe;
         this.forfait = forfait;
@@ -83,7 +81,7 @@ public class Utilisateur implements Serializable {
         return dateNaissance;
     }
 
-    public void setDateNaissance(Date dateNaissance) {
+    public void setDateNaissance(java.sql.Date dateNaissance) {
         this.dateNaissance = dateNaissance;
     }
 
