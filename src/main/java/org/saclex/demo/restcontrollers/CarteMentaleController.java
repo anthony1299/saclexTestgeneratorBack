@@ -1,39 +1,45 @@
 package org.saclex.demo.restcontrollers;
 
 import org.saclex.demo.entities.CarteMentale;
-import org.saclex.demo.repositories.CarteMentaleRepository;
+import org.saclex.demo.service.CarteMentaleService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping
-@CrossOrigin
+@RequestMapping("cartementale")
+@CrossOrigin("*")
 public class CarteMentaleController {
 
-    private final CarteMentaleRepository carteMentaleRepository;
 
-    public CarteMentaleController(CarteMentaleRepository carteMentaleRepository) {
-        this.carteMentaleRepository = carteMentaleRepository;
+    private final CarteMentaleService carteMentaleserviceimpl;
+
+    public CarteMentaleController(CarteMentaleService carteMentaleserviceimpl) {
+        this.carteMentaleserviceimpl = carteMentaleserviceimpl;
     }
 
+    //listes des cartes mentales
     @GetMapping("/listerCartes")
     public List<CarteMentale> getAllCarte(){
-        return carteMentaleRepository.findAll();
+        return carteMentaleserviceimpl.cartes();
     }
 
-    @PostMapping("/responsable/creerCarte")
+    //creer une carte mentale
+    @PostMapping("/creerCarte")
     public CarteMentale createCarte(@RequestBody CarteMentale carteMentale){
-        return carteMentaleRepository.save(carteMentale);
+        return carteMentaleserviceimpl.saveCarte(carteMentale);
     }
 
-    @PutMapping("/responsable/modifierCarte")
+    //modifier une carte mentale
+    @PutMapping("/modifierCarte")
     public CarteMentale updateCarte(@RequestBody CarteMentale carteMentale) {
-        return carteMentaleRepository.save(carteMentale);
+        return carteMentaleserviceimpl.saveCarte(carteMentale);
     }
 
-    @DeleteMapping("/responsable/supprimerCarte/{idCarte}")
+    //suprimmer une carte mentale
+    @DeleteMapping("/supprimerCarte/{idCarte}")
     public void deleteCarte(@PathVariable Long idCarte){
-        carteMentaleRepository.deleteById(idCarte);
+        carteMentaleserviceimpl.deleteCarte(idCarte);
     }
 }

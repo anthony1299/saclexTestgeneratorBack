@@ -2,41 +2,46 @@ package org.saclex.demo.restcontrollers;
 
 import org.saclex.demo.entities.Evaluation;
 import org.saclex.demo.repositories.EvaluationRepository;
+import org.saclex.demo.service.EvaluationServiceImpl;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping
-@CrossOrigin
+@RequestMapping("evaluation/")
+@CrossOrigin("*")
 public class EvaluationController {
-    private final EvaluationRepository evaluationRepository;
+    private final EvaluationServiceImpl evaluationService;
 
     public EvaluationController(EvaluationRepository evaluationRepository) {
-        this.evaluationRepository = evaluationRepository;
+        evaluationService = new EvaluationServiceImpl();
     }
 
+    //Fonction qui liste toutes les evaluations
     @GetMapping("listerEvaluations")
     public List<Evaluation> getAllEvaluation(){
-        return evaluationRepository.findAll();
+        return evaluationService.getAllEvaluations();
     }
 
+    //Creation d'une evaluation
     @PostMapping("creerEvaluation")
     public Evaluation createEvaluation(@RequestBody Evaluation evaluation){
-        return evaluationRepository.save(evaluation);
+        return evaluationService.createEvaluation(evaluation);
     }
 
+    //Fonction de modification d'une évaluation mais qui n'est pas utilisée
     @PutMapping("modifierEvaluatiion")
     public Evaluation updateEvaluation(@RequestBody Evaluation evaluation) throws Exception {
         if(evaluation.getIdEvaluation() == null){
             throw new Exception("Evaluation non existante");
         }
 
-        return evaluationRepository.save(evaluation);
+        return evaluationService.updateEvaluation(evaluation);
     }
 
+    //fonction de suppression d'une evaluation mais qui n'est pas utilisée
     @DeleteMapping("supprimerEvaluation/{idEvaluation}")
     public void deleteEvaluation(@PathVariable Long idEvaluation){
-        evaluationRepository.deleteById(idEvaluation);
+        evaluationService.deleteEvaluation(idEvaluation);
     }
 }

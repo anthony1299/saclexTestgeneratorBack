@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping
-@CrossOrigin
+@RequestMapping("forfait/")
+@CrossOrigin("*")
 public class ForfaitController {
 
     private final ForfaitRepository forfaitRepository ;

@@ -4,43 +4,45 @@ import org.saclex.demo.entities.CarteMentale;
 import org.saclex.demo.entities.Categorie;
 import org.saclex.demo.entities.Question;
 import org.saclex.demo.entities.Theme;
-import org.saclex.demo.repositories.CarteMentaleRepository;
-import org.saclex.demo.repositories.ThemeRepository;
+import org.saclex.demo.service.CarteMentaleService;
+import org.saclex.demo.service.ThemeService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping
-@CrossOrigin
+@RequestMapping("theme/")
+@CrossOrigin("*")
 public class ThemeController {
 
-    private final ThemeRepository themeRepository;
-    private final CarteMentaleRepository carteMentaleRepository;
+    private final ThemeService themeService;
+    private final CarteMentaleService carteMentaleService;
 
-    public ThemeController(ThemeRepository themeRepository, CarteMentaleRepository carteMentaleRepository) {
-        this.themeRepository = themeRepository;
-        this.carteMentaleRepository = carteMentaleRepository;
+    public ThemeController(ThemeService themeService, CarteMentaleService carteMentaleService) {
+        this.themeService = themeService;
+        this.carteMentaleService = carteMentaleService;
     }
 
-    @GetMapping("/listerTheme")
+
+    @GetMapping("listerTheme")
     public List<Theme> getAllTheme(){
-        return themeRepository.findAll();
+        return themeService.getAllThemes();
     }
 
-    @GetMapping("/categoriesParTheme/{idTheme}")
+    //Retourne le nombre de catégories associées à un thème
+    @GetMapping("categoriesParTheme/{idTheme}")
     public int getCategories(@PathVariable Long idTheme){
-        Theme th= themeRepository.findById(idTheme).get();
+        Theme th= themeService.findById(idTheme);
         int i = th.getCategories().size();
         return i;
     }
 
-    @GetMapping("/questionsParTheme/{idTheme}")
+    //Retourne le nombre de question par theme
+    @GetMapping("questionsParTheme/{idTheme}")
     public int getNbreQuestions(@PathVariable Long idTheme){
-        Theme th = themeRepository.findById(idTheme).get();
+        Theme th = themeService.findById(idTheme);
         List<Categorie> categories = th.getCategories();
-        int i;
         int nbreQuestion=0;
         for (Categorie categorie : categories){
             nbreQuestion=nbreQuestion+categorie.getQuestions().size();
@@ -49,10 +51,11 @@ public class ThemeController {
         return nbreQuestion;
     }
 
-    @GetMapping("/cartesParTheme/{idTheme}")
+    //retourne le nombre de cartes mentales par theme
+    @GetMapping("cartesParTheme/{idTheme}")
     public int getNbreCartes(@PathVariable Long idTheme){
-        List<CarteMentale> carteMentales =carteMentaleRepository.findAll();
-        Theme th = themeRepository.findById(idTheme).get();
+        List<CarteMentale> carteMentales =carteMentaleService.cartes();
+        Theme th = themeService.findById(idTheme);
         List<Categorie> categories = th.getCategories();
         List<Question> questions;
         int i;
@@ -71,19 +74,21 @@ public class ThemeController {
         return nbreCartes;
     }
 
-
-    @PostMapping("/admin/creerTheme")
+    //creation d'un thème
+    @PostMapping("creerTheme")
     public Theme createTheme(@RequestBody Theme theme){
-        return themeRepository.save(theme);
+        return themeService.createTheme(theme);
     }
 
-    @PutMapping("/admin/modifierTheme")
+    //modification d'un thème
+    @PutMapping("modifierTheme")
     public Theme updateTheme(@RequestBody Theme theme){
-        return themeRepository.save(theme);
+        return themeService.updateTheme(theme);
     }
 
-    @DeleteMapping("/admin/supprimerTheme/{idTheme}")
+    //Suppression d'un thème à l'aide de l'id
+    @DeleteMapping("supprimerTheme/{idTheme}")
     public void deleteTheme(@PathVariable Long idTheme){
-        themeRepository.deleteById(idTheme);
+        themeService.deleteTheme(idTheme);
     }
 }

@@ -6,6 +6,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping
-@CrossOrigin
+@CrossOrigin("*")
 public class EvalQuestRepController {
 }

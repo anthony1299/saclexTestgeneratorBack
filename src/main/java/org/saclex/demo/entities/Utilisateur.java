@@ -27,7 +27,7 @@ public class Utilisateur implements Serializable {
     private String email;
 
 
-    @Column(name = "date_naissance", nullable = true)
+    @Column(name = "date_naissance")
     @Temporal(TemporalType.DATE)
     @JsonFormat(pattern = "yyyy-MM-dd")
     private Date dateNaissance;
@@ -44,7 +44,7 @@ public class Utilisateur implements Serializable {
     private boolean isActive;
 
     public enum Role {
-        administrateur,apprenant,responsable_theme
+        ADMINISTRATEUR,APPRENANT,RESPONSABLE
     }
 
     public enum Sexe {
@@ -63,6 +63,17 @@ public class Utilisateur implements Serializable {
     @JoinColumn(name = "forfait")
     private Forfait forfait;
 
+    @OneToMany(mappedBy = "user",fetch = FetchType.LAZY)
+    private List<Evaluation> evaluations = new ArrayList<>();
+
+    public List<Evaluation> getEvaluations() {
+        return evaluations;
+    }
+
+    public void setEvaluations(List<Evaluation> evaluations) {
+        this.evaluations = evaluations;
+    }
+
     public Utilisateur() {
     }
 
@@ -77,6 +88,15 @@ public class Utilisateur implements Serializable {
         this.role = role;
         this.sexe = sexe;
         this.forfait = forfait;
+    }
+    public Utilisateur(String nom, String prenom, String email, Date dateNaissance, String login, String password,Sexe sexe) {
+        this.nom = nom;
+        this.prenom = prenom;
+        this.email = email;
+        this.dateNaissance = dateNaissance;
+        this.login = login;
+        this.password = password;
+        this.sexe = sexe;
     }
 
     public Date getDateNaissance() {

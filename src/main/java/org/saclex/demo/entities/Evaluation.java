@@ -14,7 +14,7 @@ import java.util.List;
 @Table(name = "evaluation")
 public class Evaluation implements Serializable {
     public enum statuEval{
-        Reussi,Echoué
+        Reussi,Echoue
     }
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -44,21 +44,40 @@ public class Evaluation implements Serializable {
     @OneToMany(mappedBy = "eval",fetch=FetchType.LAZY)
     private List<EvalQuestRep> evalQuest = new ArrayList<>();
 
+    @ManyToOne
+    @JoinColumn(name = "apprenant")
+    private Utilisateur user;
+
     public Evaluation() {
     }
 
-    public Evaluation(TypeEvaluation typeEvaluation, int total, statuEval statut, Date dateCreation, Date dateModification) {
+    public Evaluation(TypeEvaluation typeEvaluation, int total, statuEval statut) {
         this.typeEvaluation = typeEvaluation;
         this.total = total;
         this.statut = statut;
-        this.dateCreation = dateCreation;
-        this.dateModification = dateModification;
     }
 
-    public Evaluation(TypeEvaluation typeEvaluation, Date dateCreation, Date dateModification) {
+    public Evaluation(TypeEvaluation typeEvaluation, int total, statuEval statut, Utilisateur user) {
         this.typeEvaluation = typeEvaluation;
-        this.dateCreation = dateCreation;
-        this.dateModification = dateModification;
+        this.total = total;
+        this.statut = statut;
+        this.dateCreation = new Date();
+        this.dateModification = new Date();
+        this.user = user;
+    }
+
+    public Utilisateur getUser() {
+        return user;
+    }
+
+    public void setUser(Utilisateur user) {
+        this.user = user;
+    }
+
+    public Evaluation(TypeEvaluation typeEvaluation) {
+        this.typeEvaluation = typeEvaluation;
+        this.dateCreation = new Date();
+        this.dateModification = new Date();
     }
 
     public Long getIdEvaluation() {

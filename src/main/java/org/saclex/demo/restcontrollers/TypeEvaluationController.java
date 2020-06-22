@@ -2,42 +2,42 @@ package org.saclex.demo.restcontrollers;
 
 import org.saclex.demo.entities.TypeEvaluation;
 import org.saclex.demo.repositories.TypeEvaluationRepository;
+import org.saclex.demo.service.TypeEvaluationService;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
-@RequestMapping(name = "/responsable/")
-@CrossOrigin
+@RequestMapping(name = "typeevaluation/")
+@CrossOrigin("*")
 public class TypeEvaluationController {
 
-    private final TypeEvaluationRepository typeEvaluationRepository;
+    private final TypeEvaluationService typeEvaluationService;
 
-    public TypeEvaluationController(TypeEvaluationRepository typeEvaluationRepository) {
-        this.typeEvaluationRepository = typeEvaluationRepository;
+    public TypeEvaluationController(TypeEvaluationRepository typeEvaluationRepository, TypeEvaluationService typeEvaluationService) {
+        this.typeEvaluationService = typeEvaluationService;
     }
 
     @GetMapping("listerTypeEvaluation")
     public List<TypeEvaluation> getAllTypeEvaluation(){
-        return typeEvaluationRepository.findAll();
+        return typeEvaluationService.getAllTypeEvaluations();
     }
 
     @PostMapping("creerTypeEvaluation")
     public TypeEvaluation createTypeEvaluation(@RequestBody TypeEvaluation typeEvaluation){
-        return typeEvaluationRepository.save(typeEvaluation);
+        return typeEvaluationService.createTypeEvaluation(typeEvaluation);
     }
 
     @PutMapping("modifierTypeEvaluation")
     public TypeEvaluation updateTypeEvaluation(@RequestBody TypeEvaluation typeEvaluation) throws Exception {
         if(typeEvaluation.getIdTypeE() == null){
-            throw new Exception("Type evaluation non existante");
+            throw new Exception("Type evaluation non existant");
         }
 
-        return typeEvaluationRepository.save(typeEvaluation);
+        return typeEvaluationService.updateTypeEvaluation(typeEvaluation);
     }
 
     @DeleteMapping("supprimerTypeEvaluation/{idTypeEvaluation}")
     public void deleteTypeEvaluation(@PathVariable Long idTypeEvaluation){
-        typeEvaluationRepository.deleteById(idTypeEvaluation);
+       typeEvaluationService.deleteTypeEvaluation(idTypeEvaluation);
     }
 }

@@ -8,7 +8,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping
-@CrossOrigin
+@CrossOrigin("*")
 public class EnvoiMailController {
 
     private final EnvoiMailRepository envoiMailRepository;

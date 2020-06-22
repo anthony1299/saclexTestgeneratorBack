@@ -1,42 +1,61 @@
 package org.saclex.demo.restcontrollers;
 
+import org.saclex.demo.entities.Categorie;
 import org.saclex.demo.entities.Question;
-import org.saclex.demo.repositories.QuestionRepository;
+import org.saclex.demo.entities.Reponse;
+import org.saclex.demo.service.QuestionService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping(name = "/responsable/")
-@CrossOrigin
+@RequestMapping("question/")
+@CrossOrigin("*")
 public class QuestionController {
-    private final QuestionRepository questionRepository ;
+    private final QuestionService questionService;
 
-    public QuestionController(QuestionRepository questionRepository) {
-        this.questionRepository = questionRepository;
+    public QuestionController(QuestionService questionService) {
+        this.questionService = questionService;
     }
+
 
     @GetMapping("listerQuestions")
     public List<Question> getAllQuestion(){
-        return questionRepository.findAll();
+        return questionService.getAllQuestions();
     }
 
+    //retourne tous les objets reponses associés à une question
+    @GetMapping("listerReponses/{Idquestion}")
+    public List<Reponse> getReponse(@PathVariable Long Idquestion ){
+       Question question= questionService.findById(Idquestion);
+       return question.getReponses();
+    }
+    //liste des questions par rapport à une catégorie précise
+    @GetMapping("questionCategorie/{categorie}")
+    public List<Question> getquestionCategorie(@PathVariable Categorie categorie ){
+        List<Question> questions= questionService.findByCategorie(categorie);
+       return questions;
+    }
+
+    //Creation d'une question
     @PostMapping("creerQuestion")
     public Question createQuestion(@RequestBody Question question){
-        return questionRepository.save(question);
+        return questionService.createQuestion(question);
     }
 
+    //Modification d'une question
     @PutMapping("modifierQuestion")
     public Question updateQuestion(@RequestBody Question question) throws Exception {
         if(question.getIdQuestion() == null){
-            throw new Exception("Question non existante");
+            throw new Exception("Question inexistante");
         }
 
-        return questionRepository.save(question);
+        return questionService.updateQuestion(question);
     }
 
+    //Suppression d'une question à travers l'Id
     @DeleteMapping("supprimerQuestion/{idQuestion}")
     public void deleteQuestion(@PathVariable Long idQuestion){
-        questionRepository.deleteById(idQuestion);
+        questionService.deleteQuestion(idQuestion);
     }
 }

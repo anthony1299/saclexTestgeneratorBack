@@ -8,7 +8,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping
-@CrossOrigin
+@CrossOrigin("*")
 public class MailController {
     private final MailRepository mailRepository;
 
