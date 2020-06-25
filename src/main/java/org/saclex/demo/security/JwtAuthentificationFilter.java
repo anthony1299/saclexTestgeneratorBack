@@ -68,14 +68,14 @@ public class JwtAuthentificationFilter extends UsernamePasswordAuthenticationFil
               .sign(Algorithm.HMAC512(JwtProperties.SECRET));
         //on ajoute ce token à l'en tête de la requête http
       response.addHeader(JwtProperties.HEADER_STRING,JwtProperties.TOKEN_PREFIX + token);
-      /* Utilisateur u = utilisateurService.findByLogin(detailsUtilisateur.getUsername());
+       Utilisateur u = utilisateurService.findByLogin(detailsUtilisateur.getUsername());
        Gson gson =new Gson();
         String utilisateurGson = gson.toJson(u);
         PrintWriter out = response.getWriter();
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
         out.print(utilisateurGson);
-        out.flush();*/
+        out.flush();
     }
 
 }
