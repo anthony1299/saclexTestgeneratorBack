@@ -1,6 +1,7 @@
 package org.saclex.demo.service;
 
 import org.saclex.demo.entities.Categorie;
+import org.saclex.demo.entities.Theme;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,4 +19,7 @@ public interface CategorieService {
 
     //Fonction qui permet de supprimer une categorie
      void deleteCategorie(Long idCategorie);
+
+     //Liste categories par theme
+     List<Categorie> findByTheme(Theme theme);
 }

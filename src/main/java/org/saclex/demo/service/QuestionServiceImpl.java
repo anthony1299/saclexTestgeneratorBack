@@ -10,7 +10,13 @@ import java.util.List;
 @Service
 public class QuestionServiceImpl implements QuestionService {
 
+    final
     QuestionRepository questionRepository;
+
+    public QuestionServiceImpl(QuestionRepository questionRepository) {
+        this.questionRepository = questionRepository;
+    }
+
     @Override
     public List<Question> getAllQuestions() {
         return questionRepository.findAll();

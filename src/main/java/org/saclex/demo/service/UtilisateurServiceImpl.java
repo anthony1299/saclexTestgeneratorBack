@@ -10,7 +10,12 @@ import java.util.List;
 @Service
 public class UtilisateurServiceImpl implements UtilisateurService {
 
+    final
     UtilisateurRepository utilisateurRepository;
+
+    public UtilisateurServiceImpl(UtilisateurRepository utilisateurRepository) {
+        this.utilisateurRepository = utilisateurRepository;
+    }
 
     @Override
     public List<Utilisateur> getAllUtilisateurs() {
@@ -42,5 +47,10 @@ public class UtilisateurServiceImpl implements UtilisateurService {
     @Override
     public Utilisateur findByEmailIgnoreCase(String email) {
         return utilisateurRepository.findByEmailIgnoreCase(email);
+    }
+
+    @Override
+    public Utilisateur findByLogin(String login) {
+        return utilisateurRepository.findByLogin(login);
     }
 }

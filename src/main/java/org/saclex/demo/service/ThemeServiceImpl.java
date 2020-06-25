@@ -11,7 +11,12 @@ import java.util.Optional;
 @Service
 public class ThemeServiceImpl implements ThemeService {
 
+    final
     ThemeRepository themeRepository;
+
+    public ThemeServiceImpl(ThemeRepository themeRepository) {
+        this.themeRepository = themeRepository;
+    }
 
     @Override
     public List<Theme> getAllThemes() {
@@ -42,5 +47,10 @@ public class ThemeServiceImpl implements ThemeService {
     @Override
     public List<Theme> findByUser(Utilisateur utilisateur) {
         return themeRepository.findByUtilisateur(utilisateur);
+    }
+
+    @Override
+    public Theme findByLibelle(String Libelle) {
+        return themeRepository.findByLibelle(Libelle);
     }
 }

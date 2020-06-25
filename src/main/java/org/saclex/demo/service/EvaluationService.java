@@ -4,7 +4,7 @@ import org.saclex.demo.entities.Evaluation;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-@Service
+
 public interface EvaluationService {
 
     //Fonction qui permet de lister toutes les evaluations

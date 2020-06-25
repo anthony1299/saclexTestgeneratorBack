@@ -21,4 +21,5 @@ public interface UtilisateurService {
      List<Utilisateur> findByRole(Utilisateur.Role role);
 
      Utilisateur findByEmailIgnoreCase(String email);
+     Utilisateur findByLogin(String login);
 }

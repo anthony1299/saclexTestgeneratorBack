@@ -9,7 +9,11 @@ import java.util.List;
 @Service
 public class TypeQuestionServiceImpl implements TypeQuestionService {
 
-    private TypeQuestionRepository typeQuestionRepository;
+    private final TypeQuestionRepository typeQuestionRepository;
+
+    public TypeQuestionServiceImpl(TypeQuestionRepository typeQuestionRepository) {
+        this.typeQuestionRepository = typeQuestionRepository;
+    }
 
     @Override
     public List<TypeQuestion> getAllTypeQuestion() {

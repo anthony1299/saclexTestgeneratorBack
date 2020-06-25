@@ -9,8 +9,13 @@ import java.util.List;
 
 @Service
 public class ReponseServiceImpl implements ReponseService {
-    @Autowired
+    final
     ReponseRepository reponseRepository;
+
+    public ReponseServiceImpl(ReponseRepository reponseRepository) {
+        this.reponseRepository = reponseRepository;
+    }
+
     @Override
     public List<Reponse> getAllReponses() {
         return reponseRepository.findAll();

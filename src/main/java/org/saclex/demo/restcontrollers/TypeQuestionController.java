@@ -1,9 +1,7 @@
 package org.saclex.demo.restcontrollers;
 
 import org.saclex.demo.entities.TypeQuestion;
-import org.saclex.demo.repositories.TypeQuestionRepository;
 import org.saclex.demo.service.TypeQuestionService;
-import org.saclex.demo.service.TypeQuestionServiceImpl;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
@@ -14,9 +12,10 @@ public class TypeQuestionController {
 
     private final TypeQuestionService typeQuestionService;
 
-    public TypeQuestionController(TypeQuestionRepository typeQuestionRepository) {
-        typeQuestionService = new TypeQuestionServiceImpl();
+    public TypeQuestionController(TypeQuestionService typeQuestionService) {
+        this.typeQuestionService = typeQuestionService;
     }
+
 
     @GetMapping("listerTypeQuestion")
     public List<TypeQuestion> getAllTypeQuestion(){

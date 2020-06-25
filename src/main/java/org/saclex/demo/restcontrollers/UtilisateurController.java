@@ -2,9 +2,6 @@ package org.saclex.demo.restcontrollers;
 
 import org.saclex.demo.entities.Utilisateur;
 import org.saclex.demo.entities.VerificationToken;
-import org.saclex.demo.repositories.UtilisateurRepository;
-//import org.springframework.security.crypto.password.PasswordEncoder;
-import org.saclex.demo.repositories.VerificationTokenRepository;
 import org.saclex.demo.service.UtilisateurService;
 import org.saclex.demo.service.VerificationTokenService;
 import org.springframework.mail.SimpleMailMessage;

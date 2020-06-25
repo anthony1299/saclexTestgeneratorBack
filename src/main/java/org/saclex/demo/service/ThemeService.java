@@ -25,4 +25,7 @@ public interface ThemeService {
     //lister themme en fonction du createur
     List<Theme> findByUser(Utilisateur utilisateur);
 
+    Theme findByLibelle(String Libelle);
+
+
 }

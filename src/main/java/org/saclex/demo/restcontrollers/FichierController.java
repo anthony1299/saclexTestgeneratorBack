@@ -1,9 +1,7 @@
 package org.saclex.demo.restcontrollers;
 
 import org.saclex.demo.entities.Fichier;
-import org.saclex.demo.repositories.FichierRepository;
 import org.saclex.demo.service.FichierService;
-import org.saclex.demo.service.FichierServiceImpl;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -12,11 +10,13 @@ import java.util.List;
 @RequestMapping(name = "fichier/")
 @CrossOrigin("*")
 public class FichierController {
+
     private final FichierService fichierService;
 
-    public FichierController(FichierRepository fichierRepository) {
-        fichierService = new FichierServiceImpl();
+    public FichierController(FichierService fichierService) {
+        this.fichierService = fichierService;
     }
+
 
     @GetMapping("listerFichiers")
     public List<Fichier> getAllFichier(){

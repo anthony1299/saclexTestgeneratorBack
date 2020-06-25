@@ -9,4 +9,7 @@ import java.util.List;
 public interface ThemeRepository extends JpaRepository<Theme,Long> {
     //lister les themes par rapport à leur createur
     List<Theme> findByUtilisateur(Utilisateur utilisateur);
+
+    //Recuperer un theme grace a son libelle
+    Theme findByLibelle(String libelle);
 }
