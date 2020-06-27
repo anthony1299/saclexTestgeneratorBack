@@ -28,6 +28,11 @@ public class ReponseController {
         return reponseService.createReponse(reponse);
     }
 
+    @PostMapping("savereponses")
+    public void saveReponses(@RequestBody List<Reponse> reponses){
+        reponseService.saveAllReponse(reponses);
+    }
+
     @PutMapping("modifierReponse")
     public Reponse updateReponse(@RequestBody Reponse reponse) throws Exception {
         if(reponse.getIdReponse() == null){

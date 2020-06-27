@@ -18,4 +18,8 @@ public interface ReponseService {
 
     //Fonction qui permet de supprimer une reponse
      void deleteReponse(Long idReponse);
+
+     //Fonction qui permet d'enregistrer une liste de reponse
+    void saveAllReponse( List<Reponse> reponses);
+
 }

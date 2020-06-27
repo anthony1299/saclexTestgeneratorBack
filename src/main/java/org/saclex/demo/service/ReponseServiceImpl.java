@@ -35,4 +35,12 @@ public class ReponseServiceImpl implements ReponseService {
     public void deleteReponse(Long idReponse) {
         reponseRepository.deleteById(idReponse);
     }
+
+    @Override
+    public void saveAllReponse(List<Reponse> reponses) {
+        for (Reponse r: reponses
+             ) {
+            reponseRepository.save(r);
+        }
+    }
 }
