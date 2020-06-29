@@ -63,6 +63,8 @@ public class JwtAuthentificationFilter extends UsernamePasswordAuthenticationFil
     @Override
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult) throws IOException, ServletException {
       DetailsUtilisateur detailsUtilisateur = (DetailsUtilisateur) authResult.getPrincipal();
+      Date date =new Date(System.currentTimeMillis()+JwtProperties.DATE_EXPIRATION);
+      Format format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
       //On crée le jwt token
       String token = JWT.create()
               .withSubject(detailsUtilisateur.getUsername())
@@ -70,6 +72,7 @@ public class JwtAuthentificationFilter extends UsernamePasswordAuthenticationFil
               .sign(Algorithm.HMAC512(JwtProperties.SECRET));
         //on ajoute ce token à l'en tête de la requête http
       response.addHeader(JwtProperties.HEADER_STRING,JwtProperties.TOKEN_PREFIX + token);
+      response.addHeader(JwtProperties.TIME_EXPIRATION,format.format(date));
        Utilisateur u = utilisateurService.findByLogin(detailsUtilisateur.getUsername());
        Gson gson =new Gson();
         String utilisateurGson = gson.toJson(u);
