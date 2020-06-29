@@ -5,6 +5,7 @@ import org.saclex.demo.entities.Theme;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface CategorieService {
 
@@ -22,4 +23,7 @@ public interface CategorieService {
 
      //Liste categories par theme
      List<Categorie> findByTheme(Theme theme);
+
+     //Fonction qui retourne une categorie en fonction de son id
+    Optional<Categorie> findById(Long id);
 }

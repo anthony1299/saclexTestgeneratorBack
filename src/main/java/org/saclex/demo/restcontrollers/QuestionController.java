@@ -10,7 +10,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("question/")
-@CrossOrigin("*")
+@CrossOrigin(origins = "*",allowedHeaders = "*")
 public class QuestionController {
     private final QuestionService questionService;
 

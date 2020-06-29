@@ -13,7 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("theme/")
-@CrossOrigin("*")
+@CrossOrigin(origins = "*",allowedHeaders = "*")
 public class ThemeController {
 
     private final ThemeService themeService;

@@ -8,7 +8,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(name = "typeevaluation/")
-@CrossOrigin("*")
+@CrossOrigin(origins = "*",allowedHeaders = "*")
 public class TypeEvaluationController {
 
     private final TypeEvaluationService typeEvaluationService;

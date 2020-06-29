@@ -7,7 +7,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(name = "typequestion/")
-@CrossOrigin("*")
+@CrossOrigin(origins = "*",allowedHeaders = "*")
 public class TypeQuestionController {
 
     private final TypeQuestionService typeQuestionService;

@@ -8,7 +8,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("reponse/")
-@CrossOrigin("*")
+@CrossOrigin(origins = "*",allowedHeaders = "*")
 public class ReponseController {
 
     private final ReponseService reponseService ;

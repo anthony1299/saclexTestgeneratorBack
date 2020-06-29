@@ -9,7 +9,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("categorie/")
-@CrossOrigin("*")
+@CrossOrigin(origins = "*",allowedHeaders = "*")
 public class CategorieController {
 
     private final CategorieService categorieService;

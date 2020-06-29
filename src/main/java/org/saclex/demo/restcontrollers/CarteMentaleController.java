@@ -9,7 +9,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("cartementale")
-@CrossOrigin("*")
+@CrossOrigin(origins = "*",allowedHeaders = "*")
 public class CarteMentaleController {
 
 

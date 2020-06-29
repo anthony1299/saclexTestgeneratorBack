@@ -12,7 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("utilisateur")
-@CrossOrigin("*")
+@CrossOrigin(origins = "*",allowedHeaders = "*")
 public class UtilisateurController {
 
     private final UtilisateurService utilisateurService;
