@@ -1,0 +1,12 @@
+{
+  "id": 5,
+  "nom": "Dabbagh",
+  "prenom": "Elie",
+  "email": "elie@gmail.com",
+  "login": "elie",
+  "password": "$2a$10$I41b8EJCtme64g1vivwYdOcNrQDSXTy4LUuC0oa.IwcLLTZ2oXxxK",
+  "isActive": true,
+  "role": "RESPONSABLE",
+  "envoiMails": [],
+  "evaluations": []
+}

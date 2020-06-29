@@ -1,5 +1,6 @@
 package org.saclex.demo.security;
 
+import org.apache.tomcat.util.file.ConfigurationSource;
 import org.saclex.demo.entities.Utilisateur;
 import org.saclex.demo.repositories.UtilisateurRepository;
 import org.saclex.demo.service.UtilisateurService;
@@ -15,6 +16,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+
+import java.util.Arrays;
 
 /**
  * Classe utilisée pour paramétrer spring security
@@ -68,6 +72,14 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/typeevaluation/creerTypeEvaluation").hasRole(Utilisateur.Role.ADMINISTRATEUR.toString());
     }
 
+   @Bean
+    CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration configuration= new CorsConfiguration();
+        configuration.setAllowedMethods(Arrays.asList("GET","POST","DELETE","PUT"));
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**",configuration);
+        return source;
+    }
 
     //pour définir l'authentification basée sur une BD
     @Bean
