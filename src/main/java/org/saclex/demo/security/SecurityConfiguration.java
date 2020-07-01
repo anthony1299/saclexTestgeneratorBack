@@ -1,6 +1,5 @@
 package org.saclex.demo.security;
 
-import org.apache.tomcat.util.file.ConfigurationSource;
 import org.saclex.demo.entities.Utilisateur;
 import org.saclex.demo.repositories.UtilisateurRepository;
 import org.saclex.demo.service.UtilisateurService;
@@ -72,14 +71,32 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/typeevaluation/creerTypeEvaluation").hasRole(Utilisateur.Role.ADMINISTRATEUR.toString());
     }
 
-   @Bean
+    /*@Bean
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration= new CorsConfiguration();
-        configuration.setAllowedMethods(Arrays.asList("GET","POST","DELETE","PUT"));
+        configuration.setAllowedOrigins(Arrays.asList("*"));//
+        configuration.setAllowedMethods(Arrays.asList("GET","POST","OPTIONS","DELETE","PUT","PATCH"));
+        configuration.setExposedHeaders(Arrays.asList(JwtProperties.HEADER_STRING, JwtProperties.TIME_EXPIRATION));//
+        configuration.setAllowedHeaders(Arrays.asList("X-Requested-With","Origin","Content-Type","Accept", "Authorization", JwtProperties.TIME_EXPIRATION));//
+        configuration.setAllowCredentials(true);//
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**",configuration);
         return source;
+    }*/
+
+    @Bean
+    CorsConfigurationSource corsConfigurationSource(){
+        CorsConfiguration configuration = new CorsConfiguration();
+        configuration.setAllowedOrigins(Arrays.asList("*"));
+        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "OPTIONS", "DELETE", "PUT", "PATCH"));
+        configuration.setExposedHeaders(Arrays.asList(JwtProperties.HEADER_STRING,JwtProperties.TIME_EXPIRATION));
+        configuration.setAllowedHeaders(Arrays.asList("X-Requested-With", "Origin", "Content-Type", "Accept", "Authorization",JwtProperties.TIME_EXPIRATION,"x-ijt"));
+        configuration.setAllowCredentials(true);
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+        return source;
     }
+
 
     //pour définir l'authentification basée sur une BD
     @Bean

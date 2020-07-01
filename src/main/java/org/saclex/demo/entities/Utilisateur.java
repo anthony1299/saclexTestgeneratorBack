@@ -36,6 +36,8 @@ public class Utilisateur implements Serializable {
     private String login;
     @Column(name = "password")
     private String password;
+    @Column(name = "username")
+    private String username;
 
     @Column(name = "description")
     private String description;

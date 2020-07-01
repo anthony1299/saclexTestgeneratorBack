@@ -1,0 +1,282 @@
+# For a quick start check out our HTTP Requests collection (Tools|HTTP Client|Open HTTP Requests Collection).
+#
+# Following HTTP Request Live Templates are available:
+# * 'gtrp' and 'gtr' create a GET request with or without query parameters",
+# * 'ptr' and 'ptrp' create a POST request with a simple or parameter-like body",
+# * 'mptr' and 'fptr' create a POST request to submit a form with a text or file field (multipart/form-data)",
+
+POST  http://localhost:8088/utilisateur/creerApprenant
+Content-Type: application/json
+
+{
+  "nom": "FODJO",
+  "prenom": "MAXIME",
+  "email": "fodjomaximejr@gmail.com",
+  "dateNaissance": "1999-12-12",
+  "login": "max",
+  "username": "max",
+  "password": "1234",
+  "description": null,
+  "role": "APPRENANT",
+  "sexe": "masculin",
+  "envoiMails": [],
+  "forfait": null,
+  "active": true
+}
+###
+POST  http://localhost:8099/responsable/creerCategorie
+Content-Type: application/json
+
+{
+  "libelle": "cat1",
+  "description": "des",
+  "dateCreation": "2020-05-31",
+  "dateModification": "2020-05-31",
+  "theme": {
+    "id_theme": 1,
+    "libelle" : "theme8",
+    "description" : "description",
+    "dateCreation" : "2020-05-31",
+    "dateModification" : "2020-05-31",
+    "utilisateur" : {
+      "id": 1,
+      "nom": "Fodjo",
+      "prenom": "Maxime",
+      "email": "fodjomaximejr@gmail.com",
+      "dateNaissance": "1999-12-12",
+      "login": "MAX",
+      "password": "1234",
+      "description": null,
+      "role": "responsable_theme",
+      "sexe": "masculin",
+      "envoiMails": [],
+      "forfait": null,
+      "active": true
+    }
+  }
+}
+###
+
+POST  http://localhost:8088/theme/creerTheme
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJlbGllIiwiZXhwIjoxNTk0MDI0MDYwfQ.DKQScDRT1hQN-LVML2Rqe9jZ8O9wigpyOjaxwM5B0lx17ddXUDfKkcxLkEcyTGslEnC5rbPmhtlxwS7ANiYGhA
+Content-Type: application/json
+
+{
+  "libelle" : "theme8",
+  "description" : "description",
+  "dateCreation" : "2020-05-31",
+  "dateModification" : "2020-05-31",
+  "utilisateur" : {
+    "id": 3,
+    "nom": "Fodjo",
+    "prenom": "Maxime",
+    "email": "fodjomaximejr@gmail.com",
+    "dateNaissance": "1999-12-12",
+    "login": "maxime",
+    "password": "1234",
+    "description": null,
+    "role": "RESPONSABLE",
+    "sexe": "masculin",
+    "envoiMails": [],
+    "forfait": null,
+    "active": true
+  }
+}
+###
+
+POST  http://localhost:8099/responsable/creerQuestion
+Content-Type: application/json
+
+{
+  "libelle":"libellequestion",
+  "score":1,
+  "duree":1,
+  "typeQuestion":null,
+  "dateCreation":null,
+  "dateModification":null,
+  "categorie": {
+    "idCategorie": 2,
+    "libelle": "cat1",
+    "description": "des",
+    "dateCreation": "2020-05-31",
+    "dateModification": "2020-05-31",
+    "theme": {
+      "id_theme": 1,
+      "libelle" : "theme8",
+      "description" : "description",
+      "dateCreation" : "2020-05-31",
+      "dateModification" : "2020-05-31",
+      "utilisateur" : {
+        "id": 1,
+        "nom": "Fodjo",
+        "prenom": "Maxime",
+        "email": "fodjomaximejr@gmail.com",
+        "dateNaissance": "1999-12-12",
+        "login": "MAX",
+        "password": "1234",
+        "description": null,
+        "role": "responsable_theme",
+        "sexe": "masculin",
+        "envoiMails": [],
+        "forfait": null,
+        "active": true
+      }
+    }
+  }
+}
+###
+
+POST  http://localhost:8099/responsable/creerReponse
+Content-Type: application/json
+
+{
+  "libelleRep": "lib",
+  "description": "description",
+  "valeur": "true",
+  "media": null,
+  "libelle": "libo",
+  "question_associee": {
+    "idQuestion": 3,
+    "libelle": "libellequestion",
+    "score": 1,
+    "duree": 1,
+    "typeQuestion": null,
+    "categorie": {
+      "idCategorie": 2,
+      "libelle": "cat1",
+      "description": "des",
+      "theme": {
+        "id_theme": 1,
+        "libelle": "theme8",
+        "description": "description",
+        "dateCreation": "2020-05-31T00:00:00.000+0000",
+        "dateModification": "2020-05-31T00:00:00.000+0000",
+        "utilisateur": {
+          "id": 1,
+          "nom": "Fodjo",
+          "prenom": "Maxime",
+          "email": "fodjomaximejr@gmail.com",
+          "dateNaissance": "1999-12-12",
+          "login": "MAX",
+          "password": "1234",
+          "description": null,
+          "role": "responsable_theme",
+          "sexe": "masculin",
+          "envoiMails": [],
+          "forfait": null,
+          "active": true
+        }
+      },
+      "dateCreation": "2020-05-31T00:00:00.000+0000",
+      "dateModification": "2020-05-31T00:00:00.000+0000"
+    },
+    "dateCreation": null,
+    "dateModification": null
+  }
+}
+
+###
+POST  http://localhost:8099/responsable/creerReponse
+Content-Type: application/json
+
+{
+  "libelleRep": "lib",
+  "description": "description",
+  "valeur": "true",
+  "media": null,
+  "libelle": "libo",
+  "question_associee": {
+    "idQuestion": 3
+  }
+}
+###
+
+GET  http://localhost:8099/admin/listerUtilisateur
+
+###
+GET  http://localhost:8088/utilisateur/UnUtilisateur/0
+
+###
+GET  http://localhost:8088/theme/listerTheme
+###
+GET  http://192.168.100.197:8088/theme/listerTheme
+###
+GET  http://localhost:8088/theme/listerQuestions
+###
+GET  http://localhost:8088/theme/listerReponse
+###
+GET  http://localhost:8099/theme/listerCategories
+
+###
+GET  http://localhost:8086/cartesParTheme/1
+
+###
+GET  http://localhost:8086/questionsParTheme/1
+
+###
+
+GET http://localhost:8086/questionsParTheme/1
+Accept: application/json
+
+###
+
+# For a quick start check out our HTTP Requests collection (Tools|HTTP Client|Open HTTP Requests Collection).
+#
+# Following HTTP Request Live Templates are available:
+# * 'gtrp' and 'gtr' create a GET request with or without query parameters",
+# * 'ptr' and 'ptrp' create a POST request with a simple or parameter-like body",
+# * 'mptr' and 'fptr' create a POST request to submit a form with a text or file field (multipart/form-data)",
+GET http://localhost:8086/listerForfaits
+Accept: application/json
+
+<> 2020-06-01T122341.200.json
+<> 2020-06-01T120703.200.json
+<> 2020-06-01T120133.200.json
+
+###
+POST http://localhost:8086/creerForfait
+Content-Type: application/json
+
+{
+  "libele": "forfait semestriel",
+  "description": null,
+  "montant": 200000,
+  "duree": 1
+}
+
+<> 2020-06-01T070326.404.json
+<> 2020-06-01T022737.200.json
+
+
+###
+GET http://localhost:8087/questionsParTheme/0
+Accept: application/json
+
+<> 2020-06-02T010912.200.json
+<> 2020-06-02T010307.200.json
+<> 2020-06-01T110137.200.json
+<> 2020-06-01T110124.200.json
+<> 2020-06-01T110110.200.json
+<> 2020-06-01T110018.500.json
+
+###
+GET http://localhost:8087/cartesParTheme/1
+Accept: application/json
+
+<> 2020-06-02T010832.200.json
+<> 2020-06-01T112824.200.json
+<> 2020-06-01T112813.200.json
+<> 2020-06-01T112531.404.json
+<> 2020-06-01T112509.404.json
+
+###
+GET http://localhost:8087/categoriesParTheme/0
+Accept: application/json
+
+<> 2020-06-02T010832.200.json
+<> 2020-06-01T112824.200.json
+<> 2020-06-01T112813.200.json
+<> 2020-06-01T112531.404.json
+<> 2020-06-01T112509.404.json
+
+###

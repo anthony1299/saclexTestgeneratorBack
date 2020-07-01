@@ -15,7 +15,7 @@ import java.util.Date;
  */
 
 @Service
-public class dbInit implements CommandLineRunner {
+public class dbInit{
     private UtilisateurRepository utilisateurRepository;
     private DataSource dataSource;
     private BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
@@ -25,9 +25,8 @@ public class dbInit implements CommandLineRunner {
         this.dataSource = dataSource;
     }
 
-    @Override
+   /* @Override
     public void run(String... args) throws Exception {
-
         if(utilisateurRepository.findAll().size() == 0) {
             Utilisateur admin = new Utilisateur();
             admin.setLogin("admin");
@@ -39,7 +38,6 @@ public class dbInit implements CommandLineRunner {
             vie.setActive(true);
             utilisateurRepository.save(admin);
             utilisateurRepository.save(vie);
-        }
-
-    }
+        }*/
+    //}
 }
