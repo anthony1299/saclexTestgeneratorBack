@@ -102,6 +102,11 @@ public class UtilisateurController {
         return utilisateurService.updateUtilisateur(utilisateur);
     }
 
+    @GetMapping("/UnUtilisateur/{idUtilisateur}")
+    public Utilisateur getUnUser(@PathVariable Long idUtilisateur) {
+        return utilisateurService.findById(idUtilisateur);
+    }
+
     @DeleteMapping("/supprimerUtilisateur/{idUtilisateur}")
     public void deleteTypeEvaluation(@PathVariable Long idUtilisateur){
         utilisateurService.deleteUtilisateur(idUtilisateur);

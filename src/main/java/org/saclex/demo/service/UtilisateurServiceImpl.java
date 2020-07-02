@@ -53,4 +53,9 @@ public class UtilisateurServiceImpl implements UtilisateurService {
     public Utilisateur findByLogin(String login) {
         return utilisateurRepository.findByLogin(login);
     }
+
+    @Override
+    public Utilisateur findById(Long id) {
+        return utilisateurRepository.findById(id).get();
+    }
 }

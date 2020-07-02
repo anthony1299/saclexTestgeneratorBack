@@ -22,4 +22,5 @@ public interface UtilisateurService {
 
      Utilisateur findByEmailIgnoreCase(String email);
      Utilisateur findByLogin(String login);
+     Utilisateur findById(Long id);
 }

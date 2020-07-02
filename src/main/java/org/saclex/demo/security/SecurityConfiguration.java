@@ -59,6 +59,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("evaluation/creerEvaluation/**").permitAll()
                 .antMatchers("theme/listerTheme").permitAll()
                 .antMatchers("/theme/creerTheme").hasRole(Utilisateur.Role.RESPONSABLE.toString())
+                .antMatchers("/theme/modifierTheme").hasRole(Utilisateur.Role.RESPONSABLE.toString())
                 .antMatchers("/question/creerQuestion").permitAll()
                 .antMatchers("/question/listerReponses").permitAll()
                 //hasRole(Utilisateur.Role.RESPONSABLE.toString())
@@ -71,25 +72,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/typeevaluation/creerTypeEvaluation").hasRole(Utilisateur.Role.ADMINISTRATEUR.toString());
     }
 
-    /*@Bean
-    CorsConfigurationSource corsConfigurationSource() {
-        CorsConfiguration configuration= new CorsConfiguration();
-        configuration.setAllowedOrigins(Arrays.asList("*"));//
-        configuration.setAllowedMethods(Arrays.asList("GET","POST","OPTIONS","DELETE","PUT","PATCH"));
-        configuration.setExposedHeaders(Arrays.asList(JwtProperties.HEADER_STRING, JwtProperties.TIME_EXPIRATION));//
-        configuration.setAllowedHeaders(Arrays.asList("X-Requested-With","Origin","Content-Type","Accept", "Authorization", JwtProperties.TIME_EXPIRATION));//
-        configuration.setAllowCredentials(true);//
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**",configuration);
-        return source;
-    }*/
-
     @Bean
     CorsConfigurationSource corsConfigurationSource(){
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowedOrigins(Arrays.asList("*"));
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "OPTIONS", "DELETE", "PUT", "PATCH"));
-        configuration.setExposedHeaders(Arrays.asList(JwtProperties.HEADER_STRING,JwtProperties.TIME_EXPIRATION));
+        configuration.setExposedHeaders(Arrays.asList("X-Requested-With", "Origin", "Content-Type", "Accept","x-ijt",JwtProperties.HEADER_STRING,JwtProperties.TIME_EXPIRATION));
         configuration.setAllowedHeaders(Arrays.asList("X-Requested-With", "Origin", "Content-Type", "Accept", "Authorization",JwtProperties.TIME_EXPIRATION,"x-ijt"));
         configuration.setAllowCredentials(true);
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
