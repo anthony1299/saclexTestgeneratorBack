@@ -29,6 +29,10 @@ public class Categorie implements Serializable {
     @JoinColumn(name = "theme",nullable = false)
     private Theme theme;
 
+    @ManyToOne
+    @JoinColumn(name = "resp_cat",nullable = false)
+    private Utilisateur respCat;
+
     @Column(name = "date_creation")
     @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     private Date dateCreation;
@@ -44,10 +48,11 @@ public class Categorie implements Serializable {
     public Categorie() {
     }
 
-    public Categorie(String libelle, String description, Theme theme, Date dateCreation, Date dateModification) {
+    public Categorie(String libelle, String description, Theme theme, Utilisateur respCat, Date dateCreation, Date dateModification) {
         this.libelle = libelle;
         this.description = description;
         this.theme = theme;
+        this.respCat=respCat;
         this.dateCreation = dateCreation;
         this.dateModification = dateModification;
     }
@@ -107,5 +112,14 @@ public class Categorie implements Serializable {
     public void setQuestions(List<Question> questions) {
         this.questions = questions;
     }
+
+    public Utilisateur getRespCat() {
+        return respCat;
+    }
+
+    public void setRespCat(Utilisateur respCat) {
+        this.respCat=respCat;
+    }
 }
+
 

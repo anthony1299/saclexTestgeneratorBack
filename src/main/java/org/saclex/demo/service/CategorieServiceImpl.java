@@ -2,6 +2,7 @@ package org.saclex.demo.service;
 
 import org.saclex.demo.entities.Categorie;
 import org.saclex.demo.entities.Theme;
+import org.saclex.demo.entities.Utilisateur;
 import org.saclex.demo.repositories.CategorieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -48,5 +49,10 @@ public class CategorieServiceImpl implements CategorieService {
     @Override
     public Optional<Categorie> findById(Long id) {
         return categorieRepository.findById(id);
+    }
+
+    @Override
+    public List<Categorie> findByResponsable(Utilisateur utilisateur) {
+        return categorieRepository.findByRespCat(utilisateur);
     }
 }

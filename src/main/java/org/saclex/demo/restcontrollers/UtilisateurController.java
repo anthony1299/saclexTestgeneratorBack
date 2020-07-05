@@ -34,17 +34,25 @@ public class UtilisateurController {
         return utilisateurService.getAllUtilisateurs();
     }
 
-    //liste seulement les responsables de themem
+    //liste seulement les responsables de themes
     @GetMapping("/listerResponsable")
     public List<Utilisateur> getResponsables(){
-        return utilisateurService.findByRole(Utilisateur.Role.RESPONSABLE);
+        return utilisateurService.findByRole(Utilisateur.Role.RESPONSABLE_THEME);
     }
 
-    //Fonction qui crée les utilisateurs ayant pour role responsable
+    //Fonction qui crée les utilisateurs ayant pour role responsable_theme
     @PostMapping("/creerUtilisateur")
     public Utilisateur createUtilisateur(@RequestBody Utilisateur utilisateur){
             utilisateur.setActive(true);
-            utilisateur.setRole(Utilisateur.Role.RESPONSABLE);
+            utilisateur.setRole(Utilisateur.Role.RESPONSABLE_THEME);
+            utilisateur.setPassword(encoder.encode(utilisateur.getPassword()));
+        return utilisateurService.createUtilisateur(utilisateur);
+    }
+    //Fonction qui crée les utilisateurs ayant pour role responsable_categorie
+    @PostMapping("/creerRespCategorie")
+    public Utilisateur createRespCat(@RequestBody Utilisateur utilisateur){
+            utilisateur.setActive(true);
+            utilisateur.setRole(Utilisateur.Role.RESPONSABLE_CATEGORIE);
             utilisateur.setPassword(encoder.encode(utilisateur.getPassword()));
         return utilisateurService.createUtilisateur(utilisateur);
     }

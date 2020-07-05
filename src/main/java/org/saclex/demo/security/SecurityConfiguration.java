@@ -55,18 +55,40 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .addFilter(new JwtAuthorizationFilter(authenticationManager(),utilisateurRepository))
                 .authorizeRequests()
                 .antMatchers("/login").permitAll()
-                .antMatchers("/utilisateur/creerUtilisateur").permitAll()
-                .antMatchers("evaluation/creerEvaluation/**").permitAll()
+                //autorisations sur les themes
+                .antMatchers("/theme/creerTheme").hasRole(Utilisateur.Role.ADMINISTRATEUR.toString())
+                .antMatchers("/theme/modifierTheme").hasRole(Utilisateur.Role.ADMINISTRATEUR.toString())
+                .antMatchers("/theme/supprimerTheme/**").hasRole(Utilisateur.Role.ADMINISTRATEUR.toString())
                 .antMatchers("theme/listerTheme").permitAll()
-                .antMatchers("/theme/creerTheme").hasRole(Utilisateur.Role.RESPONSABLE.toString())
-                .antMatchers("/theme/modifierTheme").hasRole(Utilisateur.Role.RESPONSABLE.toString())
-                .antMatchers("/question/creerQuestion").permitAll()
+                //Autorisations pour les categories
+                .antMatchers("/categorie/creerCategorie/**").hasRole(Utilisateur.Role.RESPONSABLE_THEME.toString())
+                .antMatchers("/categorie/modifierCategorie").hasRole(Utilisateur.Role.RESPONSABLE_THEME.toString())
+                .antMatchers("/categorie/supprimerCategorie/**").hasRole(Utilisateur.Role.RESPONSABLE_THEME.toString())
+                .antMatchers("/categorie/listerCategories").hasRole(Utilisateur.Role.ADMINISTRATEUR.toString())
+                //Autorisations pour le responsable
+                .antMatchers("/utilisateur/creerUtilisateur").hasRole(Utilisateur.Role.ADMINISTRATEUR.toString())
+                .antMatchers("/utilisateur/supprimerUtilisateur/**").hasRole(Utilisateur.Role.ADMINISTRATEUR.toString())
+                //Autorisations pour l'apprenant
+                .antMatchers("/utilisateur/creerApprenant").permitAll()
+                .antMatchers("/utilisateur/verif-token").permitAll()
+                //Autorisations pour les questions
+                .antMatchers("/question/creerQuestion").hasRole(Utilisateur.Role.RESPONSABLE_CATEGORIE.toString())
+                .antMatchers("/question/modifierQuestion").hasRole(Utilisateur.Role.RESPONSABLE_CATEGORIE.toString())
+                .antMatchers("/question/supprimerQuestion/**").hasRole(Utilisateur.Role.RESPONSABLE_CATEGORIE.toString())
+                //Autorisations pour les reponses
+                .antMatchers("/reponse/creerReponse").hasRole(Utilisateur.Role.RESPONSABLE_CATEGORIE.toString())
+                .antMatchers("/reponse/modifierReponse").hasRole(Utilisateur.Role.RESPONSABLE_CATEGORIE.toString())
+                .antMatchers("/reponse/savereponses").hasRole(Utilisateur.Role.RESPONSABLE_CATEGORIE.toString())
+                .antMatchers("/reponse/supprimerReponse").hasRole(Utilisateur.Role.RESPONSABLE_CATEGORIE.toString())
+                //Autorisations sur les evaluations
+                .antMatchers("evaluation/creerEvaluation/**").permitAll()
+                //hasRole(Utilisateur.Role.APPRENANT.toString())
+                //Autorisation sur les reponses aux evaluations
+                .antMatchers("reponseEval/creerReponse/**").hasRole(Utilisateur.Role.APPRENANT.toString())
+
                 .antMatchers("/question/listerReponses").permitAll()
-                //hasRole(Utilisateur.Role.RESPONSABLE.toString())
-                .antMatchers("/reponse/creerReponse").permitAll()
-                //hasRole(Utilisateur.Role.RESPONSABLE.toString())
-                .antMatchers("/fichier/creerFichier").hasRole(Utilisateur.Role.RESPONSABLE.toString())
-                .antMatchers("/categorie/creerCategorie").hasRole(Utilisateur.Role.ADMINISTRATEUR.toString())
+                .antMatchers("/reponseEval/creerReponse/**").permitAll()
+                .antMatchers("/fichier/creerFichier").hasRole(Utilisateur.Role.RESPONSABLE_THEME.toString())
                // .antMatchers("/utilisateur/creerUtilisateur").hasRole(Utilisateur.Role.ADMINISTRATEUR.toString())
                 .antMatchers("/typequestion/creerTypeQuestion").hasRole(Utilisateur.Role.ADMINISTRATEUR.toString())
                 .antMatchers("/typeevaluation/creerTypeEvaluation").hasRole(Utilisateur.Role.ADMINISTRATEUR.toString());

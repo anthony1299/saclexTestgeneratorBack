@@ -36,8 +36,6 @@ public class Utilisateur implements Serializable {
     private String login;
     @Column(name = "password")
     private String password;
-    @Column(name = "username")
-    private String username;
 
     @Column(name = "description")
     private String description;
@@ -46,7 +44,7 @@ public class Utilisateur implements Serializable {
     private boolean isActive;
 
     public enum Role {
-        ADMINISTRATEUR,APPRENANT,RESPONSABLE
+        ADMINISTRATEUR,APPRENANT,RESPONSABLE_THEME,RESPONSABLE_CATEGORIE
     }
 
     public enum Sexe {
@@ -67,6 +65,9 @@ public class Utilisateur implements Serializable {
 
     @OneToMany(mappedBy = "user",fetch = FetchType.LAZY)
     private List<Evaluation> evaluations = new ArrayList<>();
+
+    @OneToMany(mappedBy = "respCat",fetch = FetchType.LAZY)
+    private List<Categorie> cat = new ArrayList<>();
 
     public List<Evaluation> getEvaluations() {
         return evaluations;
@@ -99,6 +100,14 @@ public class Utilisateur implements Serializable {
         this.login = login;
         this.password = password;
         this.sexe = sexe;
+    }
+
+    public List<Categorie> getCat() {
+        return cat;
+    }
+
+    public void setCat(List<Categorie> cat) {
+        this.cat=cat;
     }
 
     public Date getDateNaissance() {
