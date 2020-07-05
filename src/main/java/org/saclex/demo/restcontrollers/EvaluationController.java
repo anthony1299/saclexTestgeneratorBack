@@ -15,13 +15,15 @@ public class EvaluationController {
     private final CategorieService categorieService;
     private final ThemeService themeService;
     private final EvalQuestRepService evalQuestRepService;
+    private final UtilisateurService utilisateurService;
 
-    public EvaluationController(EvaluationService evaluationService, QuestionService questionService, CategorieService categorieService, ThemeService themeService, EvalQuestRepService evalQuestRepService) {
+    public EvaluationController(EvaluationService evaluationService, QuestionService questionService, CategorieService categorieService, ThemeService themeService, EvalQuestRepService evalQuestRepService, UtilisateurService utilisateurService) {
         this.evaluationService = evaluationService;
         this.questionService = questionService;
         this.categorieService = categorieService;
         this.themeService = themeService;
         this.evalQuestRepService = evalQuestRepService;
+        this.utilisateurService = utilisateurService;
     }
 
     //Fonction qui liste toutes les evaluations
@@ -31,16 +33,18 @@ public class EvaluationController {
     }
 
     //Creation d'une evaluation
-    @PostMapping("creerEvaluation/{idCategorie}/{nbreQuestions}")
-    public Evaluation createEvaluation(@RequestBody Evaluation evaluation, @PathVariable("idCategorie") Long idCategorie, @PathVariable("nbreQuestions") int nbreQuestions) {
+    @PostMapping("creerEvaluation/{idUser}/{idCategorie}/{nbreQuestions}")
+    public Evaluation createEvaluation(@RequestBody Evaluation evaluation,@PathVariable("idUser") Long idUser, @PathVariable("idCategorie") Long idCategorie, @PathVariable("nbreQuestions") int nbreQuestions) {
         evaluation.setDateCreation(new Date());
         evaluation.setDateModification(new Date());
+        evaluation.setUser(utilisateurService.findById(idUser));
         Evaluation eval = evaluationService.createEvaluation(evaluation);
         Categorie categorie = categorieService.findById(idCategorie).get();
+        int compteur = 0;
         //Liste des questions de la categorie
         List<Question> questions_de_la_categorie = categorie.getQuestions();
         Collections.shuffle(questions_de_la_categorie, new Random(3));
-        //objet qui contient la liste des questions pour l'evaluation en cours
+        //objet qui contient la liste des questions pour l'evaluation en cours de creation
         List<Question> questionEval = new ArrayList<>();
         //Si le nombre de questions demandé est superieur aux nombre de questions disponibles on lui renvoi toutes les questions disponible
         if (questions_de_la_categorie.size() <= nbreQuestions) {
@@ -53,37 +57,44 @@ public class EvaluationController {
             }
 
         } else {
-            int compteur = 0;
+
 
 
             //Recuperation de la liste des questions ratées pour cette categorie
             List<EvalQuestRep> listEchec = evalQuestRepService.findByStatu(Evaluation.statuEval.Echoue);
+            //On verifie si l'apprenant avait déja raté des questions de cette categorie
             List<Question> questionsRates = new ArrayList<>();
-            for (EvalQuestRep e : listEchec) {
-                if (e.getQuest().getCategorie().getIdCategorie() == idCategorie) {
-                    questionsRates.add(e.getQuest());
+            if (listEchec!=null){
+                for (EvalQuestRep e : listEchec) {
+                    if (e.getQuest().getCategorie().getIdCategorie() == idCategorie) {
+                        questionsRates.add(e.getQuest());
+                    }
                 }
-            }
-            Set<Question> set = new LinkedHashSet<>(questionsRates);
-            questionsRates = new ArrayList<>(set);
-            Collections.shuffle(questionsRates, new Random(2));
-            for (Question q:questionsRates
-                 ) {
-                questionEval.add(q);
+                Set<Question> set = new LinkedHashSet<>(questionsRates);
+                questionsRates = new ArrayList<>(set);
+                Collections.shuffle(questionsRates, new Random(2));
+                for (Question q:questionsRates
+                ) {
+                    questionEval.add(q);
+
+                }
 
             }
 
             //Recuperation de la liste des questions reussie pour cette categorie
             List<EvalQuestRep> listReussi = evalQuestRepService.findByStatu(Evaluation.statuEval.Reussi);
+            //On verifie si il avait déja reussi des questions dans cette categorie
             List<Question> questionsReussi = new ArrayList<>();
-            for (EvalQuestRep e : listReussi) {
-                if (e.getQuest().getCategorie().getIdCategorie() == idCategorie) {
-                    questionsReussi.add(e.getQuest());
+            if (listReussi!=null){
+                for(EvalQuestRep e: listReussi){
+                    if(e.getQuest().getCategorie().getIdCategorie()==idCategorie){
+                        questionsReussi.add(e.getQuest());
+                    }
                 }
-            }
-            set = new LinkedHashSet<>(questionsReussi);
-            questionsReussi = new ArrayList<>(set);
+                Set<Question> set=new LinkedHashSet<>(questionsReussi);
+                questionsReussi=new ArrayList<>(set);
 
+            }
 
             //Generation de la liste des questions non repondues pour cette categorie
             List<Question> listNonRepondu = new ArrayList<>();
@@ -120,43 +131,48 @@ public class EvaluationController {
                 System.out.println(q.getIdQuestion() + "-" + q.getLibelle() + "/n");
 
             }
-            //Compteur qui permet de verifier si le nombre de questions sollicité par l'utilisateur est respecté
-            System.out.println(questionEval.size());
-            System.out.println(nbreQuestions);
-            for (Question q : questions_de_la_categorie) {
-                if (questionEval.size()<nbreQuestions){
-                    for (int i = 0; i <nbreQuestions-questionEval.size() ; i++) {
-                        int u=new Random().nextInt(questionsReussi.size());
-                        questionEval.add(questionsReussi.get(u));
-                        questionsReussi.remove(u);
+
+            if(listEchec==null && listReussi==null){
+                if(questionEval.size() < nbreQuestions){
+                    for(int i=0; i < nbreQuestions - questionEval.size(); i++){
+                        int u=new Random().nextInt(listNonRepondu.size());
+                        questionEval.add(listNonRepondu.get(u));
+                        listNonRepondu.remove(u);
                     }
-
-                    for (Question question:questionEval
-                         ) {
-                        EvalQuestRep evalQuestRep = new EvalQuestRep();
-                        evalQuestRep.setEval(eval);
-                        evalQuestRep.setQuest(question);
-                        evalQuestRepService.createEvalQuestRep(evalQuestRep);
-                    }
-                }else {
-                    Collections.shuffle(questionEval);
-                    for (Question v:questionEval
-                         ) {
-                        if (compteur != nbreQuestions) {
-
-                            EvalQuestRep evalQuestRep = new EvalQuestRep();
-                            evalQuestRep.setEval(eval);
-                            evalQuestRep.setQuest(v);
-                            evalQuestRepService.createEvalQuestRep(evalQuestRep);
-                            compteur = compteur + 1;
-
+                }
+            }else{
+                //Compteur qui permet de verifier si le nombre de questions sollicité par l'utilisateur est respecté
+                System.out.println(questionEval.size());
+                System.out.println(nbreQuestions);
+                for (Question q : questions_de_la_categorie) {
+                    if (questionEval.size()<nbreQuestions){
+                        for (int i = 0; i <nbreQuestions-questionEval.size() ; i++) {
+                            int u=new Random().nextInt(questionsReussi.size());
+                            questionEval.add(questionsReussi.get(u));
+                            questionsReussi.remove(u);
                         }
+                    }else {
 
                     }
-                    }
 
+                }
             }
 
+
+
+        }
+        Collections.shuffle(questionEval,new Random(5));
+        for (Question v:questionEval
+        ) {
+            if (compteur != nbreQuestions) {
+
+                EvalQuestRep evalQuestRep = new EvalQuestRep();
+                evalQuestRep.setEval(eval);
+                evalQuestRep.setQuest(v);
+                evalQuestRepService.createEvalQuestRep(evalQuestRep);
+                compteur = compteur + 1;
+
+            }
 
         }
         return eval;

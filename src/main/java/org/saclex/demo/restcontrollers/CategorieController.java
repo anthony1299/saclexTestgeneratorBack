@@ -3,7 +3,7 @@ package org.saclex.demo.restcontrollers;
 import org.saclex.demo.entities.Categorie;
 import org.saclex.demo.entities.Theme;
 import org.saclex.demo.service.CategorieService;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.saclex.demo.service.UtilisateurService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -14,9 +14,11 @@ import java.util.List;
 public class CategorieController {
 
     private final CategorieService categorieService;
+    private final UtilisateurService utilisateurService;
 
-    public CategorieController(CategorieService categorieService) {
+    public CategorieController(CategorieService categorieService, UtilisateurService utilisateurService) {
         this.categorieService = categorieService;
+        this.utilisateurService=utilisateurService;
     }
 
     //liste des categories
@@ -26,8 +28,9 @@ public class CategorieController {
     }
 
     //creer une categorie
-    @PostMapping("creerCategorie")
-    public Categorie createCategorie(@RequestBody Categorie categorie){
+    @PostMapping("creerCategorie/{idUser}")
+    public Categorie createCategorie(@RequestBody Categorie categorie,@PathVariable(name="idUser") Long idUser){
+        categorie.setRespCat(utilisateurService.findById(idUser));
         return categorieService.createCategorie(categorie);
     }
 

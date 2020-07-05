@@ -19,4 +19,6 @@ public interface EvaluationService {
     //Fonction qui permet de supprimer une evaluation
      void deleteEvaluation(Long idEvaluation);
 
+     Evaluation findById(Long idEvaluation);
+
 }

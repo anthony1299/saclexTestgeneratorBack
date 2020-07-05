@@ -1,8 +1,12 @@
 package org.saclex.demo.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @XmlRootElement
@@ -22,12 +26,15 @@ public class EvalQuestRep implements Serializable {
     @JoinColumn(name = "question")
     private Question quest;
 
-    @Column(name = "reponse")
-    private Long reponse;
 
     @Column(name = "etat")
     @Enumerated(EnumType.STRING)
     private Evaluation.statuEval statut;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "evalId",fetch = FetchType.LAZY)
+    private List<ReponseEval> repEval = new ArrayList<>();
+
 
     public EvalQuestRep() {
     }
@@ -40,7 +47,6 @@ public class EvalQuestRep implements Serializable {
     public EvalQuestRep(Evaluation eval, Question quest, Long reponse) {
         this.eval = eval;
         this.quest = quest;
-        this.reponse = reponse;
     }
 
     public Long getId() {
@@ -65,14 +71,6 @@ public class EvalQuestRep implements Serializable {
 
     public void setQuest(Question quest) {
         this.quest = quest;
-    }
-
-    public Long getReponse() {
-        return reponse;
-    }
-
-    public void setReponse(Long reponse) {
-        this.reponse = reponse;
     }
 
     public Evaluation.statuEval getStatut() {

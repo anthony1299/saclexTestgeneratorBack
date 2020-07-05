@@ -2,6 +2,7 @@ package org.saclex.demo.service;
 
 import org.saclex.demo.entities.EvalQuestRep;
 import org.saclex.demo.entities.Evaluation;
+import org.saclex.demo.entities.Question;
 import org.saclex.demo.repositories.EvalQuestRepRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,5 +26,10 @@ EvalQuestRepRepository evalQuestRepRepository;
     @Override
     public List<EvalQuestRep> findByStatu(Evaluation.statuEval statuEval) {
         return evalQuestRepRepository.findByStatut(statuEval);
+    }
+
+    @Override
+    public EvalQuestRep findByEvalAndQuest(Evaluation eval, Question question) {
+        return evalQuestRepRepository.findByEvalAndQuest(eval,question);
     }
 }

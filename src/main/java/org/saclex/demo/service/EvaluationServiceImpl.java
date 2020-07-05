@@ -35,4 +35,9 @@ EvaluationRepository evaluationRepository;
     public void deleteEvaluation(Long idEvaluation) {
         evaluationRepository.deleteById(idEvaluation);
     }
+
+    @Override
+    public Evaluation findById(Long idEvaluation) {
+        return evaluationRepository.findById(idEvaluation).get();
+    }
 }

@@ -2,6 +2,7 @@ package org.saclex.demo.service;
 
 import org.saclex.demo.entities.Categorie;
 import org.saclex.demo.entities.Theme;
+import org.saclex.demo.entities.Utilisateur;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -26,4 +27,7 @@ public interface CategorieService {
 
      //Fonction qui retourne une categorie en fonction de son id
     Optional<Categorie> findById(Long id);
+
+    //Fonction qui liste les categories par responsable
+    List<Categorie> findByResponsable(Utilisateur respcat);
 }

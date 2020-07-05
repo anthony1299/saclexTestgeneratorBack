@@ -21,6 +21,7 @@ public class Evaluation implements Serializable {
     @Column(name = "id_evaluation")
     private Long idEvaluation;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "type_evaluation")
     private TypeEvaluation typeEvaluation;
@@ -44,6 +45,7 @@ public class Evaluation implements Serializable {
     @OneToMany(mappedBy = "eval",fetch=FetchType.LAZY)
     private List<EvalQuestRep> evalQuest = new ArrayList<>();
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "apprenant")
     private Utilisateur user;
