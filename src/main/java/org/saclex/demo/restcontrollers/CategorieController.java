@@ -1,6 +1,7 @@
 package org.saclex.demo.restcontrollers;
 
 import org.saclex.demo.entities.Categorie;
+import org.saclex.demo.entities.Theme;
 import org.saclex.demo.service.CategorieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -35,6 +36,11 @@ public class CategorieController {
     public Categorie updateCategorie(@RequestBody Categorie categorie) {
 
         return categorieService.updateCategorie(categorie);
+    }
+
+    @GetMapping("getCatByTheme")
+    public List<Categorie> getCatByTheme(@RequestBody Theme theme){
+        return categorieService.findByTheme(theme);
     }
 
     //supprimer une categorie
