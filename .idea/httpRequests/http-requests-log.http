@@ -1,3 +1,199 @@
+POST http://localhost:8088/evaluation/creerEvaluation/4/1/2
+Content-Type: application/json
+
+{
+  "libele": "python",
+  "description": null,
+  "dateCreation": "2020-05-31T00:00:00.000+0000",
+  "dateModification": "2020-05-31T00:00:00.000+0000"
+}
+
+<> 2020-07-07T075453.200.json
+
+###
+
+GET http://localhost:8088/categorie/getCatByTheme/
+
+<> 2020-07-07T025227.404.json
+
+###
+
+GET http://localhost:8088/categorie/getCatByTheme/0
+
+<> 2020-07-07T024715.200.json
+
+###
+
+GET http://localhost:8088/categorie/getCatByTheme/0
+
+<> 2020-07-07T024125.200.json
+
+###
+
+GET http://localhost:8088/categorie/getCatByTheme/0
+
+<> 2020-07-07T023543.200.json
+
+###
+
+GET http://localhost:8088/categorie/getCatByTheme/0
+
+<> 2020-07-07T023408.200.json
+
+###
+
+GET http://localhost:8088/categorie/getCatByTheme/0
+
+###
+
+GET http://localhost:8088/categorie/getCatByTheme/0
+
+<> 2020-07-07T023126.500.json
+
+###
+
+GET http://localhost:8088/categorie/getCatByTheme/0
+
+<> 2020-07-07T022717.500.json
+
+###
+
+GET http://localhost:8088/categorie/getCatByTheme/0
+
+<> 2020-07-07T022712.500.json
+
+###
+
+GET http://localhost:8088/categorie/getCatByTheme/0
+
+<> 2020-07-07T022452.500.json
+
+###
+
+GET http://localhost:8088/theme/listcategoriesParTheme/0
+
+###
+
+GET http://localhost:8088/theme/listcategoriesParTheme/0
+
+<> 2020-07-07T021307.200.json
+
+###
+
+GET http://localhost:8088/theme/listcategoriesParTheme/12
+
+<> 2020-07-07T020833.500.json
+
+###
+
+GET http://localhost:8088/theme/listcategoriesParTheme/126
+
+<> 2020-07-07T020828.200.json
+
+###
+
+GET http://localhost:8088/theme/listcategoriesParTheme/124
+
+<> 2020-07-07T020822.200.json
+
+###
+
+GET http://localhost:8088/theme/listcategoriesParTheme/120
+
+<> 2020-07-07T020816.200.json
+
+###
+
+GET http://localhost:8088/theme/listcategoriesParTheme/0
+
+<> 2020-07-07T020657.200.json
+
+###
+
+GET http://localhost:8088/theme/themeParResponsable/5
+
+<> 2020-07-07T102456.200.json
+
+###
+
+GET http://localhost:8088/theme/themeParResponsable/5
+
+<> 2020-07-06T112136.200.json
+
+###
+
+GET http://localhost:8088/theme/themeParResponsable/5
+
+<> 2020-07-06T112046.500.html
+
+###
+
+GET http://localhost:8088/theme/themeParResponsable/5
+
+<> 2020-07-06T111908.500.json
+
+###
+
+GET http://localhost:8088/theme/themeParResponsable/5
+
+<> 2020-07-06T111426.500.json
+
+###
+
+GET http://localhost:8088/theme/themeParResponsable/5
+
+<> 2020-07-06T111221.500.json
+
+###
+
+GET http://localhost:8088/theme/listerTheme
+
+<> 2020-07-06T110922.200.json
+
+###
+
+GET http://localhost:8088/theme/listerQuestions
+
+<> 2020-07-06T110826.404.json
+
+###
+
+GET http://localhost:8088/theme/listerReponse
+
+<> 2020-07-06T110817.404.json
+
+###
+
+GET http://localhost:8088/theme/themeParResponsable/5
+
+<> 2020-07-06T110748.404.json
+
+###
+
+GET http://localhost:8088/utilisateur/listerResponsableCategorie
+
+<> 2020-07-06T110743.200.json
+
+###
+
+GET http://localhost:8088/theme/themeParResponsable/5
+
+<> 2020-07-06T110533.404.json
+
+###
+
+GET http://localhost:8088/utilisateur/listerResponsableCategorie
+
+<> 2020-07-06T010823.200.json
+
+###
+
+GET http://localhost:8088/utilisateur/listerResponsableTheme
+
+<> 2020-07-06T010801.200.json
+
+###
+
 GET http://localhost:8088/utilisateur/UnUtilisateur/5
 
 <> 2020-07-02T124700.200.json
@@ -250,507 +446,6 @@ GET http://localhost:8088/UnUtilisateur/0
 ###
 
 GET http://localhost:8088/theme/listerQuestions
-
-###
-
-POST http://localhost:8088/login
-Content-Type: application/json
-
-{
-  "username": "elie",
-  "password": "1234"
-}
-
-<> 2020-06-29T090044.200.json
-
-###
-
-POST http://localhost:8088/login
-Content-Type: application/json
-
-{
-  "username": "elie",
-  "password": "1234"
-}
-
-<> 2020-06-29T083933.200.json
-
-###
-
-POST http://localhost:8088/login
-Content-Type: application/json
-
-{
-  "username": "elie",
-  "password": "1234"
-}
-
-<> 2020-06-29T082147.200.json
-
-###
-
-POST http://localhost:8088/login
-Content-Type: application/json
-
-{
-  "username": "elie",
-  "password": "1234"
-}
-
-<> 2020-06-29T080005.200.json
-
-###
-
-POST http://localhost:8088/evaluation/creerEvaluation/2/4
-Content-Type: application/json
-
-{
-  "libelle": "class python",
-  "description": null,
-  "dateCreation": "2020-06-10T11:15:03.000+0000",
-  "dateModification": "2020-06-10T11:15:03.000+0000",
-  "user": {
-    "id": 6
-  }
-    }
-
-<> 2020-06-28T010423.200.json
-
-###
-
-POST http://localhost:8088/evaluation/creerEvaluation/2/4
-Content-Type: application/json
-
-{
-  "libelle": "class python",
-  "description": null,
-  "dateCreation": "2020-06-10T11:15:03.000+0000",
-  "dateModification": "2020-06-10T11:15:03.000+0000",
-  "user": {
-    "id": 6
-  }
-    }
-
-<> 2020-06-28T010415.200.json
-
-###
-
-POST http://localhost:8088/evaluation/creerEvaluation/2/2
-Content-Type: application/json
-
-{
-  "libelle": "class python",
-  "description": null,
-  "dateCreation": "2020-06-10T11:15:03.000+0000",
-  "dateModification": "2020-06-10T11:15:03.000+0000",
-  "user": {
-    "id": 6
-  }
-    }
-
-<> 2020-06-28T010347.200.json
-
-###
-
-POST http://localhost:8088/evaluation/creerEvaluation/2/2
-Content-Type: application/json
-
-{
-  "libelle": "class python",
-  "description": null,
-  "dateCreation": "2020-06-10T11:15:03.000+0000",
-  "dateModification": "2020-06-10T11:15:03.000+0000",
-  "user": {
-    "id": 6
-  }
-    }
-
-<> 2020-06-28T010328.200.json
-
-###
-
-POST http://localhost:8088/evaluation/creerEvaluation/2/2
-Content-Type: application/json
-
-{
-  "libelle": "class python",
-  "description": null,
-  "dateCreation": "2020-06-10T11:15:03.000+0000",
-  "dateModification": "2020-06-10T11:15:03.000+0000",
-  "user": {
-    "id": 6
-  }
-    }
-
-<> 2020-06-28T010104.200.json
-
-###
-
-POST http://localhost:8088/evaluation/creerEvaluation/2/2
-Content-Type: application/json
-
-{
-  "libelle": "class python",
-  "description": null,
-  "dateCreation": "2020-06-10T11:15:03.000+0000",
-  "dateModification": "2020-06-10T11:15:03.000+0000",
-  "user": {
-    "id": 6
-  }
-    }
-
-<> 2020-06-28T010020.200.json
-
-###
-
-POST http://localhost:8088/evaluation/creerEvaluation/2/2
-Content-Type: application/json
-
-{
-  "libelle": "class python",
-  "description": null,
-  "dateCreation": "2020-06-10T11:15:03.000+0000",
-  "dateModification": "2020-06-10T11:15:03.000+0000",
-  "user": {
-    "id": 6
-  }
-    }
-
-<> 2020-06-28T125814.200.json
-
-###
-
-POST http://localhost:8088/evaluation/creerEvaluation/2/2
-Content-Type: application/json
-
-{
-  "libelle": "class python",
-  "description": null,
-  "dateCreation": "2020-06-10T11:15:03.000+0000",
-  "dateModification": "2020-06-10T11:15:03.000+0000",
-  "user": {
-    "id": 6
-  }
-    }
-
-<> 2020-06-28T125525.200.json
-
-###
-
-POST http://localhost:8088/evaluation/creerEvaluation/2/2
-Content-Type: application/json
-
-{
-  "libelle": "class python",
-  "description": null,
-  "dateCreation": "2020-06-10T11:15:03.000+0000",
-  "dateModification": "2020-06-10T11:15:03.000+0000",
-  "user": {
-    "id": 6
-  }
-    }
-
-<> 2020-06-28T122937.200.json
-
-###
-
-POST http://localhost:8088/evaluation/creerEvaluation/2/2
-Content-Type: application/json
-
-{
-  "libelle": "class python",
-  "description": null,
-  "dateCreation": "2020-06-10T11:15:03.000+0000",
-  "dateModification": "2020-06-10T11:15:03.000+0000",
-  "user": {
-    "id": 6
-  }
-    }
-
-<> 2020-06-28T122744.200.json
-
-###
-
-POST http://localhost:8088/evaluation/creerEvaluation/2/2
-Content-Type: application/json
-
-{
-  "libelle": "class python",
-  "description": null,
-  "dateCreation": "2020-06-10T11:15:03.000+0000",
-  "dateModification": "2020-06-10T11:15:03.000+0000",
-  "user": {
-    "id": 6
-  }
-    }
-
-<> 2020-06-28T122550.200.json
-
-###
-
-POST http://localhost:8088/evaluation/creerEvaluation/2/2
-Content-Type: application/json
-
-{
-  "libelle": "class python",
-  "description": null,
-  "dateCreation": "2020-06-10T11:15:03.000+0000",
-  "dateModification": "2020-06-10T11:15:03.000+0000",
-  "user": {
-    "id": 6
-  }
-    }
-
-<> 2020-06-28T122240.200.json
-
-###
-
-POST http://localhost:8088/evaluation/creerEvaluation/2/2
-Content-Type: application/json
-
-{
-  "libelle": "class python",
-  "description": null,
-  "dateCreation": "2020-06-10T11:15:03.000+0000",
-  "dateModification": "2020-06-10T11:15:03.000+0000",
-  "user": {
-    "id": 6
-  }
-    }
-
-<> 2020-06-28T122107.200.json
-
-###
-
-POST http://localhost:8088/evaluation/creerEvaluation/2/2
-Content-Type: application/json
-
-{
-  "libelle": "class python",
-  "description": null,
-  "dateCreation": "2020-06-10T11:15:03.000+0000",
-  "dateModification": "2020-06-10T11:15:03.000+0000",
-  "user": {
-    "id": 6
-  }
-    }
-
-<> 2020-06-28T121458.200.json
-
-###
-
-POST http://localhost:8088/evaluation/creerEvaluation/2/2
-Content-Type: application/json
-
-{
-  "libelle": "class python",
-  "description": null,
-  "dateCreation": "2020-06-10T11:15:03.000+0000",
-  "dateModification": "2020-06-10T11:15:03.000+0000",
-  "user": {
-    "id": 6
-  }
-    }
-
-<> 2020-06-28T121006.200.json
-
-###
-
-POST http://localhost:8088/evaluation/creerEvaluation/2/10
-Content-Type: application/json
-
-{
-  "libelle": "class python",
-  "description": null,
-  "dateCreation": "2020-06-10T11:15:03.000+0000",
-  "dateModification": "2020-06-10T11:15:03.000+0000",
-  "user": {
-    "id": 6
-  }
-    }
-
-<> 2020-06-27T104407.200.json
-
-###
-
-POST http://localhost:8088/evaluation/creerEvaluation/2/3
-Content-Type: application/json
-
-{
-  "libelle": "class python",
-  "description": null,
-  "dateCreation": "2020-06-10T11:15:03.000+0000",
-  "dateModification": "2020-06-10T11:15:03.000+0000",
-  "user": {
-    "id": 6
-  }
-    }
-
-<> 2020-06-27T104334.200.json
-
-###
-
-POST http://localhost:8088/evaluation/creerEvaluation/2/2
-Content-Type: application/json
-
-{
-  "libelle": "class python",
-  "description": null,
-  "dateCreation": "2020-06-10T11:15:03.000+0000",
-  "dateModification": "2020-06-10T11:15:03.000+0000",
-  "user": {
-    "id": 6
-  }
-    }
-
-<> 2020-06-27T103943.200.json
-
-###
-
-POST http://localhost:8088/evaluation/creerEvaluation/2/2
-Content-Type: application/json
-
-{
-  "idEvaluation": 10,
-  "libelle": "class python",
-  "description": null,
-  "dateCreation": "2020-06-10T11:15:03.000+0000",
-  "dateModification": "2020-06-10T11:15:03.000+0000",
-  "user": {
-    "id": 6
-  }
-    }
-
-<> 2020-06-27T103836.200.json
-
-###
-
-POST http://localhost:8088/evaluation/creerEvaluation/2/2
-Content-Type: application/json
-
-{
-  "idEvaluation": 8,
-  "libelle": "class python",
-  "description": null,
-  "dateCreation": "2020-06-10T11:15:03.000+0000",
-  "dateModification": "2020-06-10T11:15:03.000+0000",
-  "user": {
-    "id": 6
-  }
-    }
-
-<> 2020-06-27T103709.200.json
-
-###
-
-POST http://localhost:8088/evaluation/creerEvaluation/2/2
-Content-Type: application/json
-
-{
-  "idEvaluation": 8,
-  "libelle": "class python",
-  "description": null,
-  "dateCreation": "2020-06-10T11:15:03.000+0000",
-  "dateModification": "2020-06-10T11:15:03.000+0000",
-  "user": {
-    "id": 6
-  }
-    }
-
-<> 2020-06-27T103540.500.json
-
-###
-
-POST http://localhost:8088/reponse/creerReponse
-Content-Type: application/json
-
-{
-  "idReponse": 28,
-  "libelle": "une langue",
-  "description": null,
-  "valeur": false,
-  "media": null,
-  "question_associee": {
-  "idQuestion": 1
-  }
-
-}
-
-<> 2020-06-27T034138.200.json
-
-###
-
-POST http://localhost:8088/creerReponse
-Content-Type: application/json
-
-{
-  "idReponse": 28,
-  "libelle": "une langue",
-  "description": null,
-  "valeur": false,
-  "media": null,
-  "question_associee": {
-  "idQuestion": 1
-  }
-
-}
-
-<> 2020-06-27T034115.404.json
-
-###
-
-POST http://localhost:8088/login
-Content-Type: application/json
-
-{
-  "username": "elie",
-  "password": "1234"
-}
-
-<> 2020-06-25T023756.200.json
-
-###
-
-GET http://localhost:8088/theme/listerTheme
-Accept: application/json
-
-<> 2020-06-25T022924.200.json
-
-###
-
-POST http://localhost:8088/login
-Content-Type: application/json
-
-{
-  "username": "elie",
-  "password": "1234"
-}
-
-<> 2020-06-25T011942.500.json
-
-###
-
-POST http://localhost:8088/login
-Content-Type: application/json
-
-{
-  "username": "elie",
-  "password": "1234"
-}
-
-<> 2020-06-25T122801.500.json
-
-###
-
-POST http://localhost:8088/login
-Content-Type: application/json
-
-{
-  "username": "elie",
-  "password": "1234"
-}
-
-<> 2020-06-25T122704.500.json
 
 ###
 

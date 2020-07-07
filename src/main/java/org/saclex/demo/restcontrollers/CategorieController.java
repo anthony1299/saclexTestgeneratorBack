@@ -3,6 +3,7 @@ package org.saclex.demo.restcontrollers;
 import org.saclex.demo.entities.Categorie;
 import org.saclex.demo.entities.Theme;
 import org.saclex.demo.service.CategorieService;
+import org.saclex.demo.service.ThemeService;
 import org.saclex.demo.service.UtilisateurService;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,10 +16,12 @@ public class CategorieController {
 
     private final CategorieService categorieService;
     private final UtilisateurService utilisateurService;
+    private final ThemeService themeService;
 
-    public CategorieController(CategorieService categorieService, UtilisateurService utilisateurService) {
+    public CategorieController(CategorieService categorieService, UtilisateurService utilisateurService, ThemeService themeService) {
         this.categorieService = categorieService;
         this.utilisateurService=utilisateurService;
+        this.themeService = themeService;
     }
 
     //liste des categories
@@ -41,11 +44,16 @@ public class CategorieController {
         return categorieService.updateCategorie(categorie);
     }
 
-    @GetMapping("getCatByTheme")
+    /*@GetMapping("getCatByTheme")
     public List<Categorie> getCatByTheme(@RequestBody Theme theme){
         return categorieService.findByTheme(theme);
-    }
+    }*/
 
+    @GetMapping("getCatByTheme/{idTheme}")
+    public List<Categorie> getCatByTheme(@PathVariable Long idTheme){
+        Theme theme = themeService.findById(idTheme);
+        return categorieService.findByTheme(theme);
+    }
     //supprimer une categorie
     @DeleteMapping("supprimerCategorie/{idCategorie}")
     public void deleteReaction(@PathVariable Long idCategorie){

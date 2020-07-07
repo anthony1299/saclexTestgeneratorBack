@@ -35,7 +35,7 @@ public class UtilisateurController {
     }
 
     //liste seulement les responsables de themes
-    @GetMapping("/listerResponsable")
+    @GetMapping("/listerResponsableTheme")
     public List<Utilisateur> getResponsables(){
         return utilisateurService.findByRole(Utilisateur.Role.RESPONSABLE_THEME);
     }

@@ -1,12 +1,10 @@
 package org.saclex.demo.restcontrollers;
 
-import org.saclex.demo.entities.CarteMentale;
-import org.saclex.demo.entities.Categorie;
-import org.saclex.demo.entities.Question;
-import org.saclex.demo.entities.Theme;
+import org.saclex.demo.entities.*;
 import org.saclex.demo.service.CarteMentaleService;
+import org.saclex.demo.service.CategorieService;
 import org.saclex.demo.service.ThemeService;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.saclex.demo.service.UtilisateurService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,10 +16,14 @@ public class ThemeController {
 
     private final ThemeService themeService;
     private final CarteMentaleService carteMentaleService;
+    private final UtilisateurService utilisateurService;
+    private final CategorieService categorieService;
 
-    public ThemeController(ThemeService themeService, CarteMentaleService carteMentaleService) {
+    public ThemeController(ThemeService themeService, CarteMentaleService carteMentaleService, UtilisateurService utilisateurService, CategorieService categorieService) {
         this.themeService = themeService;
         this.carteMentaleService = carteMentaleService;
+        this.utilisateurService = utilisateurService;
+        this.categorieService = categorieService;
     }
 
 
@@ -31,11 +33,20 @@ public class ThemeController {
     }
 
     //Retourne le nombre de catégories associées à un thème
-    @GetMapping("categoriesParTheme/{idTheme}")
+    /*@GetMapping("categoriesParTheme/{idTheme}")
     public int getCategories(@PathVariable Long idTheme){
         Theme th= themeService.findById(idTheme);
         int i = th.getCategories().size();
         return i;
+    }*/
+
+    //Retourne les catégories associées à un thème
+    @GetMapping("listcategoriesParTheme/{idTheme}")
+    public List<Categorie> getListCategories(@PathVariable Long idTheme){
+        Theme th= themeService.findById(idTheme);
+
+        List<Categorie> categorieList = categorieService.findByTheme(th);
+        return categorieList;
     }
 
     //Retourne le nombre de question par theme
@@ -90,5 +101,13 @@ public class ThemeController {
     @DeleteMapping("supprimerTheme/{idTheme}")
     public void deleteTheme(@PathVariable Long idTheme){
         themeService.deleteTheme(idTheme);
+    }
+
+    //Theme par responsable
+    @GetMapping("themeParResponsable/{idUser}")
+    public List<Theme> themeParResponsable(@PathVariable Long idUser){
+        Utilisateur utilisateur = utilisateurService.findById(idUser);
+
+        return themeService.findByUser(utilisateur);
     }
 }

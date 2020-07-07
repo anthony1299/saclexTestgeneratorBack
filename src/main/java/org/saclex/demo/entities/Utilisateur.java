@@ -4,6 +4,7 @@ package org.saclex.demo.entities;
 //import org.springframework.security.core.userdetails.UserDetails;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -66,6 +67,7 @@ public class Utilisateur implements Serializable {
     @OneToMany(mappedBy = "user",fetch = FetchType.LAZY)
     private List<Evaluation> evaluations = new ArrayList<>();
 
+    @JsonIgnore
     @OneToMany(mappedBy = "respCat",fetch = FetchType.LAZY)
     private List<Categorie> cat = new ArrayList<>();
 

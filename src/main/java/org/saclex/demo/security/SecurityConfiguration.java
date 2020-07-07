@@ -67,8 +67,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/categorie/modifierCategorie").hasRole(Utilisateur.Role.RESPONSABLE_THEME.toString())
                 .antMatchers("/categorie/supprimerCategorie/**").hasRole(Utilisateur.Role.RESPONSABLE_THEME.toString())
                 .antMatchers("/categorie/listerCategories").hasRole(Utilisateur.Role.ADMINISTRATEUR.toString())
+                .antMatchers("/categorie/getCatByTheme").permitAll()
                 //Autorisations pour le responsable
                 .antMatchers("/utilisateur/creerUtilisateur").hasRole(Utilisateur.Role.ADMINISTRATEUR.toString())
+                .antMatchers("/utilisateur/listerResponsableTheme").permitAll()
+                .antMatchers("/utilisateur/listerResponsableCategorie").permitAll()
                 .antMatchers("/utilisateur/supprimerUtilisateur/**").hasRole(Utilisateur.Role.ADMINISTRATEUR.toString())
                 //Autorisations pour l'apprenant
                 .antMatchers("/utilisateur/creerApprenant").permitAll()
@@ -94,8 +97,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 //hasRole(Utilisateur.Role.RESPONSABLE.toString())
                 .antMatchers("/reponse/creerReponse").permitAll()
                 //hasRole(Utilisateur.Role.RESPONSABLE.toString())
-                .antMatchers("/fichier/creerFichier").hasRole(Utilisateur.Role.RESPONSABLE.toString())
-                .antMatchers("/categorie/creerCategorie").hasRole(Utilisateur.Role.RESPONSABLE.toString())
                // .antMatchers("/utilisateur/creerUtilisateur").hasRole(Utilisateur.Role.ADMINISTRATEUR.toString())
                 .antMatchers("/typequestion/creerTypeQuestion").hasRole(Utilisateur.Role.ADMINISTRATEUR.toString())
                 .antMatchers("/typeevaluation/creerTypeEvaluation").hasRole(Utilisateur.Role.ADMINISTRATEUR.toString());
