@@ -34,12 +34,12 @@ public class EvaluationController {
 
     //Creation d'une evaluation
     @PostMapping("creerEvaluation/{idUser}/{idCategorie}/{nbreQuestions}")
-    public Evaluation createEvaluation(@RequestBody Evaluation evaluation,@PathVariable("idUser") Long idUser, @PathVariable("idCategorie") Long idCategorie, @PathVariable("nbreQuestions") int nbreQuestions) {
+    public List<EvalQuestRep> createEvaluation(@RequestBody Evaluation evaluation,@PathVariable("idUser") Long idUser, @PathVariable("idCategorie") Long idCategorie, @PathVariable("nbreQuestions") int nbreQuestions) {
         evaluation.setDateCreation(new Date());
         evaluation.setDateModification(new Date());
         evaluation.setUser(utilisateurService.findById(idUser));
-        Evaluation eval = evaluationService.createEvaluation(evaluation);
         Categorie categorie = categorieService.findById(idCategorie).get();
+        Evaluation eval = evaluationService.createEvaluation(evaluation);
         int compteur = 0;
         //Liste des questions de la categorie
         List<Question> questions_de_la_categorie = categorie.getQuestions();
@@ -175,7 +175,7 @@ public class EvaluationController {
             }
 
         }
-        return eval;
+        return eval.getEvalQuest();
     }
 
         //Fonction de modification d'une évaluation mais qui n'est pas utilisée
