@@ -40,6 +40,12 @@ public class UtilisateurController {
         return utilisateurService.findByRole(Utilisateur.Role.RESPONSABLE_THEME);
     }
 
+    //liste seulement les responsables de catégories
+    @GetMapping("/listerResponsableCategorie")
+    public List<Utilisateur> getResponsablescategories(){
+        return utilisateurService.findByRole(Utilisateur.Role.RESPONSABLE_CATEGORIE);
+    }
+
     //Fonction qui crée les utilisateurs ayant pour role responsable_theme
     @PostMapping("/creerUtilisateur")
     public Utilisateur createUtilisateur(@RequestBody Utilisateur utilisateur){

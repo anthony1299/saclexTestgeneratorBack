@@ -31,9 +31,11 @@ public class CategorieController {
     }
 
     //creer une categorie
-    @PostMapping("creerCategorie/{idUser}")
-    public Categorie createCategorie(@RequestBody Categorie categorie,@PathVariable(name="idUser") Long idUser){
-        categorie.setRespCat(utilisateurService.findById(idUser));
+    @PostMapping("creerCategorie")
+    public Categorie createCategorie(@RequestBody Categorie categorie
+            //,@PathVariable(name="idUser") Long idUser
+    ){
+        //categorie.setRespCat(utilisateurService.findById(idUser));
         return categorieService.createCategorie(categorie);
     }
 
