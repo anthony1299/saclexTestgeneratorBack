@@ -1,35 +1,19 @@
 package org.saclex.demo.entities;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class QuestionReponses {
-    private List<EvalQuestRep> evalQuestRep;
-    private Question question;
     private List<Reponse> reponses;
+    private List<EvalQuestRep> eqr;
 
     public QuestionReponses() {
+        this.reponses=new ArrayList<>();
     }
 
-    public QuestionReponses(List<EvalQuestRep> evalQuestRep, Question question, List<Reponse> reponses) {
-        this.evalQuestRep = evalQuestRep;
-        this.question = question;
-        this.reponses = reponses;
-    }
-
-    public List<EvalQuestRep> getEvalQuestRep() {
-        return evalQuestRep;
-    }
-
-    public void setEvalQuestRep(List<EvalQuestRep> evalQuestRep) {
-        this.evalQuestRep = evalQuestRep;
-    }
-
-    public Question getQuestion() {
-        return question;
-    }
-
-    public void setQuestion(Question question) {
-        this.question=question;
+    public QuestionReponses(List<Reponse> reponses, List<EvalQuestRep> eqr) {
+        this.reponses=reponses;
+        this.eqr=eqr;
     }
 
     public List<Reponse> getReponses() {
@@ -38,5 +22,13 @@ public class QuestionReponses {
 
     public void setReponses(List<Reponse> reponses) {
         this.reponses=reponses;
+    }
+
+    public List<EvalQuestRep> getEqr() {
+        return eqr;
+    }
+
+    public void setEqr(List<EvalQuestRep> eqr) {
+        this.eqr=eqr;
     }
 }

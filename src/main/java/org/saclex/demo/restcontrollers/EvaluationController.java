@@ -162,6 +162,7 @@ public class EvaluationController {
 
         }
         Collections.shuffle(questionEval,new Random(5));
+        List<EvalQuestRep> leqr= new ArrayList<>();
         for (Question v:questionEval
         ) {
             if (compteur != nbreQuestions) {
@@ -170,6 +171,8 @@ public class EvaluationController {
                 evalQuestRep.setEval(eval);
                 evalQuestRep.setQuest(v);
                 evalQuestRepService.createEvalQuestRep(evalQuestRep);
+                System.out.println(evalQuestRep.getId());
+                leqr.add(evalQuestRep);
                 compteur = compteur + 1;
 
             }
@@ -179,7 +182,7 @@ public class EvaluationController {
         for(Question question:questionEval
             ){
             QuestionReponses qp=new QuestionReponses();
-            qp.setQuestion(question);
+            qp.setEqr(leqr);
             qp.setReponses(question.getReponses());
             lqp.add(qp);
 
