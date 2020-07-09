@@ -14,4 +14,6 @@ public interface EvalQuestRepRepository extends JpaRepository<EvalQuestRep,Long>
      List<EvalQuestRep> findByStatut(Evaluation.statuEval statuEval);
 
      EvalQuestRep findByEvalAndQuest(Evaluation eval, Question question);
+
+        List<EvalQuestRep> findByEval(Evaluation e);
 }

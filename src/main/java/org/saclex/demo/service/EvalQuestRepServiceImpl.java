@@ -32,4 +32,9 @@ EvalQuestRepRepository evalQuestRepRepository;
     public EvalQuestRep findByEvalAndQuest(Evaluation eval, Question question) {
         return evalQuestRepRepository.findByEvalAndQuest(eval,question);
     }
+
+    @Override
+    public List<EvalQuestRep> findByEval(Evaluation e) {
+        return evalQuestRepRepository.findByEval(e);
+    }
 }

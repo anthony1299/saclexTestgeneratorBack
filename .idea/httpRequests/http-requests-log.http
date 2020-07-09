@@ -8,34 +8,6 @@ Content-Type: application/json
   "dateModification": "2020-05-31T00:00:00.000+0000"
 }
 
-<> 2020-07-09T080128.200.json
-
-###
-
-POST http://localhost:8088/evaluation/creerEvaluation/4/2/4
-Content-Type: application/json
-
-{
-  "libele": "python",
-  "description": null,
-  "dateCreation": "2020-05-31T00:00:00.000+0000",
-  "dateModification": "2020-05-31T00:00:00.000+0000"
-}
-
-<> 2020-07-08T011726.200.json
-
-###
-
-POST http://localhost:8088/evaluation/creerEvaluation/4/2/4
-Content-Type: application/json
-
-{
-  "libele": "python",
-  "description": null,
-  "dateCreation": "2020-05-31T00:00:00.000+0000",
-  "dateModification": "2020-05-31T00:00:00.000+0000"
-}
-
 <> 2020-07-08T114228.200.json
 
 ###
@@ -391,6 +363,48 @@ Content-Type: application/json
 }
 
 <> 2020-07-01T013454.200.json
+
+###
+
+POST http://localhost:8088/theme/creerTheme
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJlbGllIiwiZXhwIjoxNTk0MDI0MDYwfQ.DKQScDRT1hQN-LVML2Rqe9jZ8O9wigpyOjaxwM5B0lx17ddXUDfKkcxLkEcyTGslEnC5rbPmhtlxwS7ANiYGhA
+Content-Type: application/json
+
+{
+  "libelle" : "theme8",
+  "description" : "description",
+  "dateCreation" : "2020-05-31",
+  "dateModification" : "2020-05-31",
+  "utilisateur" : {
+    "id": 3,
+    "nom": "Fodjo",
+    "prenom": "Maxime",
+    "email": "fodjomaximejr@gmail.com",
+    "dateNaissance": "1999-12-12",
+    "login": "maxime",
+    "password": "1234",
+    "description": null,
+    "role": "RESPONSABLE",
+    "sexe": "masculin",
+    "envoiMails": [],
+    "forfait": null,
+    "active": true
+  }
+}
+
+<> 2020-07-01T013434.200.json
+
+###
+
+POST http://localhost:8088/login
+Content-Type: application/json
+
+{
+  "username": "elie",
+  "password": "1234"
+}
+
+<> 2020-07-01T012039.200.json
 
 ###
 
