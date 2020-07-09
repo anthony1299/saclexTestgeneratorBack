@@ -44,7 +44,7 @@ public class Question implements Serializable {
     @OneToMany(mappedBy = "quest",fetch=FetchType.LAZY)
     private List<EvalQuestRep> questEval = new ArrayList<>();
 
-    @JsonIgnore
+
     @OneToMany(mappedBy = "question_associee",fetch=FetchType.LAZY)
     private List<Reponse> reponses = new ArrayList<>();
 

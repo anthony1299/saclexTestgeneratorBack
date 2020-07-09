@@ -96,6 +96,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/fichier/creerFichier").hasRole(Utilisateur.Role.RESPONSABLE_THEME.toString())
                 //hasRole(Utilisateur.Role.RESPONSABLE.toString())
                 .antMatchers("/reponse/creerReponse").permitAll()
+                .antMatchers("/question/listerQuestions").permitAll()
                 //hasRole(Utilisateur.Role.RESPONSABLE.toString())
                // .antMatchers("/utilisateur/creerUtilisateur").hasRole(Utilisateur.Role.ADMINISTRATEUR.toString())
                 .antMatchers("/typequestion/creerTypeQuestion").hasRole(Utilisateur.Role.ADMINISTRATEUR.toString())
