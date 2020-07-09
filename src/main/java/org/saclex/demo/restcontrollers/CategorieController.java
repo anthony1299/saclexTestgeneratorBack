@@ -2,6 +2,7 @@ package org.saclex.demo.restcontrollers;
 
 import org.saclex.demo.entities.Categorie;
 import org.saclex.demo.entities.Theme;
+import org.saclex.demo.entities.Utilisateur;
 import org.saclex.demo.service.CategorieService;
 import org.saclex.demo.service.ThemeService;
 import org.saclex.demo.service.UtilisateurService;
@@ -55,6 +56,12 @@ public class CategorieController {
     public List<Categorie> getCatByTheme(@PathVariable Long idTheme){
         Theme theme = themeService.findById(idTheme);
         return categorieService.findByTheme(theme);
+    }
+
+    @GetMapping("getCatByUser/{idUser}")
+    public List<Categorie> getCatByUser(@PathVariable Long idUser){
+        Utilisateur utilisateur = utilisateurService.findById(idUser);
+        return categorieService.findByResponsable(utilisateur);
     }
     //supprimer une categorie
     @DeleteMapping("supprimerCategorie/{idCategorie}")

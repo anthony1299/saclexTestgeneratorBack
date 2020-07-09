@@ -5,19 +5,19 @@
 # * 'ptr' and 'ptrp' create a POST request with a simple or parameter-like body",
 # * 'mptr' and 'fptr' create a POST request to submit a form with a text or file field (multipart/form-data)",
 
-POST  http://localhost:8088/utilisateur/creerApprenant
+POST  http://localhost:8088/utilisateur/creerRespCategorie
 Content-Type: application/json
 
 {
   "nom": "FODJO",
   "prenom": "MAXIME",
   "email": "fodjomaximejr@gmail.com",
-  "dateNaissance": "1999-12-12",
-  "login": "max",
-  "username": "max",
+  "dateNaissance": null,
+  "login": "maxim",
+  "username": "maxi",
   "password": "1234",
   "description": null,
-  "role": "APPRENANT",
+  "role": null,
   "sexe": "masculin",
   "envoiMails": [],
   "forfait": null,

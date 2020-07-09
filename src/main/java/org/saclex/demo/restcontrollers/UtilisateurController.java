@@ -68,6 +68,7 @@ public class UtilisateurController {
     public String createApprennant(@RequestBody Utilisateur utilisateur){
         //On definit son role et on le sauvegarde en BD son champs isActive est à false
         utilisateur.setRole(Utilisateur.Role.APPRENANT);
+        utilisateur.setPassword(encoder.encode(utilisateur.getPassword()));
         utilisateurService.createUtilisateur(utilisateur);
 
         //On cree un token en fonction de l'utilisateur qui vient d'être créé
