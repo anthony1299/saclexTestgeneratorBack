@@ -69,7 +69,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/categorie/listerCategories").hasRole(Utilisateur.Role.ADMINISTRATEUR.toString())
                 .antMatchers("/categorie/getCatByTheme").permitAll()
                 //Autorisations pour le responsable
-                .antMatchers("/utilisateur/creerUtilisateur").hasRole(Utilisateur.Role.ADMINISTRATEUR.toString())
+               // .antMatchers("/utilisateur/creerUtilisateur").hasRole(Utilisateur.Role.ADMINISTRATEUR.toString())
+                .antMatchers("/utilisateur/creerUtilisateur").permitAll()
+                .antMatchers("/utilisateur/creerUtilisateur").permitAll()
                 .antMatchers("/utilisateur/listerResponsableTheme").permitAll()
                 .antMatchers("/utilisateur/listerResponsableCategorie").permitAll()
                 .antMatchers("/utilisateur/supprimerUtilisateur/**").hasRole(Utilisateur.Role.ADMINISTRATEUR.toString())

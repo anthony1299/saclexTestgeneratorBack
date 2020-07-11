@@ -179,12 +179,12 @@ public class EvaluationController {
 
         }
         List<QuestionReponses> lqp=new ArrayList<>();
-        for(Question question:questionEval
+        for(EvalQuestRep eqr:leqr
             ){
             QuestionReponses qp=new QuestionReponses();
-            qp.setEqr(leqr);
-            qp.setReponses(question.getReponses());
+            qp.setEqr(eqr);
             lqp.add(qp);
+
 
         }
         return lqp;

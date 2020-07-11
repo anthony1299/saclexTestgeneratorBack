@@ -5,13 +5,13 @@ import java.util.List;
 
 public class QuestionReponses {
     private List<Reponse> reponses;
-    private List<EvalQuestRep> eqr;
+    private EvalQuestRep eqr;
 
     public QuestionReponses() {
         this.reponses=new ArrayList<>();
     }
 
-    public QuestionReponses(List<Reponse> reponses, List<EvalQuestRep> eqr) {
+    public QuestionReponses(List<Reponse> reponses, EvalQuestRep eqr) {
         this.reponses=reponses;
         this.eqr=eqr;
     }
@@ -24,11 +24,11 @@ public class QuestionReponses {
         this.reponses=reponses;
     }
 
-    public List<EvalQuestRep> getEqr() {
+    public EvalQuestRep getEqr() {
         return eqr;
     }
 
-    public void setEqr(List<EvalQuestRep> eqr) {
+    public void setEqr(EvalQuestRep eqr) {
         this.eqr=eqr;
     }
 }

@@ -50,7 +50,7 @@ public class UtilisateurController {
     @PostMapping("/creerUtilisateur")
     public Utilisateur createUtilisateur(@RequestBody Utilisateur utilisateur){
             utilisateur.setActive(true);
-            utilisateur.setRole(Utilisateur.Role.RESPONSABLE_THEME);
+            utilisateur.setRole(Utilisateur.Role.APPRENANT);
             utilisateur.setPassword(encoder.encode(utilisateur.getPassword()));
         return utilisateurService.createUtilisateur(utilisateur);
     }
