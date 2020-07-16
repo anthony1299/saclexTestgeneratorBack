@@ -84,15 +84,19 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 //Autorisations pour les questions
                 .antMatchers("/question/creerQuestion").permitAll()
                 //hasRole(Utilisateur.Role.RESPONSABLE_CATEGORIE.toString())
-                .antMatchers("/question/modifierQuestion").hasRole(Utilisateur.Role.RESPONSABLE_CATEGORIE.toString())
+                .antMatchers("/question/modifierQuestion").permitAll()
+                //hasRole(Utilisateur.Role.RESPONSABLE_CATEGORIE.toString())
                 .antMatchers("/question/supprimerQuestion/**").hasRole(Utilisateur.Role.RESPONSABLE_CATEGORIE.toString())
                 //Autorisations pour les reponses
                 .antMatchers("/reponse/creerReponse").permitAll()
                 //hasRole(Utilisateur.Role.RESPONSABLE_CATEGORIE.toString())
-                .antMatchers("/reponse/modifierReponse").hasRole(Utilisateur.Role.RESPONSABLE_CATEGORIE.toString())
+                .antMatchers("/reponse/modifierReponse").permitAll()
+                //hasRole(Utilisateur.Role.RESPONSABLE_CATEGORIE.toString())
+                //.antMatchers("/reponse/modifierReponse").hasRole(Utilisateur.Role.ADMINISTRATEUR.toString())
                 .antMatchers("/reponse/savereponses").permitAll()
                 //hasRole(Utilisateur.Role.RESPONSABLE_CATEGORIE.toString())
-                .antMatchers("/reponse/supprimerReponse").hasRole(Utilisateur.Role.RESPONSABLE_CATEGORIE.toString())
+                .antMatchers("/reponse/supprimerReponse").permitAll()
+                //hasRole(Utilisateur.Role.RESPONSABLE_CATEGORIE.toString())
                 //Autorisations sur les evaluations
                 .antMatchers("evaluation/creerEvaluation/**").permitAll()
                 //hasRole(Utilisateur.Role.APPRENANT.toString())
