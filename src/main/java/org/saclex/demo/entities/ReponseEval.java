@@ -11,7 +11,6 @@ public class ReponseEval {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @JsonIgnore
     @ManyToOne
     @JoinColumn (name = "evalId")
     private EvalQuestRep evalId;

@@ -37,7 +37,7 @@ public class Categorie implements Serializable {
     @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     private Date dateCreation;
 
-    @JsonIgnore
+
     @OneToMany(mappedBy = "categorie",fetch=FetchType.LAZY)
     private List<Question> questions = new ArrayList<>();
 
