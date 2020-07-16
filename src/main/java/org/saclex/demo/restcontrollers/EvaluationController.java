@@ -190,6 +190,16 @@ public class EvaluationController {
         return lqp;
     }
 
+   /* @PostMapping("correction")
+    public List<EvalQuestRep>correctionEval(@RequestBody List<ReponseEval> reponseEvals){
+        List<Reponse> reponseList= new ArrayList<>();
+        for(ReponseEval r:reponseEvals
+            ){
+            reponseList=r.getEvalId().getQuest().getReponses();
+
+
+        }
+    }*/
         //Fonction de modification d'une évaluation mais qui n'est pas utilisée
         @PutMapping("modifierEvaluatiion")
         public Evaluation updateEvaluation (@RequestBody Evaluation evaluation) throws Exception {
