@@ -30,7 +30,7 @@ public class Reponse implements Serializable {
     @Column(name = "media")
     private byte[] media;
 
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @JsonProperty(access=JsonProperty.Access.WRITE_ONLY)
     @ManyToOne
     @JoinColumn(name = "question_id")
     private Question question_associee;
