@@ -3,19 +3,23 @@ package org.saclex.demo.restcontrollers;
 import org.saclex.demo.entities.Categorie;
 import org.saclex.demo.entities.Question;
 import org.saclex.demo.entities.Reponse;
+import org.saclex.demo.service.CategorieService;
 import org.saclex.demo.service.QuestionService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("question/")
 @CrossOrigin(origins = "*",allowedHeaders = "*")
 public class QuestionController {
     private final QuestionService questionService;
+    private final CategorieService categorieService;
 
-    public QuestionController(QuestionService questionService) {
+    public QuestionController(QuestionService questionService, CategorieService categorieService) {
         this.questionService = questionService;
+        this.categorieService=categorieService;
     }
 
 
@@ -31,9 +35,10 @@ public class QuestionController {
        return question.getReponses();
     }
     //liste des questions par rapport à une catégorie précise
-    @GetMapping("questionCategorie/{categorie}")
-    public List<Question> getquestionCategorie(@PathVariable Categorie categorie ){
-        List<Question> questions= questionService.findByCategorie(categorie);
+    @GetMapping("questionCategorie/{idcategorie}")
+    public List<Question> getquestionCategorie(@PathVariable Long idcategorie ){
+        Optional<Categorie> categorie=categorieService.findById(idcategorie);
+        List<Question> questions= questionService.findByCategorie(categorie.get());
        return questions;
     }
 
