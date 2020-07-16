@@ -9,7 +9,7 @@ POST http://localhost:8088/login
 Content-Type: application/json
 
 {
-  "username": "elie",
+  "username": "maxime",
   "password": "1234"
 }
 

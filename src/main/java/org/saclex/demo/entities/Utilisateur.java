@@ -64,12 +64,14 @@ public class Utilisateur implements Serializable {
     @JoinColumn(name = "forfait")
     private Forfait forfait;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "user",fetch = FetchType.LAZY)
     private List<Evaluation> evaluations = new ArrayList<>();
 
     @JsonIgnore
     @OneToMany(mappedBy = "respCat",fetch = FetchType.LAZY)
     private List<Categorie> cat = new ArrayList<>();
+
 
     public List<Evaluation> getEvaluations() {
         return evaluations;
