@@ -84,6 +84,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/utilisateur/verif-token").permitAll()
                 //Autorisations pour les questions
                 .antMatchers("/question/creerQuestion").permitAll()
+                .antMatchers("/question/**").permitAll()
                 //hasRole(Utilisateur.Role.RESPONSABLE_CATEGORIE.toString())
                 .antMatchers("/question/modifierQuestion").permitAll()
                 //hasRole(Utilisateur.Role.RESPONSABLE_CATEGORIE.toString())
@@ -91,6 +92,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 //hasRole(Utilisateur.Role.RESPONSABLE_CATEGORIE.toString())
                 //Autorisations pour les reponses
                 .antMatchers("/reponse/creerReponse").permitAll()
+                .antMatchers("/reponse/correctAnswer").permitAll()
                 //hasRole(Utilisateur.Role.RESPONSABLE_CATEGORIE.toString())
                 .antMatchers("/reponse/modifierReponse").permitAll()
                 //hasRole(Utilisateur.Role.RESPONSABLE_CATEGORIE.toString())
@@ -111,6 +113,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 //hasRole(Utilisateur.Role.RESPONSABLE.toString())
                 .antMatchers("/reponse/creerReponse").permitAll()
                 .antMatchers("/question/listerQuestions").permitAll()
+                .antMatchers("/questionCategorie/**").permitAll()
+
                 //hasRole(Utilisateur.Role.RESPONSABLE.toString())
                // .antMatchers("/utilisateur/creerUtilisateur").hasRole(Utilisateur.Role.ADMINISTRATEUR.toString())
                 .antMatchers("/typequestion/creerTypeQuestion").hasRole(Utilisateur.Role.ADMINISTRATEUR.toString())

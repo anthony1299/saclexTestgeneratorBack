@@ -35,6 +35,13 @@ public class EvalQuestRep implements Serializable {
     @OneToMany(mappedBy = "evalId",fetch = FetchType.LAZY)
     private List<ReponseEval> repEval = new ArrayList<>();
 
+    public List<ReponseEval> getRepEval() {
+        return repEval;
+    }
+
+    public void setRepEval(List<ReponseEval> repEval) {
+        this.repEval=repEval;
+    }
 
     public EvalQuestRep() {
     }

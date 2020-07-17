@@ -37,4 +37,9 @@ EvalQuestRepRepository evalQuestRepRepository;
     public List<EvalQuestRep> findByEval(Evaluation e) {
         return evalQuestRepRepository.findByEval(e);
     }
+
+    @Override
+    public EvalQuestRep updateEvalQuestRep(EvalQuestRep evalQuestRep) {
+        return evalQuestRepRepository.save(evalQuestRep);
+    }
 }

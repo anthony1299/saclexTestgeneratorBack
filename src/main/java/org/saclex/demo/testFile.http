@@ -23,7 +23,7 @@ Content-Type: application/json
   "active": true
 }
 ###
-POST  http://localhost:8099/responsable/creerCategorie
+POST  http://localhost:8088/question/questionCategorie/2
 Content-Type: application/json
 
 {
@@ -243,7 +243,7 @@ GET  http://localhost:8086/questionsParTheme/1
 
 ###
 
-GET http://localhost:8086/questionsParTheme/1
+GET http://localhost:8088/question/questionCategorie/2
 Accept: application/json
 
 ###
@@ -275,6 +275,12 @@ Content-Type: application/json
 <> 2020-06-01T070326.404.json
 <> 2020-06-01T022737.200.json
 ###
+POST http://localhost:8088/reponse/correctAnswer/1
+Content-Type: application/json
+
+<> 2020-06-01T070326.404.json
+<> 2020-06-01T022737.200.json
+###
 POST http://localhost:8088/evaluation/creerEvaluation/4/1/2
 Content-Type: application/json
 
@@ -290,7 +296,7 @@ Content-Type: application/json
 
 
 ###
-GET http://localhost:8087/questionsParTheme/0
+GET http://localhost:8088/question/listerQuestions
 Accept: application/json
 
 <> 2020-06-02T010912.200.json

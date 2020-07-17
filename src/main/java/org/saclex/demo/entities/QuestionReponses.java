@@ -11,9 +11,21 @@ public class QuestionReponses {
         this.reponses=new ArrayList<>();
     }
 
+    public QuestionReponses(List<ReponseEval> reponses, EvalQuestRep eqr) {
+        this.reponses=reponses;
+        this.eqr=eqr;
+    }
 
     public EvalQuestRep getEqr() {
         return eqr;
+    }
+
+    public List<ReponseEval> getReponses() {
+        return reponses;
+    }
+
+    public void setReponses(List<ReponseEval> reponses) {
+        this.reponses=reponses;
     }
 
     public void setEqr(EvalQuestRep eqr) {

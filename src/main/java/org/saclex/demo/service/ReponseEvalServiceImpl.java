@@ -24,4 +24,9 @@ public class ReponseEvalServiceImpl implements ReponseEvalService {
     public ReponseEval saveRepEval(ReponseEval reponse) {
         return reponseEvalRepository.save(reponse);
     }
+
+    @Override
+    public List<ReponseEval> saveAllReponse(List<ReponseEval> reponsesuser) {
+       return reponseEvalRepository.saveAll(reponsesuser);
+    }
 }

@@ -11,4 +11,6 @@ public interface ReponseEvalService {
     //Fonction qui permert d'enregistrer la reponse d"un etudiant a une question d'une evaluation
     ReponseEval saveRepEval( ReponseEval reponse);
 
+    List<ReponseEval> saveAllReponse( List<ReponseEval> reponsesuser);
+
 }
