@@ -47,21 +47,41 @@ public class EvaluationController {
         int compteur = 0;
         //Liste des questions de la categorie
         List<Question> questions_de_la_categorie = categorie.getQuestions();
+        System.out.println(questions_de_la_categorie.size());
         Collections.shuffle(questions_de_la_categorie, new Random(3));
+        List<QuestionReponses> lqp=new ArrayList<>();
         //objet qui contient la liste des questions pour l'evaluation en cours de creation
         List<Question> questionEval = new ArrayList<>();
         //Si le nombre de questions demandé est superieur aux nombre de questions disponibles on lui renvoi toutes les questions disponible
         if (questions_de_la_categorie.size() <= nbreQuestions) {
+            System.out.println("je suis dans le if");
+            List<EvalQuestRep> leqr= new ArrayList<>();
+            for (Question v:questions_de_la_categorie
+            ) {
+                    EvalQuestRep evalQuestRep = new EvalQuestRep();
+                    evalQuestRep.setEval(eval);
+                    evalQuestRep.setQuest(v);
+                    evalQuestRepService.createEvalQuestRep(evalQuestRep);
+                    System.out.println(evalQuestRep.getId());
+                    leqr.add(evalQuestRep);
 
-            for (Question q : questions_de_la_categorie) {
-                EvalQuestRep evalQuestRep = new EvalQuestRep();
-                evalQuestRep.setEval(eval);
-                evalQuestRep.setQuest(q);
-                evalQuestRepService.createEvalQuestRep(evalQuestRep);
+                }
+
+            for(EvalQuestRep eqr:leqr
+            ){
+                QuestionReponses qp=new QuestionReponses();
+                qp.setEqr(eqr);
+                lqp.add(qp);
+
+
             }
 
-        } else {
+        }
 
+
+
+         else {
+            System.out.println("je suis dans le else");
 
 
             //Recuperation de la liste des questions ratées pour cette categorie
@@ -182,7 +202,6 @@ public class EvaluationController {
             }
 
         }
-        List<QuestionReponses> lqp=new ArrayList<>();
         for(EvalQuestRep eqr:leqr
             ){
             QuestionReponses qp=new QuestionReponses();
@@ -196,6 +215,7 @@ public class EvaluationController {
 
     @PostMapping("correction")
     public List<EvalQuestRep>correctionEval(@RequestBody List<QuestionReponses> questionReponses){
+        System.out.println(questionReponses.get(0).getReponses().toString());
         List<Reponse> reponseList;
         List<ReponseEval> reponseEvals;
         List<EvalQuestRep> evalQuestReps=new ArrayList<>();
@@ -204,25 +224,33 @@ public class EvaluationController {
             List<Reponse> reponseuser= new ArrayList<>();
             List<Long> r1= new ArrayList<>();
             List<Long> r2= new ArrayList<>();
-             reponseEvalService.saveAllReponse(q.getReponses());
-            reponseEvals=q.getEqr().getRepEval();
+            reponseEvals=reponseEvalService.saveAllReponse(q.getReponses());
             for(ReponseEval rep:reponseEvals
                 ){
                 reponseuser.add(rep.getRep());
             }
+            System.out.println("reponses user "+reponseuser.size());
             for(Reponse r:reponseuser
                 ){
                 r1.add(r.getIdReponse());
 
             }
+            System.out.println("r1 "+r1.size());
             reponseList=reponseService.findcorrectAnswer(q.getEqr().getQuest().getIdQuestion());
+
+                System.out.println(reponseList.size());
+
             for(Reponse r:reponseList
             ){
                 r2.add(r.getIdReponse());
 
+
             }
+            System.out.println("r2 "+r2.size());
             Collections.sort(r1);
+            System.out.println(r1);
             Collections.sort(r2);
+            System.out.println(r2);
             if(r1.equals(r2)){
                 q.getEqr().setStatut(Evaluation.statuEval.Reussi);
             }else{

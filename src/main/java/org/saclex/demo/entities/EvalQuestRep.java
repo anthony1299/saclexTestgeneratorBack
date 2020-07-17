@@ -31,7 +31,6 @@ public class EvalQuestRep implements Serializable {
     @Enumerated(EnumType.STRING)
     private Evaluation.statuEval statut;
 
-    @JsonIgnore
     @OneToMany(mappedBy = "evalId",fetch = FetchType.LAZY)
     private List<ReponseEval> repEval = new ArrayList<>();
 
