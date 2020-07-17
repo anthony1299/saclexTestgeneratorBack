@@ -69,7 +69,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/categorie/modifierCategorie").hasRole(Utilisateur.Role.ADMINISTRATEUR.toString())
                 .antMatchers("/categorie/supprimerCategorie/**").hasRole(Utilisateur.Role.RESPONSABLE_THEME.toString())
                 .antMatchers("/categorie/supprimerCategorie/**").hasRole(Utilisateur.Role.ADMINISTRATEUR.toString())
-                .antMatchers("/categorie/listerCategories").hasRole(Utilisateur.Role.ADMINISTRATEUR.toString())
+                .antMatchers("/categorie/listerCategories").permitAll()
+                //hasRole(Utilisateur.Role.ADMINISTRATEUR.toString())
                 .antMatchers("/categorie/getCatByTheme").permitAll()
                 //Autorisations pour le responsable
                // .antMatchers("/utilisateur/creerUtilisateur").hasRole(Utilisateur.Role.ADMINISTRATEUR.toString())
@@ -86,7 +87,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 //hasRole(Utilisateur.Role.RESPONSABLE_CATEGORIE.toString())
                 .antMatchers("/question/modifierQuestion").permitAll()
                 //hasRole(Utilisateur.Role.RESPONSABLE_CATEGORIE.toString())
-                .antMatchers("/question/supprimerQuestion/**").hasRole(Utilisateur.Role.RESPONSABLE_CATEGORIE.toString())
+                .antMatchers("/question/supprimerQuestion/**").permitAll()
+                //hasRole(Utilisateur.Role.RESPONSABLE_CATEGORIE.toString())
                 //Autorisations pour les reponses
                 .antMatchers("/reponse/creerReponse").permitAll()
                 //hasRole(Utilisateur.Role.RESPONSABLE_CATEGORIE.toString())

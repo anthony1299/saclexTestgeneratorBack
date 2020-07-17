@@ -1,3 +1,511 @@
+GET http://localhost:8088/categorie/listerCategories
+
+<> 2020-07-16T082231.403.json
+
+###
+
+GET http://localhost:8088/theme/listerCategories
+
+<> 2020-07-16T082130.404.json
+
+###
+
+GET http://localhost:8099/theme/listerCategories
+
+###
+
+GET http://localhost:8088/theme/listcategoriesParTheme/0
+
+<> 2020-07-16T081847.200.json
+
+###
+
+GET http://localhost:8088/theme/listerTheme
+
+<> 2020-07-16T081831.200.json
+
+###
+
+POST http://localhost:8088/evaluation/creerEvaluation/4/2/3
+Content-Type: application/json
+
+{
+  "libelle": "python",
+  "description": null,
+  "dateCreation": "2020-06-10T11:15:03.000+0000",
+  "dateModification": "2020-06-10T11:15:03.000+0000"
+    }
+
+<> 2020-07-16T051714.200.json
+
+###
+
+GET http://localhost:8088/question/listerReponses/757
+
+<> 2020-07-16T051702.200.json
+
+###
+
+GET http://localhost:8088/question/listerReponses/757
+
+<> 2020-07-16T051241.200.json
+
+###
+
+GET http://localhost:8088/question/listerReponses/757
+
+###
+
+GET http://localhost:8088/question/listerReponses/749
+
+###
+
+GET http://localhost:8088/question/listerReponses/749
+
+###
+
+POST http://localhost:8088/evaluation/creerEvaluation/4/2/3
+Content-Type: application/json
+
+{
+  "libelle": "python",
+  "description": null,
+  "dateCreation": "2020-06-10T11:15:03.000+0000",
+  "dateModification": "2020-06-10T11:15:03.000+0000"
+    }
+
+<> 2020-07-16T045959.200.json
+
+###
+
+POST http://localhost:8088/reponse/creerReponse
+Content-Type: application/json
+
+{
+  "libelleRep": "lib",
+  "description": "description",
+  "valeur": "true",
+  "media": null,
+  "libelle": "libo",
+  "question_associee": {
+    "idQuestion": 749
+  }
+}
+
+<> 2020-07-16T045829.200.json
+
+###
+
+POST http://localhost:8088/reponse/creerReponse
+Content-Type: application/json
+
+{
+  "libelleRep": "lib",
+  "description": "description",
+  "valeur": "true",
+  "media": null,
+  "libelle": "libo",
+  "question_associee": {
+    "idQuestion": 749
+  }
+}
+
+<> 2020-07-16T045718.500.html
+
+###
+
+POST http://localhost:8088/reponse/creerReponse
+Content-Type: application/json
+
+{
+  "libelleRep": "lib",
+  "description": "description",
+  "valeur": "true",
+  "media": null,
+  "libelle": "libo",
+  "question_associee": {
+    "idQuestion": 749
+  }
+}
+
+<> 2020-07-16T045338.200.json
+
+###
+
+POST http://localhost:8088/responsable/creerReponse
+Content-Type: application/json
+
+{
+  "libelleRep": "lib",
+  "description": "description",
+  "valeur": "true",
+  "media": null,
+  "libelle": "libo",
+  "question_associee": {
+    "idQuestion": 749
+  }
+}
+
+<> 2020-07-16T045325.404.json
+
+###
+
+POST http://localhost:8099/responsable/creerReponse
+Content-Type: application/json
+
+{
+  "libelleRep": "lib",
+  "description": "description",
+  "valeur": "true",
+  "media": null,
+  "libelle": "libo",
+  "question_associee": {
+    "idQuestion": 749
+  }
+}
+
+###
+
+POST http://localhost:8088/login
+Content-Type: application/json
+
+{
+  "username": "maxime",
+  "password": "1234"
+}
+
+<> 2020-07-15T093545.200.json
+
+###
+
+POST http://localhost:8088/utilisateur/creerApprenant
+Content-Type: application/json
+
+{
+  "nom": "FODJO",
+  "prenom": "MAXIME",
+  "email": "fodjomaximejr@gmail.com",
+  "dateNaissance": null,
+  "login": "maxime",
+  "password": "1234",
+  "description": null,
+  "role": null,
+  "sexe": "feminin",
+  "envoiMails": [],
+  "forfait": null,
+  "active": true
+}
+
+<> 2020-07-15T093445.200.txt
+
+###
+
+POST http://localhost:8088/login
+Content-Type: application/json
+
+{
+  "username": "maxime",
+  "password": "1234"
+}
+
+<> 2020-07-15T092751.500.json
+
+###
+
+POST http://localhost:8088/login
+Content-Type: application/json
+
+{
+  "username": "maxime",
+  "password": "1234"
+}
+
+<> 2020-07-15T092743.500.json
+
+###
+
+POST http://localhost:8088/login
+Content-Type: application/json
+
+{
+  "username": "maxime",
+  "password": "1234"
+}
+
+<> 2020-07-15T092500.401.json
+
+###
+
+POST http://localhost:8088/evaluation/creerEvaluation/4/2/3
+Content-Type: application/json
+
+{
+  "libelle": "python",
+  "description": null,
+  "dateCreation": "2020-06-10T11:15:03.000+0000",
+  "dateModification": "2020-06-10T11:15:03.000+0000"
+    }
+
+<> 2020-07-15T044838.200.json
+
+###
+
+GET http://localhost:8088/theme/listerTheme
+
+<> 2020-07-15T021022.200.json
+
+###
+
+POST http://localhost:8088/utilisateur/creerApprenant
+Content-Type: application/json
+
+{
+  "nom": "LOWE",
+  "prenom": "FRANCK",
+  "email": "fodjomaximejr@gmail.com",
+  "dateNaissance": null,
+  "login": "lowe",
+  "password": "1234",
+  "description": null,
+  "role": null,
+  "sexe": "feminin",
+  "envoiMails": [],
+  "forfait": null,
+  "active": true
+}
+
+<> 2020-07-13T070135.500.json
+
+###
+
+POST http://localhost:8088/utilisateur/creerApprenant
+Content-Type: application/json
+
+{
+  "nom": "LOWE",
+  "prenom": "FRANCK",
+  "email": "lowefranck@gmail.com",
+  "dateNaissance": null,
+  "login": "lowe",
+  "password": "1234",
+  "description": null,
+  "role": null,
+  "sexe": "feminin",
+  "envoiMails": [],
+  "forfait": null,
+  "active": true
+}
+
+<> 2020-07-13T070107.500.json
+
+###
+
+POST http://localhost:8088/evaluation/creerEvaluation/4/2/3
+Content-Type: application/json
+
+{
+  "libelle": "python",
+  "description": null,
+  "dateCreation": "2020-06-10T11:15:03.000+0000",
+  "dateModification": "2020-06-10T11:15:03.000+0000"
+    }
+
+<> 2020-07-10T095138.200.json
+
+###
+
+POST http://localhost:8088/login
+Content-Type: application/json
+
+{
+  "username": "johny",
+  "password": "1234"
+}
+
+<> 2020-07-10T095116.401.json
+
+###
+
+POST http://localhost:8088/evaluation/creerEvaluation/4/2/3
+Content-Type: application/json
+
+{
+  "libelle": "python",
+  "description": null,
+  "dateCreation": "2020-06-10T11:15:03.000+0000",
+  "dateModification": "2020-06-10T11:15:03.000+0000"
+    }
+
+<> 2020-07-10T030443.200.json
+
+###
+
+POST http://localhost:8088/evaluation/creerEvaluation/4/2/3
+Content-Type: application/json
+
+{
+  "libelle": "python",
+  "description": null,
+  "dateCreation": "2020-06-10T11:15:03.000+0000",
+  "dateModification": "2020-06-10T11:15:03.000+0000"
+    }
+
+<> 2020-07-09T024848.200.json
+
+###
+
+POST http://localhost:8088/utilisateur/creerApprenant
+Content-Type: application/json
+
+{
+  "nom": "DONKENG",
+  "prenom": "CHANNEL",
+  "email": "laetitia.donkeng@gmail.com",
+  "dateNaissance": null,
+  "login": "cha",
+  "password": "1234",
+  "description": null,
+  "role": null,
+  "sexe": "feminin",
+  "envoiMails": [],
+  "forfait": null,
+  "active": true
+}
+
+<> 2020-07-09T020700.200.txt
+
+###
+
+POST http://localhost:8088/login
+Content-Type: application/json
+
+{
+  "username": "cha",
+  "password": "1234"
+}
+
+<> 2020-07-09T013704.500.json
+
+###
+
+POST http://localhost:8088/login
+Content-Type: application/json
+
+{
+  "username": "cha",
+  "password": "1234"
+}
+
+<> 2020-07-09T013425.200.json
+
+###
+
+POST http://localhost:8088/login
+Content-Type: application/json
+
+{
+  "username": "cha",
+  "password": "1234"
+}
+
+<> 2020-07-09T013421.200.json
+
+###
+
+POST http://localhost:8088/login
+Content-Type: application/json
+
+{
+  "username": "cha",
+  "password": "1234"
+}
+
+<> 2020-07-09T013417.200.json
+
+###
+
+POST http://localhost:8088/utilisateur/creerApprenant
+Content-Type: application/json
+
+{
+  "nom": "DONKENG",
+  "prenom": "CHANNEL",
+  "email": "laetitia.donkeng@gmail.com",
+  "dateNaissance": null,
+  "login": "cha",
+  "password": "1234",
+  "description": null,
+  "role": null,
+  "sexe": "feminin",
+  "envoiMails": [],
+  "forfait": null,
+  "active": true
+}
+
+<> 2020-07-09T013247.200.txt
+
+###
+
+POST http://localhost:8088/login
+Content-Type: application/json
+
+{
+  "username": "johny",
+  "password": "1234"
+}
+
+<> 2020-07-09T010712.500.json
+
+###
+
+POST http://localhost:8088/login
+Content-Type: application/json
+
+{
+  "username": "johny",
+  "password": "1234"
+}
+
+<> 2020-07-09T010702.500.json
+
+###
+
+POST http://localhost:8088/login
+Content-Type: application/json
+
+{
+  "username": "johny",
+  "password": "1234"
+}
+
+<> 2020-07-09T010412.500.json
+
+###
+
+POST http://localhost:8088/login
+Content-Type: application/json
+
+{
+  "username": "johny",
+  "password": "1234"
+}
+
+<> 2020-07-09T010034.500.json
+
+###
+
+POST http://localhost:8088/login
+Content-Type: application/json
+
+{
+  "username": "johny",
+  "password": "1234"
+}
+
+<> 2020-07-09T010005.500.json
+
+###
+
 POST http://localhost:8088/evaluation/creerEvaluation/4/2/3
 Content-Type: application/json
 
@@ -100,334 +608,4 @@ Content-Type: application/json
     }
 
 <> 2020-07-08T033751.200.json
-
-###
-
-POST http://localhost:8088/evaluation/creerEvaluation/4/2/3
-Content-Type: application/json
-
-{
-  "libelle": "python",
-  "description": null,
-  "dateCreation": "2020-06-10T11:15:03.000+0000",
-  "dateModification": "2020-06-10T11:15:03.000+0000"
-    }
-
-<> 2020-07-08T033633.200.json
-
-###
-
-POST http://localhost:8088/evaluation/creerEvaluation/4/2/3
-Content-Type: application/json
-
-{
-  "libelle": "python",
-  "description": null,
-  "dateCreation": "2020-06-10T11:15:03.000+0000",
-  "dateModification": "2020-06-10T11:15:03.000+0000"
-    }
-
-<> 2020-07-08T033214.200.json
-
-###
-
-<<<<<<< Updated upstream
-POST http://localhost:8088/evaluation/creerEvaluation/4/2/4
-Content-Type: application/json
-
-{
-  "libele": "python",
-  "description": null,
-  "dateCreation": "2020-05-31T00:00:00.000+0000",
-  "dateModification": "2020-05-31T00:00:00.000+0000"
-}
-
-<> 2020-07-08T114228.200.json
-
-###
-
-GET http://localhost:8088/utilisateur/listerResponsableCategorie
-
-<> 2020-07-08T114112.200.json
-
-###
-
-GET http://localhost:8088/utilisateur/listerResponsableTheme
-
-<> 2020-07-08T111323.200.json
-
-###
-
-GET http://localhost:8088/utilisateur/listerResponsableCategorie
-
-<> 2020-07-08T111315.404.json
-
-###
-
-POST http://localhost:8088/evaluation/creerEvaluation/4/2/4
-Content-Type: application/json
-
-{
-  "libele": "python",
-  "description": null,
-  "dateCreation": "2020-05-31T00:00:00.000+0000",
-  "dateModification": "2020-05-31T00:00:00.000+0000"
-}
-
-<> 2020-07-08T091326.200.json
-
-###
-
-POST http://localhost:8088/evaluation/creerEvaluation/4/1/2
-Content-Type: application/json
-
-{
-  "libele": "python",
-  "description": null,
-  "dateCreation": "2020-05-31T00:00:00.000+0000",
-  "dateModification": "2020-05-31T00:00:00.000+0000"
-}
-
-<> 2020-07-08T083336.200.json
-
-###
-
-POST http://localhost:8088/evaluation/creerEvaluation/4/1/2
-Content-Type: application/json
-
-{
-  "libele": "python",
-  "description": null,
-  "dateCreation": "2020-05-31T00:00:00.000+0000",
-  "dateModification": "2020-05-31T00:00:00.000+0000"
-}
-
-<> 2020-07-08T083245.200.json
-
-###
-
-POST http://localhost:8088/evaluation/creerEvaluation/4/1/2
-Content-Type: application/json
-
-{
-  "libele": "python",
-  "description": null,
-  "dateCreation": "2020-05-31T00:00:00.000+0000",
-  "dateModification": "2020-05-31T00:00:00.000+0000"
-}
-
-<> 2020-07-08T080729.200.json
-
-###
-
-POST http://localhost:8088/evaluation/creerEvaluation/4/2/3
-Content-Type: application/json
-
-{
-  "libelle": "python",
-  "description": null,
-  "dateCreation": "2020-06-10T11:15:03.000+0000",
-  "dateModification": "2020-06-10T11:15:03.000+0000"
-    }
-
-<> 2020-07-08T025404.200.json
-
-###
-
-POST http://localhost:8088/evaluation/creerEvaluation/4/2/3
-Content-Type: application/json
-
-{
-  "libelle": "python",
-  "description": null,
-  "dateCreation": "2020-06-10T11:15:03.000+0000",
-  "dateModification": "2020-06-10T11:15:03.000+0000"
-    }
-
-<> 2020-07-08T024630.200.json
-
-###
-
-POST http://localhost:8088/evaluation/creerEvaluation/4/2/3
-Content-Type: application/json
-
-{
-  "libelle": "python",
-  "description": null,
-  "dateCreation": "2020-06-10T11:15:03.000+0000",
-  "dateModification": "2020-06-10T11:15:03.000+0000"
-    }
->>>>>>> Stashed changes
-
-###
-
-POST http://localhost:8088/evaluation/creerEvaluation/4/1/2
-Content-Type: application/json
-
-{
-  "libele": "python",
-  "description": null,
-  "dateCreation": "2020-05-31T00:00:00.000+0000",
-  "dateModification": "2020-05-31T00:00:00.000+0000"
-}
-
-<> 2020-07-07T075453.200.json
-
-###
-
-GET http://localhost:8088/categorie/getCatByTheme/
-
-<> 2020-07-07T025227.404.json
-
-###
-
-GET http://localhost:8088/categorie/getCatByTheme/0
-
-<> 2020-07-07T024715.200.json
-
-###
-
-GET http://localhost:8088/categorie/getCatByTheme/0
-
-<> 2020-07-07T024125.200.json
-
-###
-
-GET http://localhost:8088/categorie/getCatByTheme/0
-
-<> 2020-07-07T023543.200.json
-
-###
-
-GET http://localhost:8088/categorie/getCatByTheme/0
-
-<> 2020-07-07T023408.200.json
-
-###
-
-GET http://localhost:8088/categorie/getCatByTheme/0
-
-###
-
-GET http://localhost:8088/categorie/getCatByTheme/0
-
-<> 2020-07-07T023126.500.json
-
-###
-
-GET http://localhost:8088/categorie/getCatByTheme/0
-
-<> 2020-07-07T022717.500.json
-
-###
-
-GET http://localhost:8088/categorie/getCatByTheme/0
-
-<> 2020-07-07T022712.500.json
-
-###
-
-GET http://localhost:8088/categorie/getCatByTheme/0
-
-<> 2020-07-07T022452.500.json
-
-###
-
-GET http://localhost:8088/theme/listcategoriesParTheme/0
-
-###
-
-GET http://localhost:8088/theme/listcategoriesParTheme/0
-
-<> 2020-07-07T021307.200.json
-
-###
-
-GET http://localhost:8088/theme/listcategoriesParTheme/12
-
-<> 2020-07-07T020833.500.json
-
-###
-
-GET http://localhost:8088/theme/listcategoriesParTheme/126
-
-<> 2020-07-07T020828.200.json
-
-###
-
-GET http://localhost:8088/theme/listcategoriesParTheme/124
-
-<> 2020-07-07T020822.200.json
-
-###
-
-GET http://localhost:8088/theme/listcategoriesParTheme/120
-
-<> 2020-07-07T020816.200.json
-
-###
-
-GET http://localhost:8088/theme/listcategoriesParTheme/0
-
-<> 2020-07-07T020657.200.json
-
-###
-
-GET http://localhost:8088/theme/themeParResponsable/5
-
-<> 2020-07-07T102456.200.json
-
-###
-
-GET http://localhost:8088/theme/themeParResponsable/5
-
-<> 2020-07-06T112136.200.json
-
-###
-
-GET http://localhost:8088/theme/themeParResponsable/5
-
-<> 2020-07-06T112046.500.html
-
-###
-
-GET http://localhost:8088/theme/themeParResponsable/5
-
-<> 2020-07-06T111908.500.json
-
-###
-
-GET http://localhost:8088/theme/themeParResponsable/5
-
-<> 2020-07-06T111426.500.json
-
-###
-
-GET http://localhost:8088/theme/themeParResponsable/5
-
-<> 2020-07-06T111221.500.json
-
-###
-
-GET http://localhost:8088/theme/listerTheme
-
-<> 2020-07-06T110922.200.json
-
-###
-
-GET http://localhost:8088/theme/listerQuestions
-
-<> 2020-07-06T110826.404.json
-
-###
-
-GET http://localhost:8088/theme/listerReponse
-
-<> 2020-07-06T110817.404.json
-
-###
-
-GET http://localhost:8088/theme/themeParResponsable/5
-
-<> 2020-07-06T110748.404.json
 
