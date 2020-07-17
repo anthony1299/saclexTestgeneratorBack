@@ -15,7 +15,8 @@ public class ReponseEval {
     @JoinColumn (name = "evalId")
     private EvalQuestRep evalId;
 
-    @Column(name = "rep_user")
+    @ManyToOne
+    @JoinColumn(name="rep_user")
     private Reponse rep;
 
 

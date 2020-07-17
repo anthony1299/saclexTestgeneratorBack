@@ -6,6 +6,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @XmlRootElement
@@ -34,6 +36,10 @@ public class Reponse implements Serializable {
     @ManyToOne
     @JoinColumn(name = "question_id")
     private Question question_associee;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "rep",fetch=FetchType.LAZY)
+    private List<ReponseEval> reponseEvals = new ArrayList<>();
 
     public Reponse() {
     }

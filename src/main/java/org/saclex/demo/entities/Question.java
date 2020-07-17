@@ -1,6 +1,7 @@
 package org.saclex.demo.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -32,6 +33,8 @@ public class Question implements Serializable {
     @JoinColumn(name = "type_question")
     private TypeQuestion typeQuestion;
 
+
+    @JsonProperty(access=JsonProperty.Access.WRITE_ONLY)
     @ManyToOne
     @JoinColumn(name = "categorie")
     private Categorie categorie;
