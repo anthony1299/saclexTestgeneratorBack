@@ -14,14 +14,18 @@ public class EvaluationController {
     private final QuestionService questionService;
     private final CategorieService categorieService;
     private final ThemeService themeService;
+    private final ReponseService reponseService;
+    private final ReponseEvalService reponseEvalService;
     private final EvalQuestRepService evalQuestRepService;
     private final UtilisateurService utilisateurService;
 
-    public EvaluationController(EvaluationService evaluationService, QuestionService questionService, CategorieService categorieService, ThemeService themeService, EvalQuestRepService evalQuestRepService, UtilisateurService utilisateurService) {
+    public EvaluationController(EvaluationService evaluationService, QuestionService questionService, CategorieService categorieService, ThemeService themeService, ReponseService reponseService, ReponseEvalService reponseEvalService, EvalQuestRepService evalQuestRepService, UtilisateurService utilisateurService) {
         this.evaluationService = evaluationService;
         this.questionService = questionService;
         this.categorieService = categorieService;
         this.themeService = themeService;
+        this.reponseService=reponseService;
+        this.reponseEvalService=reponseEvalService;
         this.evalQuestRepService = evalQuestRepService;
         this.utilisateurService = utilisateurService;
     }
@@ -190,16 +194,48 @@ public class EvaluationController {
         return lqp;
     }
 
-   /* @PostMapping("correction")
-    public List<EvalQuestRep>correctionEval(@RequestBody List<ReponseEval> reponseEvals){
-        List<Reponse> reponseList= new ArrayList<>();
-        for(ReponseEval r:reponseEvals
+    @PostMapping("correction")
+    public List<EvalQuestRep>correctionEval(@RequestBody List<QuestionReponses> questionReponses){
+        List<Reponse> reponseList;
+        List<ReponseEval> reponseEvals;
+        List<EvalQuestRep> evalQuestReps=new ArrayList<>();
+        for(QuestionReponses q:questionReponses
             ){
-            reponseList=r.getEvalId().getQuest().getReponses();
+            List<Reponse> reponseuser= new ArrayList<>();
+            List<Long> r1= new ArrayList<>();
+            List<Long> r2= new ArrayList<>();
+             reponseEvalService.saveAllReponse(q.getReponses());
+            reponseEvals=q.getEqr().getRepEval();
+            for(ReponseEval rep:reponseEvals
+                ){
+                reponseuser.add(rep.getRep());
+            }
+            for(Reponse r:reponseuser
+                ){
+                r1.add(r.getIdReponse());
+
+            }
+            reponseList=reponseService.findcorrectAnswer(q.getEqr().getQuest().getIdQuestion());
+            for(Reponse r:reponseList
+            ){
+                r2.add(r.getIdReponse());
+
+            }
+            Collections.sort(r1);
+            Collections.sort(r2);
+            if(r1.equals(r2)){
+                q.getEqr().setStatut(Evaluation.statuEval.Reussi);
+            }else{
+                q.getEqr().setStatut(Evaluation.statuEval.Echoue);
+            }
+
+            evalQuestReps.add(evalQuestRepService.updateEvalQuestRep(q.getEqr()));
+
 
 
         }
-    }*/
+        return evalQuestReps;
+    }
         //Fonction de modification d'une évaluation mais qui n'est pas utilisée
         @PutMapping("modifierEvaluatiion")
         public Evaluation updateEvaluation (@RequestBody Evaluation evaluation) throws Exception {

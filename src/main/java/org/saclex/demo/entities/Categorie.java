@@ -25,7 +25,6 @@ public class Categorie implements Serializable {
     @Column(name = "description")
     private String description;
 
-    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "theme",nullable = false)
     private Theme theme;

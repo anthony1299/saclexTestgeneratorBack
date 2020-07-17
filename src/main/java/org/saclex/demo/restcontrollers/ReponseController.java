@@ -1,5 +1,6 @@
 package org.saclex.demo.restcontrollers;
 
+import org.saclex.demo.entities.Question;
 import org.saclex.demo.entities.Reponse;
 import org.saclex.demo.service.ReponseService;
 import org.springframework.web.bind.annotation.*;
@@ -31,6 +32,11 @@ public class ReponseController {
     @PostMapping("savereponses")
     public void saveReponses(@RequestBody List<Reponse> reponses){
         reponseService.saveAllReponse(reponses);
+    }
+
+    @PostMapping("correctAnswer/{idQuestion}")
+    public List<Reponse> correction(@PathVariable Long idQuestion){
+       return reponseService.findcorrectAnswer(idQuestion);
     }
 
     @PutMapping("modifierReponse")

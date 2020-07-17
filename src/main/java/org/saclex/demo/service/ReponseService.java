@@ -1,10 +1,10 @@
 package org.saclex.demo.service;
 
+import org.saclex.demo.entities.Question;
 import org.saclex.demo.entities.Reponse;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-
 public interface ReponseService {
 
     //Fonction qui permet de lister toutes les reponses
@@ -22,4 +22,6 @@ public interface ReponseService {
      //Fonction qui permet d'enregistrer une liste de reponse
     void saveAllReponse( List<Reponse> reponses);
 
+    //Fonction qui permet de recuperer toutes les reponses correctes pour une question donnée
+    List<Reponse> findcorrectAnswer(Long q);
 }

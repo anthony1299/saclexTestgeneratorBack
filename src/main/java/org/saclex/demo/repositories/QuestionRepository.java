@@ -14,4 +14,5 @@ public interface QuestionRepository extends JpaRepository<Question,Long> {
 
      //Liste des questions d'une catégorie
     List<Question> findByCategorie(Categorie categorie);
+
 }

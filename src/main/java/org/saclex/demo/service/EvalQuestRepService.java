@@ -18,4 +18,5 @@ public interface EvalQuestRepService {
 
     List<EvalQuestRep> findByEval(Evaluation e);
 
+    EvalQuestRep updateEvalQuestRep( EvalQuestRep categorie) ;
 }
