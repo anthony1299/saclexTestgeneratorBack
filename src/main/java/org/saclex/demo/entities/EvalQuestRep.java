@@ -1,8 +1,10 @@
 package org.saclex.demo.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import javax.validation.constraints.Null;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -18,6 +20,7 @@ public class EvalQuestRep implements Serializable {
     @Column(name = "id")
     private Long id;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "evaluation")
     private Evaluation eval;
@@ -25,6 +28,10 @@ public class EvalQuestRep implements Serializable {
     @ManyToOne
     @JoinColumn(name = "question")
     private Question quest;
+
+
+    @Column(name="temps_reponse")
+    private Integer tempsMis;
 
 
     @Column(name = "etat")
@@ -43,6 +50,7 @@ public class EvalQuestRep implements Serializable {
     }
 
     public EvalQuestRep() {
+        this.tempsMis=0;
     }
 
     public EvalQuestRep(Evaluation eval, Question quest) {
@@ -50,9 +58,18 @@ public class EvalQuestRep implements Serializable {
         this.quest = quest;
     }
 
-    public EvalQuestRep(Evaluation eval, Question quest, Long reponse) {
-        this.eval = eval;
-        this.quest = quest;
+    public EvalQuestRep(Evaluation eval, Question quest, int tempsMis) {
+        this.eval=eval;
+        this.quest=quest;
+        this.tempsMis=tempsMis;
+    }
+
+    public int getTempsMis() {
+        return tempsMis;
+    }
+
+    public void setTempsMis(int tempsMis) {
+        this.tempsMis=tempsMis;
     }
 
     public Long getId() {

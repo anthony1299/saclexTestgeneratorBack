@@ -1,6 +1,7 @@
 package org.saclex.demo.repositories;
 
 import org.saclex.demo.entities.Evaluation;
+import org.saclex.demo.entities.Utilisateur;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

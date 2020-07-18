@@ -14,22 +14,19 @@ import java.util.List;
 @Table(name = "type_evaluation")
 public class TypeEvaluation implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id_type_eval")
+    @GeneratedValue(strategy=GenerationType.AUTO)
+    @Column(name="id_type_eval")
     private Long idTypeE;
 
-    @Column(name = "libelle")
+    @Column(name="libelle")
     private String libelle;
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "typeEvaluation",fetch=FetchType.LAZY)
-    List<Evaluation> evaluations = new ArrayList<>();
 
     public TypeEvaluation() {
     }
 
     public TypeEvaluation(String libelle) {
-        this.libelle = libelle;
+        this.libelle=libelle;
     }
 
     public Long getIdTypeE() {
@@ -37,7 +34,7 @@ public class TypeEvaluation implements Serializable {
     }
 
     public void setIdTypeE(Long idTypeE) {
-        this.idTypeE = idTypeE;
+        this.idTypeE=idTypeE;
     }
 
     public String getLibelle() {
@@ -45,14 +42,8 @@ public class TypeEvaluation implements Serializable {
     }
 
     public void setLibelle(String libelle) {
-        this.libelle = libelle;
-    }
-
-    public List<Evaluation> getEvaluations() {
-        return evaluations;
-    }
-
-    public void setEvaluations(List<Evaluation> evaluations) {
-        this.evaluations = evaluations;
+        this.libelle=libelle;
     }
 }
+
+

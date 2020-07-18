@@ -21,4 +21,6 @@ public interface EvaluationService {
 
      Evaluation findById(Long idEvaluation);
 
+    List<Evaluation> findByIdUser(Long idUser);
+
 }

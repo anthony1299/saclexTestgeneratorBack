@@ -1,6 +1,6 @@
 package org.saclex.demo.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.*;
 
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -16,18 +16,27 @@ public class Evaluation implements Serializable {
     public enum statuEval{
         Reussi,Echoue
     }
+    public enum TypeEval{
+        Formative,Certificative
+    }
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id_evaluation")
     private Long idEvaluation;
 
-    @JsonIgnore
-    @ManyToOne
-    @JoinColumn(name = "type_evaluation")
-    private TypeEvaluation typeEvaluation;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "type_evaluation")
+    private TypeEval typeEvaluation;
+
+    @Column(name="intitule")
+    private String intitule;
+
 
     @Column(name = "total")
-    private int total;
+    private Integer total;
+
+    @Column(name="total_obtenu")
+    private Integer totalObtenu;
 
     @Column(name = "statut")
     @Enumerated(EnumType.STRING)
@@ -51,21 +60,39 @@ public class Evaluation implements Serializable {
     private Utilisateur user;
 
     public Evaluation() {
+        this.total=0;
+        this.totalObtenu=0;
     }
 
-    public Evaluation(TypeEvaluation typeEvaluation, int total, statuEval statut) {
+    public Evaluation(TypeEval typeEvaluation, int total, statuEval statut) {
         this.typeEvaluation = typeEvaluation;
         this.total = total;
         this.statut = statut;
     }
 
-    public Evaluation(TypeEvaluation typeEvaluation, int total, statuEval statut, Utilisateur user) {
+    public Evaluation(TypeEval typeEvaluation, int total, statuEval statut, Utilisateur user) {
         this.typeEvaluation = typeEvaluation;
         this.total = total;
         this.statut = statut;
         this.dateCreation = new Date();
         this.dateModification = new Date();
         this.user = user;
+    }
+
+    public int getTotalObtenu() {
+        return totalObtenu;
+    }
+
+    public void setTotalObtenu(int totalObtenu) {
+        this.totalObtenu=totalObtenu;
+    }
+
+    public String getIntitule() {
+        return intitule;
+    }
+
+    public void setIntitule(String intitule) {
+        this.intitule=intitule;
     }
 
     public Utilisateur getUser() {
@@ -76,7 +103,7 @@ public class Evaluation implements Serializable {
         this.user = user;
     }
 
-    public Evaluation(TypeEvaluation typeEvaluation) {
+    public Evaluation(TypeEval typeEvaluation) {
         this.typeEvaluation = typeEvaluation;
         this.dateCreation = new Date();
         this.dateModification = new Date();
@@ -90,12 +117,20 @@ public class Evaluation implements Serializable {
         this.idEvaluation = idEvaluation;
     }
 
-    public TypeEvaluation getTypeEvaluation() {
+    public TypeEval getTypeEvaluation() {
         return typeEvaluation;
     }
 
-    public void setTypeEvaluation(TypeEvaluation typeEvaluation) {
-        this.typeEvaluation = typeEvaluation;
+    public void setTypeEvaluation(TypeEval typeEvaluation) {
+        this.typeEvaluation=typeEvaluation;
+    }
+
+    public void setTotal(Integer total) {
+        this.total=total;
+    }
+
+    public void setTotalObtenu(Integer totalObtenu) {
+        this.totalObtenu=totalObtenu;
     }
 
     public int getTotal() {

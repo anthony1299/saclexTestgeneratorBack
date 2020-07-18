@@ -15,6 +15,9 @@ import java.util.List;
 @Table(name = "question")
 public class Question implements Serializable {
 
+    public enum Difficulte{
+        Facile,Moyen,Difficile
+    }
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id_question")
@@ -38,6 +41,10 @@ public class Question implements Serializable {
     @ManyToOne
     @JoinColumn(name = "categorie")
     private Categorie categorie;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name="difficulte")
+    private Difficulte difficulte;
 
     @JsonIgnore
     @OneToMany(mappedBy = "question",fetch=FetchType.LAZY)
@@ -78,14 +85,23 @@ public class Question implements Serializable {
         this.questEval = questEval;
     }
 
-    public Question(String libelle, int score, int duree, TypeQuestion typeQuestion, Categorie categorie, Date dateCreation, Date dateModification) {
-        this.libelle = libelle;
-        this.score = score;
-        this.duree = duree;
-        this.typeQuestion = typeQuestion;
-        this.categorie = categorie;
-        this.dateCreation = dateCreation;
-        this.dateModification = dateModification;
+    public Question(String libelle, int score, int duree, TypeQuestion typeQuestion, Categorie categorie, Difficulte difficulte, Date dateCreation, Date dateModification) {
+        this.libelle=libelle;
+        this.score=score;
+        this.duree=duree;
+        this.typeQuestion=typeQuestion;
+        this.categorie=categorie;
+        this.difficulte=difficulte;
+        this.dateCreation=dateCreation;
+        this.dateModification=dateModification;
+    }
+
+    public Difficulte getDifficulte() {
+        return difficulte;
+    }
+
+    public void setDifficulte(Difficulte difficulte) {
+        this.difficulte=difficulte;
     }
 
     public Long getIdQuestion() {

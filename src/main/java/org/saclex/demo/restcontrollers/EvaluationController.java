@@ -36,6 +36,11 @@ public class EvaluationController {
         return evaluationService.getAllEvaluations();
     }
 
+    //Fonction qui permet de retrouver toutes les evaluations d'un utilisateur
+    @GetMapping("evaluationByUser/{idUser}")
+    public List<Evaluation> getEvaluationsByUser(@PathVariable Long idUser){
+        return evaluationService.findByIdUser(idUser);
+    }
     //Creation d'une evaluation
     @PostMapping("creerEvaluation/{idUser}/{idCategorie}/{nbreQuestions}")
     public List<QuestionReponses> createEvaluation(@RequestBody Evaluation evaluation,@PathVariable("idUser") Long idUser, @PathVariable("idCategorie") Long idCategorie, @PathVariable("nbreQuestions") int nbreQuestions) {
@@ -43,6 +48,8 @@ public class EvaluationController {
         evaluation.setDateModification(new Date());
         evaluation.setUser(utilisateurService.findById(idUser));
         Categorie categorie = categorieService.findById(idCategorie).get();
+        evaluation.setIntitule(categorie.getLibelle());
+        evaluation.setTypeEvaluation(Evaluation.TypeEval.Formative);
         Evaluation eval = evaluationService.createEvaluation(evaluation);
         int compteur = 0;
         //Liste des questions de la categorie
@@ -262,11 +269,29 @@ public class EvaluationController {
 
 
         }
+        int totalObtenu=0;
+        int total=0;
+        for(EvalQuestRep e:evalQuestReps
+            ){
+            total=total+e.getQuest().getScore();
+            if(e.getStatut()==Evaluation.statuEval.Reussi){
+                totalObtenu=totalObtenu+e.getQuest().getScore();}
+        }
+        Evaluation evaluation=(evalQuestReps.get(0).getEval());
+        evaluation.setTotal(total);
+        evaluation.setTotalObtenu(totalObtenu);
+        if(totalObtenu<total/2){
+            evaluation.setStatut(Evaluation.statuEval.Echoue);
+        }else {
+            evaluation.setStatut(Evaluation.statuEval.Reussi);
+        }
+        evaluationService.updateEvaluation(evaluation);
         return evalQuestReps;
     }
-        //Fonction de modification d'une évaluation mais qui n'est pas utilisée
-        @PutMapping("modifierEvaluatiion")
-        public Evaluation updateEvaluation (@RequestBody Evaluation evaluation) throws Exception {
+
+    //Fonction de modification d'une évaluation mais qui n'est pas utilisée
+    @PutMapping("modifierEvaluatiion")
+    public Evaluation updateEvaluation (@RequestBody Evaluation evaluation) throws Exception {
             if (evaluation.getIdEvaluation() == null) {
                 throw new Exception("Evaluation non existante");
             }
