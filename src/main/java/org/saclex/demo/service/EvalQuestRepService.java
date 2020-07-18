@@ -16,7 +16,7 @@ public interface EvalQuestRepService {
     //fonction qui permet de rretrouver l'ID d'un evalQuestRep en fonction de l'id de l'evaluation et de la question
     EvalQuestRep findByEvalAndQuest(Evaluation eval, Question question);
 
-    List<EvalQuestRep> findByEval(Evaluation e);
+    List<EvalQuestRep> findByEval(Long  ideval);
 
     EvalQuestRep updateEvalQuestRep( EvalQuestRep categorie) ;
 }

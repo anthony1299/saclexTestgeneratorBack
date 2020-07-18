@@ -57,6 +57,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/login").permitAll()
                 .antMatchers("/utilisateur/creerUtilisateur").permitAll()
                 .antMatchers("evaluation/creerEvaluation/**").permitAll()
+                .antMatchers("evalquest/evalquestbyeval/**").permitAll()
                 .antMatchers("theme/listerTheme").permitAll()
                 .antMatchers("/theme/creerTheme").hasRole(Utilisateur.Role.ADMINISTRATEUR.toString())
                 .antMatchers("/theme/creerTheme").hasRole(Utilisateur.Role.RESPONSABLE_THEME.toString())

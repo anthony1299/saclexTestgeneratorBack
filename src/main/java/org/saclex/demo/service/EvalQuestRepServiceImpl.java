@@ -4,6 +4,7 @@ import org.saclex.demo.entities.EvalQuestRep;
 import org.saclex.demo.entities.Evaluation;
 import org.saclex.demo.entities.Question;
 import org.saclex.demo.repositories.EvalQuestRepRepository;
+import org.saclex.demo.repositories.EvaluationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,9 +14,11 @@ import java.util.List;
 public class EvalQuestRepServiceImpl implements EvalQuestRepService {
 final
 EvalQuestRepRepository evalQuestRepRepository;
+EvaluationRepository evaluationRepository;
 
-    public EvalQuestRepServiceImpl(EvalQuestRepRepository evalQuestRepRepository) {
-        this.evalQuestRepRepository = evalQuestRepRepository;
+    public EvalQuestRepServiceImpl(EvalQuestRepRepository evalQuestRepRepository, EvaluationRepository evaluationRepository) {
+        this.evalQuestRepRepository=evalQuestRepRepository;
+        this.evaluationRepository=evaluationRepository;
     }
 
     @Override
@@ -34,8 +37,11 @@ EvalQuestRepRepository evalQuestRepRepository;
     }
 
     @Override
-    public List<EvalQuestRep> findByEval(Evaluation e) {
-        return evalQuestRepRepository.findByEval(e);
+    public List<EvalQuestRep> findByEval(Long ideval) {
+        System.out.println(ideval);
+        Evaluation ev=evaluationRepository.findById(ideval).get();
+        System.out.println(ev.getIntitule());
+        return ev.getEvalQuest();
     }
 
     @Override
