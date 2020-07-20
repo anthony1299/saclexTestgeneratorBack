@@ -38,9 +38,7 @@ EvaluationRepository evaluationRepository;
 
     @Override
     public List<EvalQuestRep> findByEval(Long ideval) {
-        System.out.println(ideval);
         Evaluation ev=evaluationRepository.findById(ideval).get();
-        System.out.println(ev.getIntitule());
         return ev.getEvalQuest();
     }
 

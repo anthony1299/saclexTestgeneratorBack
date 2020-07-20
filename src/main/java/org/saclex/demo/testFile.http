@@ -234,6 +234,8 @@ GET  http://localhost:8088/theme/listerQuestions
 GET  http://localhost:8088/theme/listerReponse
 ###
 GET  http://localhost:8088/categorie/listerCategories
+###
+GET  http://localhost:8088/evalquest/evalquestbyeval/68
 
 ###
 GET  http://localhost:8086/cartesParTheme/1

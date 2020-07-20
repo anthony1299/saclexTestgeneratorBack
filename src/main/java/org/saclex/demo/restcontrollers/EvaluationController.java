@@ -68,8 +68,8 @@ public class EvaluationController {
         List < Question > questionEval = new ArrayList <>();
 
         //Si le nombre de questions demandé est superieur aux nombre de questions disponibles on lui renvoi toutes les questions disponible
-        if( questions_de_la_categorie.size() <= nbreQuestions ){
-
+        if( questions_de_la_categorie.size() <nbreQuestions ){
+            System.out.println("je suis dans if");
             for( Question v : questions_de_la_categorie
             ) {
                 EvalQuestRep evalQuestRep = new EvalQuestRep();
@@ -77,7 +77,7 @@ public class EvaluationController {
                 evalQuestRep.setQuest( v );
                 tempsEval = tempsEval + v.getDuree();
                 evalQuestRepService.createEvalQuestRep( evalQuestRep );
-                System.out.println( "question categorie "+evalQuestRep.getId() );
+                System.out.println( "question categorie "+evalQuestRep.getQuest().getLibelle());
                 leqr.add( evalQuestRep );
 
             }
@@ -100,6 +100,7 @@ public class EvaluationController {
             //Recuperation de la derniere evaluation
             Evaluation lastEval =evaluationService.lastEval( idUser,idCategorie );
             if( lastEval!=null ){
+                System.out.println("last eval"+lastEval.getIdEvaluation());
                 List < EvalQuestRep > listeqrlast=evalQuestRepService.findByEval( lastEval.getIdEvaluation() );
 
                 //Remplissage des listes de questions reussies et ratées
@@ -112,14 +113,34 @@ public class EvaluationController {
                     }
 
                 }
-                for( Question q:questionsRates ){
-                    if( compteur<=(nbreQuestions*30)/100 ){
-                        int u = new Random().nextInt( questionsReussi.size() );
-                        questionEval.add( questionsRates.get( u ) );
-                        questionsRates.remove( u );
-                        compteur=compteur+1;
+                //test des listes de creation de l'évaluation
+                System.out.println("questions ratees");
+                for (Question q : questionsRates
+                ) {
+                    System.out.println(q.getIdQuestion() + "-" + q.getLibelle() + "/n");
+
+                }
+                System.out.println("questions reussies");
+                for (Question q : questionsReussi
+                ) {
+                    System.out.println(q.getIdQuestion() + "-" + q.getLibelle() + "/n");
+
+                }
+
+                if (questionsRates.size()!=0){
+                    for( Question q:questionsRates ){
+                        if( compteur<=(nbreQuestions*60)/100 ){
+                            int u = new Random().nextInt( questionsRates.size() );
+                            if (!questionEval.contains(questionsRates.get(u))){
+                                questionEval.add( questionsRates.get( u ) );
+                                compteur=compteur+1;
+                            }
+
+
+                        }
                     }
                 }
+
             }
 
 
@@ -132,7 +153,14 @@ public class EvaluationController {
                 }
             }
 
-            //Collections.shuffle( listNonRepondu , new Random( 2 ) );
+            Collections.shuffle( listNonRepondu , new Random( 2 ) );
+
+            System.out.println("questions non repondues");
+            for (Question q : listNonRepondu
+            ) {
+                System.out.println(q.getIdQuestion() + "-" + q.getLibelle() + "/n");
+
+            }
 
             //Ajout des questions non répondues à la liste des questions de l'évaluation
             for( Question q : listNonRepondu
@@ -145,8 +173,9 @@ public class EvaluationController {
             if (questionEval.size()<nbreQuestions){
                 for( int i = 0; i < nbreQuestions - questionEval.size(); i++ ) {
                     int u = new Random().nextInt( questionsReussi.size() );
-                    questionEval.add( questionsReussi.get( u ) );
-                    questionsReussi.remove( u );
+                    if (!questionEval.contains(questionsReussi.get(u))){
+                        questionEval.add( questionsReussi.get( u ) );
+                    }
                 }
             }
 
@@ -181,6 +210,7 @@ public class EvaluationController {
             }
 */
             Collections.shuffle( questionEval );
+
             for( Question v : questionEval ) {
 
                     EvalQuestRep evalQuestRep = new EvalQuestRep();

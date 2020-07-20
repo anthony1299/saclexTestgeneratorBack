@@ -61,7 +61,6 @@ CategorieService categorieService;
         Categorie c = categorieService.findById( IdCategorie ).get();
         List< EvalQuestRep >levq=new ArrayList <>();
         List<Evaluation> evalCat=new ArrayList <>();
-
         for( Evaluation e:lev
               ) {
                     levq=evalQuestRepService.findByEval(e.getIdEvaluation());
@@ -76,13 +75,15 @@ CategorieService categorieService;
                         }
 
         }
+        System.out.println("eval cat "+evalCat);
         Collections.sort( evalCat , new Comparator < Evaluation >() {
             @Override
             public int compare(Evaluation o1 , Evaluation o2) {
                 return o1.getDateCreation().compareTo( o2.getDateCreation() );
             }
         } );
-        if( evalCat!=null ){
+        if( evalCat.size()!=0 ){
+            Collections.reverse(evalCat);
             return evalCat.get( 0 );
         }
         else

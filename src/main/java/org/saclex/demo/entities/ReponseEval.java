@@ -1,6 +1,7 @@
 package org.saclex.demo.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
 
@@ -11,7 +12,7 @@ public class ReponseEval {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @JsonIgnore
+    @JsonProperty(access=JsonProperty.Access.WRITE_ONLY)
     @ManyToOne
     @JoinColumn (name = "evalId")
     private EvalQuestRep evalId;
@@ -47,6 +48,15 @@ public class ReponseEval {
 
     public Reponse getRep() {
         return rep;
+    }
+
+    @Override
+    public String toString() {
+        return "ReponseEval{" +
+                "id=" + id +
+                ", evalId=" + evalId +
+                ", rep=" + rep +
+                '}';
     }
 
     public void setRep(Reponse rep) {
