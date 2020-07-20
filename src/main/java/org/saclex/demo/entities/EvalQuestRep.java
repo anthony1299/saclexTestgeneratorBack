@@ -8,6 +8,7 @@ import javax.validation.constraints.Null;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -33,6 +34,9 @@ public class EvalQuestRep implements Serializable {
     @Column(name="temps_reponse")
     private Integer tempsMis;
 
+    @Column(name = "date_creation")
+    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
+    private Date dateCreation;
 
     @Column(name = "etat")
     @Enumerated(EnumType.STRING)
@@ -51,6 +55,7 @@ public class EvalQuestRep implements Serializable {
 
     public EvalQuestRep() {
         this.tempsMis=0;
+        this.dateCreation=new Date();
     }
 
     public EvalQuestRep(Evaluation eval, Question quest) {
@@ -62,6 +67,18 @@ public class EvalQuestRep implements Serializable {
         this.eval=eval;
         this.quest=quest;
         this.tempsMis=tempsMis;
+    }
+
+    public void setTempsMis(Integer tempsMis) {
+        this.tempsMis = tempsMis;
+    }
+
+    public Date getDateCreation() {
+        return dateCreation;
+    }
+
+    public void setDateCreation(Date dateCreation) {
+        this.dateCreation = dateCreation;
     }
 
     public int getTempsMis() {

@@ -21,6 +21,8 @@ public interface EvaluationService {
 
      Evaluation findById(Long idEvaluation);
 
+     Evaluation lastEval(Long idUser,Long IdCategorie);
+
     List<Evaluation> findByIdUser(Long idUser);
 
 }

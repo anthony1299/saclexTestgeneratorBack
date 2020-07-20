@@ -16,5 +16,9 @@ public interface EvalQuestRepRepository extends JpaRepository<EvalQuestRep,Long>
 
      EvalQuestRep findByEvalAndQuest(Evaluation eval, Question question);
 
+     @Query("SELECT e from EvalQuestRep e join e.quest q join q.categorie c where c.idCategorie=?1")
+    List<EvalQuestRep> findByCategorie(Long idCategorie);
+
+
         List<EvalQuestRep> findByEval(Evaluation e);
 }

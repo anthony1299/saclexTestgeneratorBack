@@ -38,6 +38,16 @@ public class Evaluation implements Serializable {
     @Column(name="total_obtenu")
     private Integer totalObtenu;
 
+
+    @Column(name="pourcentage")
+    private Integer pourcentage;
+
+    @Column(name="tempsEvaluation")
+    private Integer tempsEvaluation;
+
+    @Column(name="tempsApprenant")
+    private Integer tempsApprenant;
+
     @Column(name = "statut")
     @Enumerated(EnumType.STRING)
     private statuEval statut;
@@ -107,6 +117,30 @@ public class Evaluation implements Serializable {
         this.typeEvaluation = typeEvaluation;
         this.dateCreation = new Date();
         this.dateModification = new Date();
+    }
+
+    public Integer getPourcentage() {
+        return pourcentage;
+    }
+
+    public void setPourcentage(Integer pourcentage) {
+        this.pourcentage=pourcentage;
+    }
+
+    public Integer getTempsEvaluation() {
+        return tempsEvaluation;
+    }
+
+    public void setTempsEvaluation(Integer tempsEvaluation) {
+        this.tempsEvaluation=tempsEvaluation;
+    }
+
+    public Integer getTempsApprenant() {
+        return tempsApprenant;
+    }
+
+    public void setTempsApprenant(Integer tempsApprenant) {
+        this.tempsApprenant=tempsApprenant;
     }
 
     public Long getIdEvaluation() {
