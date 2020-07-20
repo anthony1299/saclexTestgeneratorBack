@@ -38,10 +38,6 @@ public class Evaluation implements Serializable {
     @Column(name="total_obtenu")
     private Integer totalObtenu;
 
-
-    @Column(name="pourcentage")
-    private Integer pourcentage;
-
     @Column(name="tempsEvaluation")
     private Integer tempsEvaluation;
 
@@ -117,14 +113,6 @@ public class Evaluation implements Serializable {
         this.typeEvaluation = typeEvaluation;
         this.dateCreation = new Date();
         this.dateModification = new Date();
-    }
-
-    public Integer getPourcentage() {
-        return pourcentage;
-    }
-
-    public void setPourcentage(Integer pourcentage) {
-        this.pourcentage=pourcentage;
     }
 
     public Integer getTempsEvaluation() {
