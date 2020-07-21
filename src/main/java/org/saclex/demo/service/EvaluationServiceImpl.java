@@ -17,11 +17,10 @@ import java.util.List;
 @Service
 public class EvaluationServiceImpl implements EvaluationService {
 
-final
-EvaluationRepository evaluationRepository;
-UtilisateurRepository utilisateurRepository;
-EvalQuestRepService evalQuestRepService;
-CategorieService categorieService;
+private final EvaluationRepository evaluationRepository;
+private final UtilisateurRepository utilisateurRepository;
+private final EvalQuestRepService evalQuestRepService;
+private final CategorieService categorieService;
 
     public EvaluationServiceImpl(EvaluationRepository evaluationRepository, UtilisateurRepository utilisateurRepository,EvalQuestRepService evalQuestRepService,CategorieService categorieService) {
         this.evaluationRepository=evaluationRepository;
@@ -59,7 +58,7 @@ CategorieService categorieService;
     public Evaluation lastEval(Long idUser , Long IdCategorie) {
         List<Evaluation>lev=findByIdUser( idUser );
         Categorie c = categorieService.findById( IdCategorie ).get();
-        List< EvalQuestRep >levq=new ArrayList <>();
+        List< EvalQuestRep >levq;
         List<Evaluation> evalCat=new ArrayList <>();
         for( Evaluation e:lev
               ) {
@@ -88,6 +87,50 @@ CategorieService categorieService;
         }
         else
         return null ;
+    }
+
+    @Override
+    public Evaluation lastEval(Long idUser , Long IdCategorie , String niveau) {
+        List<Evaluation>lev=findByIdUser( idUser );
+        Categorie c = categorieService.findById( IdCategorie ).get();
+        List< EvalQuestRep >levq;
+        List<Evaluation> evalCat=new ArrayList <>();
+        List<Evaluation> evalCategorie=new ArrayList <>();
+        for( Evaluation e:lev
+        ) {
+            levq=evalQuestRepService.findByEval(e.getIdEvaluation());
+            if(levq!=null){
+                for(EvalQuestRep eva:levq
+                ) {
+                    if( c.getQuestions().contains( eva.getQuest() )){
+                        evalCat.add( e );
+                    }
+                }
+
+            }
+
+        }
+        for( Evaluation e:evalCat
+              ) {
+
+            if( e.getNiveauEval().toString().equals( niveau )){
+                evalCategorie.add( e );
+            }
+        }
+
+        System.out.println("eval cat "+evalCat);
+        Collections.sort( evalCategorie , new Comparator < Evaluation >() {
+            @Override
+            public int compare(Evaluation o1 , Evaluation o2) {
+                return o1.getDateCreation().compareTo( o2.getDateCreation() );
+            }
+        } );
+        if( evalCategorie.size()!=0 ){
+            Collections.reverse(evalCategorie);
+            return evalCategorie.get( 0 );
+        }
+        else
+            return null ;
     }
 
     @Override

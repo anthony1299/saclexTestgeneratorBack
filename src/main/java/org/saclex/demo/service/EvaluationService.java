@@ -23,6 +23,8 @@ public interface EvaluationService {
 
      Evaluation lastEval(Long idUser,Long IdCategorie);
 
+     Evaluation lastEval(Long idUser,Long IdCategorie,String niveau);
+
     List<Evaluation> findByIdUser(Long idUser);
 
 }

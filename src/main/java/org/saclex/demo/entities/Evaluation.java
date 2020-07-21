@@ -44,6 +44,10 @@ public class Evaluation implements Serializable {
     @Column(name="tempsApprenant")
     private Integer tempsApprenant;
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "niveauEval")
+    private Question.Difficulte niveauEval;
+
     @Column(name = "statut")
     @Enumerated(EnumType.STRING)
     private statuEval statut;
@@ -83,6 +87,14 @@ public class Evaluation implements Serializable {
         this.dateCreation = new Date();
         this.dateModification = new Date();
         this.user = user;
+    }
+
+    public Question.Difficulte getNiveauEval() {
+        return niveauEval;
+    }
+
+    public void setNiveauEval(Question.Difficulte niveauEval) {
+        this.niveauEval = niveauEval;
     }
 
     public int getTotalObtenu() {

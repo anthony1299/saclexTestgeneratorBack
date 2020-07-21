@@ -16,7 +16,7 @@ import java.util.List;
 public class Question implements Serializable {
 
     public enum Difficulte{
-        Facile,Moyen,Difficile
+        Facile,Moyen,Difficile,Mixte
     }
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
