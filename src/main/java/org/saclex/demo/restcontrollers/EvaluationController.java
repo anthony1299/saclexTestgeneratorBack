@@ -311,7 +311,7 @@ public class EvaluationController {
 
 
     @PostMapping("correction")
-    public List<EvalQuestRep>correctionEval(@RequestBody List<QuestionReponses> questionReponses){
+    public ResultatEval correctionEval(@RequestBody List<QuestionReponses> questionReponses){
         System.out.println(questionReponses.get(0).getReponses().toString());
         List<Reponse> reponseList;
         List<ReponseEval> reponseEvals;
@@ -365,22 +365,32 @@ public class EvaluationController {
         }
         int totalObtenu=0;
         int total=0;
+        int tempsMis=0;
+        int tempsEval=0;
         for(EvalQuestRep e:evalQuestReps
             ){
             total=total+e.getQuest().getScore();
+            tempsMis=tempsMis+e.getTempsMis();
+            tempsEval=tempsEval+e.getQuest().getDuree();
             if(e.getStatut()==Evaluation.statuEval.Reussi){
                 totalObtenu=totalObtenu+e.getQuest().getScore();}
         }
         Evaluation evaluation=(evalQuestReps.get(0).getEval());
         evaluation.setTotal(total);
         evaluation.setTotalObtenu(totalObtenu);
+        evaluation.setTempsEvaluation( tempsEval );
+        evaluation.setTempsApprenant( tempsMis );
         if(totalObtenu<total/2){
             evaluation.setStatut(Evaluation.statuEval.Echoue);
         }else {
             evaluation.setStatut(Evaluation.statuEval.Reussi);
         }
+
         evaluationService.updateEvaluation(evaluation);
-        return evalQuestReps;
+        ResultatEval rev=new ResultatEval();
+        rev.setEvalQuestReps( evalQuestReps );
+        rev.setEvaluation( evaluation );
+        return rev;
     }
 
     //Fonction de modification d'une évaluation mais qui n'est pas utilisée
