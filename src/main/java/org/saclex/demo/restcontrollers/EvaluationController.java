@@ -323,7 +323,7 @@ public class EvaluationController {
             List<Long> r2= new ArrayList<>();
             System.out.println(q.getEqr().getId());
             reponseEvals=reponseEvalService.saveAllReponse(q.getReponses());
-
+//terst
             for(ReponseEval rep:reponseEvals
                 ){
 
