@@ -1,6 +1,10 @@
 package org.saclex.demo.service;
 
 import org.saclex.demo.entities.Evaluation;
+import org.saclex.demo.entities.ListEvaluation;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.rest.core.annotation.RestResource;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -25,6 +29,9 @@ public interface EvaluationService {
 
      Evaluation lastEval(Long idUser,Long IdCategorie,String niveau);
 
-    List<Evaluation> findByIdUser(Long idUser);
+     // @RestResource
+     List<Evaluation> findByIdUser(Long idUser);
+
+     ListEvaluation findByUser(Long idUser, int pageable);
 
 }

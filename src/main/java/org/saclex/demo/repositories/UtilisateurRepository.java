@@ -2,11 +2,12 @@ package org.saclex.demo.repositories;
 
 import org.saclex.demo.entities.Utilisateur;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Repository
+@RepositoryRestResource
 public interface UtilisateurRepository extends JpaRepository<Utilisateur,Long> {
     //Rechercher utilisateur par son login
     Utilisateur findByLogin(String login);

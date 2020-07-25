@@ -45,12 +45,16 @@ public class UtilisateurController {
     public List<Utilisateur> getResponsablescategories(){
         return utilisateurService.findByRole(Utilisateur.Role.RESPONSABLE_CATEGORIE);
     }
+    @GetMapping("/listerApprenant")
+    public List<Utilisateur> getAprenant(){
+        return utilisateurService.findByRole(Utilisateur.Role.APPRENANT);
+    }
 
     //Fonction qui crée les utilisateurs ayant pour role responsable_theme
     @PostMapping("/creerUtilisateur")
     public Utilisateur createUtilisateur(@RequestBody Utilisateur utilisateur){
             utilisateur.setActive(true);
-            utilisateur.setRole(Utilisateur.Role.APPRENANT);
+            utilisateur.setRole(Utilisateur.Role.RESPONSABLE_THEME);
             utilisateur.setPassword(encoder.encode(utilisateur.getPassword()));
         return utilisateurService.createUtilisateur(utilisateur);
     }

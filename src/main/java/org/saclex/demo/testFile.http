@@ -203,7 +203,12 @@ Content-Type: application/json
 
 GET  http://localhost:8088/admin/listerUtilisateur
 ###
-GET  http://localhost:8088/utilisateur/listerResponsableTheme
+GET  http://localhost:8088/evaluation/evaluationByUser/5?page=2
+###
+GET  http://localhost:8088/utilisateurs/5/evaluations?page=0&size=5
+
+###
+GET  http://localhost:8088/utilisateur/listerApprenant
 ###
 GET  http://localhost:8088/utilisateur/listerResponsableCategorie
 ###

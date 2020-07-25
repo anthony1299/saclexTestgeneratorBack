@@ -1,13 +1,14 @@
 package org.saclex.demo.service;
 
-import org.saclex.demo.entities.Categorie;
-import org.saclex.demo.entities.EvalQuestRep;
-import org.saclex.demo.entities.Evaluation;
-import org.saclex.demo.entities.Utilisateur;
+import org.saclex.demo.entities.*;
 import org.saclex.demo.repositories.CategorieRepository;
 import org.saclex.demo.repositories.EvaluationRepository;
 import org.saclex.demo.repositories.UtilisateurRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -131,6 +132,17 @@ private final CategorieService categorieService;
         }
         else
             return null ;
+    }
+
+    @Override
+    public ListEvaluation findByUser(Long idUser,int numPage) {
+        Utilisateur u = utilisateurRepository.findById(idUser).get();
+        Pageable pageable = PageRequest.of(numPage,10, Sort.by(Sort.Direction.ASC,"dateCreation"));
+        Page<Evaluation> evaluationPage = evaluationRepository.findByUser(u, pageable);
+        return new ListEvaluation(evaluationPage.getContent(),evaluationPage.getTotalPages(),evaluationPage.getNumber());
+
+
+        // return u.getEvaluations();
     }
 
     @Override
