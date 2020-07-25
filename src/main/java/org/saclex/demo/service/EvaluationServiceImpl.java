@@ -151,4 +151,26 @@ private final CategorieService categorieService;
 
         return u.getEvaluations();
     }
+
+    @Override
+    public List < Evaluation > findByIntituleAndUer(String intitule , Long idUser) {
+        List < Evaluation > listev1=findByIdUser( idUser );
+        List < Evaluation > listev2=new ArrayList <>(  );
+
+        for( Evaluation e:listev1
+              ) {
+            if( e.getIntitule().equals( intitule ) ){
+                listev2.add( e );
+            }
+
+        }
+        Collections.sort( listev2 , new Comparator < Evaluation >() {
+            @Override
+            public int compare(Evaluation o1 , Evaluation o2) {
+                return o1.getDateCreation().compareTo( o2.getDateCreation() );
+            }
+        } );
+
+        return listev2;
+    }
 }

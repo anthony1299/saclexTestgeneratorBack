@@ -1,0 +1,411 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reportAntho" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="1ed32f9c-0e46-4956-bfac-26805952d893">
+    <property name="ireport.zoom" value="1.0"/>
+    <property name="ireport.x" value="0"/>
+    <property name="ireport.y" value="0"/>
+    <property name="com.jaspersoft.studio.data.defaultdataadapter" value="antho"/>
+    <style name="style_statut">
+        <pen lineWidth="0.5" lineColor="#000000"/>
+        <box>
+            <pen lineWidth="0.5"/>
+            <topPen lineWidth="0.5"/>
+            <leftPen lineWidth="0.5"/>
+            <bottomPen lineWidth="0.5"/>
+            <rightPen lineWidth="0.5"/>
+        </box>
+        <conditionalStyle>
+            <conditionExpression><![CDATA[$F{statut}.equals( "Reussi" )]]></conditionExpression>
+            <style forecolor="#33CC00" backcolor="#000000" fill="Solid">
+                <box>
+                    <pen lineWidth="0.5" lineColor="#000000"/>
+                    <topPen lineWidth="0.5" lineColor="#000000"/>
+                    <leftPen lineWidth="0.5" lineColor="#000000"/>
+                    <bottomPen lineWidth="0.5" lineColor="#000000"/>
+                    <rightPen lineWidth="0.5" lineColor="#000000"/>
+                </box>
+            </style>
+        </conditionalStyle>
+        <conditionalStyle>
+            <conditionExpression><![CDATA[$F{statut}.equals( "Echoue" )]]></conditionExpression>
+            <style forecolor="#FF0033" backcolor="#000000" fill="Solid">
+                <box>
+                    <pen lineWidth="0.5" lineColor="#000000"/>
+                    <topPen lineWidth="0.5" lineColor="#000000"/>
+                    <leftPen lineWidth="0.5" lineColor="#000000"/>
+                    <bottomPen lineWidth="0.5" lineColor="#000000"/>
+                    <rightPen lineWidth="0.5" lineColor="#000000"/>
+                </box>
+            </style>
+        </conditionalStyle>
+    </style>
+    <style name="style_evalStatut">
+        <conditionalStyle>
+            <conditionExpression><![CDATA[$F{evalstatut}.equals( "Reussi" )]]></conditionExpression>
+            <style forecolor="#33CC00" backcolor="#0D0101" fill="Solid" isBlankWhenNull="true" isBold="true">
+                <pen lineColor="#000000"/>
+            </style>
+        </conditionalStyle>
+        <conditionalStyle>
+            <conditionExpression><![CDATA[$F{evalstatut}.equals( "Echoue" )]]></conditionExpression>
+            <style mode="Transparent" forecolor="#FF0033" backcolor="#050101" fill="Solid">
+                <pen lineColor="#000000"/>
+            </style>
+        </conditionalStyle>
+    </style>
+    <style name="style_statut_1">
+        <pen lineWidth="0.5" lineColor="#000000"/>
+        <box>
+            <pen lineWidth="0.5"/>
+            <topPen lineWidth="0.5"/>
+            <leftPen lineWidth="0.5"/>
+            <bottomPen lineWidth="0.5"/>
+            <rightPen lineWidth="0.5"/>
+        </box>
+        <conditionalStyle>
+            <conditionExpression><![CDATA[$F{statut}.equals( "Reussi" )]]></conditionExpression>
+            <style forecolor="#FF0000" backcolor="#000000" fill="Solid">
+                <box>
+                    <pen lineWidth="0.5" lineColor="#000000"/>
+                    <topPen lineWidth="0.5" lineColor="#000000"/>
+                    <leftPen lineWidth="0.5" lineColor="#000000"/>
+                    <bottomPen lineWidth="0.5" lineColor="#000000"/>
+                    <rightPen lineWidth="0.5" lineColor="#000000"/>
+                </box>
+            </style>
+        </conditionalStyle>
+        <conditionalStyle>
+            <conditionExpression><![CDATA[$F{statut}.equals( "Echoue" )]]></conditionExpression>
+            <style forecolor="#00FF00" backcolor="#000000" fill="Solid">
+                <box>
+                    <pen lineWidth="0.5" lineColor="#000000"/>
+                    <topPen lineWidth="0.5" lineColor="#000000"/>
+                    <leftPen lineWidth="0.5" lineColor="#000000"/>
+                    <bottomPen lineWidth="0.5" lineColor="#000000"/>
+                    <rightPen lineWidth="0.5" lineColor="#000000"/>
+                </box>
+            </style>
+        </conditionalStyle>
+    </style>
+    <parameter name="idEval" class="java.lang.Long"/>
+    <parameter name="image" class="java.lang.String"/>
+    <queryString>
+        <![CDATA[call details_eval($P{idEval})]]>
+    </queryString>
+    <field name="@nb:=@nb+1" class="java.lang.Long"/>
+    <field name="numero" class="java.lang.Long"/>
+    <field name="nom_prenom" class="java.lang.String"/>
+    <field name="catlib" class="java.lang.String"/>
+    <field name="total_obtenu" class="java.lang.Integer">
+        <fieldDescription><![CDATA[]]></fieldDescription>
+    </field>
+    <field name="total" class="java.lang.Integer">
+        <fieldDescription><![CDATA[]]></fieldDescription>
+    </field>
+    <field name="type_evaluation" class="java.lang.String">
+        <fieldDescription><![CDATA[]]></fieldDescription>
+    </field>
+    <field name="date_creation" class="java.sql.Timestamp">
+        <fieldDescription><![CDATA[]]></fieldDescription>
+    </field>
+    <field name="evalstatut" class="java.lang.String"/>
+    <field name="questionLib" class="java.lang.String"/>
+    <field name="tempsQuestion" class="java.lang.Integer"/>
+    <field name="tempsMis" class="java.lang.Integer"/>
+    <field name="score" class="java.lang.Integer">
+        <fieldDescription><![CDATA[]]></fieldDescription>
+    </field>
+    <field name="statut" class="java.lang.String"/>
+    <field name="pointobtenu" class="java.lang.Long"/>
+    <variable name="temps_eval" class="java.lang.Integer" calculation="Sum">
+        <variableExpression><![CDATA[$F{tempsQuestion}]]></variableExpression>
+    </variable>
+    <variable name="temps_realise" class="java.lang.Integer" calculation="Sum">
+        <variableExpression><![CDATA[$F{tempsMis}]]></variableExpression>
+    </variable>
+    <variable name="pourcentage" class="java.lang.String">
+        <variableExpression><![CDATA[$F{total_obtenu}/$F{total} * 100 + "%"]]></variableExpression>
+    </variable>
+    <variable name="numero_2" class="java.lang.Integer" calculation="Count">
+        <variableExpression><![CDATA[$F{numero}]]></variableExpression>
+    </variable>
+    <background>
+        <band splitType="Stretch"/>
+    </background>
+    <title>
+        <band height="169" splitType="Stretch">
+            <textField>
+                <reportElement x="18" y="10" width="322" height="20" uuid="118bd098-cba3-4de1-b518-f0f3c4bac442"/>
+                <textFieldExpression><![CDATA["Nom(s) et prénom(s) : " + $F{nom_prenom}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="18" y="30" width="322" height="20" uuid="0bb91245-3a82-437a-8960-9d31a992eff0"/>
+                <textFieldExpression><![CDATA["Type de l'évaluation : " + $F{type_evaluation}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="18" y="50" width="322" height="20" uuid="363845f1-620f-41a9-bebc-707f150b8ec6"/>
+                <textFieldExpression><![CDATA["Catégorie : " + $F{catlib}]]></textFieldExpression>
+            </textField>
+            <textField pattern="dd/MM/yyyy HH.mm.ss">
+                <reportElement x="18" y="70" width="322" height="20" uuid="f3862080-b57b-409c-bcb9-e44cdc04a300"/>
+                <textFieldExpression><![CDATA["Date : " + $F{date_creation}]]></textFieldExpression>
+            </textField>
+            <textField evaluationTime="Report">
+                <reportElement x="484" y="10" width="318" height="20" uuid="4d484e08-e173-4a85-8313-755c6cc98c63"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle"/>
+                <textFieldExpression><![CDATA["Nombre de questions : " + $V{numero_2}]]></textFieldExpression>
+            </textField>
+            <textField evaluationTime="Report">
+                <reportElement x="484" y="50" width="318" height="20" uuid="2d238c2c-003e-4cca-a403-7450a60b9af3"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle"/>
+                <textFieldExpression><![CDATA["Temps pour l'évaluation : " + $V{temps_eval} + " seconde(s)"]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="484" y="30" width="318" height="20" uuid="1e982e18-4909-453b-b096-dba3a37cd3e6"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle"/>
+                <textFieldExpression><![CDATA["Note obtenue : " + $F{total_obtenu}+"/"+$F{total}]]></textFieldExpression>
+            </textField>
+            <textField evaluationTime="Report">
+                <reportElement x="484" y="70" width="318" height="20" uuid="599569d0-26d8-4487-88e0-053f6c5fd5fb"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle"/>
+                <textFieldExpression><![CDATA["Temps réalisé : " + $V{temps_realise} + " seconde(s)"]]></textFieldExpression>
+            </textField>
+            <textField evaluationTime="Report" pattern="###0.00">
+                <reportElement x="291" y="103" width="281" height="20" uuid="6aa57067-19d1-406f-a820-944d3264d52a"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle"/>
+                <textFieldExpression><![CDATA["Pourcentage de réussite : " + $F{total_obtenu}/$F{total} * 100 + "%"]]></textFieldExpression>
+            </textField>
+            <textField evaluationTime="Report">
+                <reportElement x="291" y="123" width="281" height="20" uuid="fe8bf4b6-83b9-4fd2-ae54-3da0cce3a5be"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle"/>
+                <textFieldExpression><![CDATA["Temps moyen par question : " + $V{temps_eval}/$V{numero_2} + " seconde(s)"]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement x="319" y="143" width="108" height="20" uuid="e37c8a2c-cec5-4970-8846-715a93bc9fba"/>
+                <textElement verticalAlignment="Middle"/>
+                <text><![CDATA[Statut de l'évaluation : ]]></text>
+            </staticText>
+            <textField evaluationTime="Report">
+                <reportElement style="style_evalStatut" x="427" y="143" width="100" height="20" uuid="12dc0bef-c407-42e6-a956-2320d2af2de0"/>
+                <box>
+                    <pen lineWidth="0.0"/>
+                    <topPen lineWidth="0.0"/>
+                    <leftPen lineWidth="0.0"/>
+                    <bottomPen lineWidth="0.0"/>
+                    <rightPen lineWidth="0.0"/>
+                </box>
+                <textElement verticalAlignment="Middle">
+                    <font isBold="true"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{evalstatut}]]></textFieldExpression>
+            </textField>
+            <image hAlign="Center" vAlign="Middle">
+                <reportElement x="353" y="10" width="100" height="70" uuid="048de051-dea8-4869-aa16-62a227d61e4c"/>
+                <imageExpression><![CDATA[$P{image}]]></imageExpression>
+            </image>
+        </band>
+    </title>
+    <columnHeader>
+        <band height="20" splitType="Stretch">
+            <staticText>
+                <reportElement x="0" y="0" width="53" height="20" uuid="316657e9-cbc9-4b44-b535-dd239d4f62f4"/>
+                <box>
+                    <pen lineWidth="0.5"/>
+                    <topPen lineWidth="0.5"/>
+                    <leftPen lineWidth="0.5"/>
+                    <bottomPen lineWidth="0.5"/>
+                    <rightPen lineWidth="0.5"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font fontName="Arial Black" size="8" isBold="false"/>
+                </textElement>
+                <text><![CDATA[Numéro]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="53" y="0" width="209" height="20" uuid="ccbb511e-cd40-4688-9f39-812c8dc9bdce"/>
+                <box>
+                    <pen lineWidth="0.5"/>
+                    <topPen lineWidth="0.5"/>
+                    <leftPen lineWidth="0.5"/>
+                    <bottomPen lineWidth="0.5"/>
+                    <rightPen lineWidth="0.5"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font fontName="Arial Black" size="8" isBold="false"/>
+                </textElement>
+                <text><![CDATA[Libellé question]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="262" y="0" width="114" height="20" uuid="813c80d8-70ab-4460-8bfe-eb63e3274688"/>
+                <box>
+                    <pen lineWidth="0.5"/>
+                    <topPen lineWidth="0.5"/>
+                    <leftPen lineWidth="0.5"/>
+                    <bottomPen lineWidth="0.5"/>
+                    <rightPen lineWidth="0.5"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font fontName="Arial Black" size="8" isBold="false"/>
+                </textElement>
+                <text><![CDATA[Temps de la question]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="376" y="0" width="135" height="20" uuid="72c0e1aa-66c4-4126-b8bc-c1a74bb0164b"/>
+                <box>
+                    <pen lineWidth="0.5"/>
+                    <topPen lineWidth="0.5"/>
+                    <leftPen lineWidth="0.5"/>
+                    <bottomPen lineWidth="0.5"/>
+                    <rightPen lineWidth="0.5"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font fontName="Arial Black" size="8" isBold="false"/>
+                </textElement>
+                <text><![CDATA[Temps mis sur la question]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="511" y="0" width="107" height="20" uuid="10b8fc35-b629-4698-865d-cce3cd277548"/>
+                <box>
+                    <pen lineWidth="0.5"/>
+                    <topPen lineWidth="0.5"/>
+                    <leftPen lineWidth="0.5"/>
+                    <bottomPen lineWidth="0.5"/>
+                    <rightPen lineWidth="0.5"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font fontName="Arial Black" size="8" isBold="false"/>
+                </textElement>
+                <text><![CDATA[Points de la question]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="618" y="0" width="81" height="20" uuid="5a8d7c0f-e2db-4bbf-a9ca-7c578e34bf96"/>
+                <box>
+                    <pen lineWidth="0.5"/>
+                    <topPen lineWidth="0.5"/>
+                    <leftPen lineWidth="0.5"/>
+                    <bottomPen lineWidth="0.5"/>
+                    <rightPen lineWidth="0.5"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font fontName="Arial Black" size="8" isBold="false"/>
+                </textElement>
+                <text><![CDATA[Points obtenus]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="699" y="0" width="103" height="20" uuid="9683ace8-d664-49d5-80d2-e15b9d22de58"/>
+                <box>
+                    <pen lineWidth="0.5"/>
+                    <topPen lineWidth="0.5"/>
+                    <leftPen lineWidth="0.5"/>
+                    <bottomPen lineWidth="0.5"/>
+                    <rightPen lineWidth="0.5"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font fontName="Arial Black" size="8" isBold="false"/>
+                </textElement>
+                <text><![CDATA[Statut]]></text>
+            </staticText>
+        </band>
+    </columnHeader>
+    <detail>
+        <band height="20" splitType="Stretch">
+            <textField>
+                <reportElement x="0" y="0" width="53" height="20" uuid="26ab08a6-8b72-4e8c-84d1-1597e3507af1"/>
+                <box>
+                    <pen lineWidth="0.5"/>
+                    <topPen lineWidth="0.5"/>
+                    <leftPen lineWidth="0.5"/>
+                    <bottomPen lineWidth="0.5"/>
+                    <rightPen lineWidth="0.5"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font fontName="Arial Black" size="8" isBold="false"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{numero}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="53" y="0" width="209" height="20" uuid="a0622ec3-998d-43b6-9a93-2b4dd4382138"/>
+                <box>
+                    <pen lineWidth="0.5"/>
+                    <topPen lineWidth="0.5"/>
+                    <leftPen lineWidth="0.5"/>
+                    <bottomPen lineWidth="0.5"/>
+                    <rightPen lineWidth="0.5"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="8"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{questionLib}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="262" y="0" width="114" height="20" uuid="2f969736-93a6-46b2-84b9-35e82b3e66fe"/>
+                <box>
+                    <pen lineWidth="0.5"/>
+                    <topPen lineWidth="0.5"/>
+                    <leftPen lineWidth="0.5"/>
+                    <bottomPen lineWidth="0.5"/>
+                    <rightPen lineWidth="0.5"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="8"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{tempsQuestion}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="376" y="0" width="135" height="20" uuid="b6ee0eb8-86d7-4b14-a9ec-e3c57ad5f97c"/>
+                <box>
+                    <pen lineWidth="0.5"/>
+                    <topPen lineWidth="0.5"/>
+                    <leftPen lineWidth="0.5"/>
+                    <bottomPen lineWidth="0.5"/>
+                    <rightPen lineWidth="0.5"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="8"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{tempsMis}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="511" y="0" width="107" height="20" uuid="8ffa7caf-583f-4011-8564-5f17c02f727a"/>
+                <box>
+                    <pen lineWidth="0.5"/>
+                    <topPen lineWidth="0.5"/>
+                    <leftPen lineWidth="0.5"/>
+                    <bottomPen lineWidth="0.5"/>
+                    <rightPen lineWidth="0.5"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="8"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{score}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="618" y="0" width="81" height="20" uuid="19c5f4f2-f126-41d7-83f3-2c950eddd597"/>
+                <box>
+                    <pen lineWidth="0.5"/>
+                    <topPen lineWidth="0.5"/>
+                    <leftPen lineWidth="0.5"/>
+                    <bottomPen lineWidth="0.5"/>
+                    <rightPen lineWidth="0.5"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="8"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{pointobtenu}]]></textFieldExpression>
+            </textField>
+            <textField evaluationTime="Auto">
+                <reportElement style="style_statut" x="699" y="0" width="103" height="20" uuid="4ed0a0b7-111f-4016-8c48-11bd9a5e38a0"/>
+                <box>
+                    <pen lineWidth="0.5"/>
+                    <topPen lineWidth="0.5"/>
+                    <leftPen lineWidth="0.5"/>
+                    <bottomPen lineWidth="0.5"/>
+                    <rightPen lineWidth="0.5"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="8" isBold="true"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{statut}]]></textFieldExpression>
+            </textField>
+        </band>
+    </detail>
+</jasperReport>

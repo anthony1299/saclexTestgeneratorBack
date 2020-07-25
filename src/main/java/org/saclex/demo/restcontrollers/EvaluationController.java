@@ -1,10 +1,12 @@
 package org.saclex.demo.restcontrollers;
 
+import net.sf.jasperreports.engine.JRException;
 import org.saclex.demo.entities.*;
 import org.saclex.demo.service.*;
 import org.springframework.web.bind.annotation.*;
 
-import javax.persistence.EntityManager;
+import java.io.IOException;
+import java.sql.SQLException;
 import java.util.*;
 
 @RestController
@@ -19,8 +21,9 @@ public class EvaluationController {
     private final ReponseEvalService reponseEvalService;
     private final EvalQuestRepService evalQuestRepService;
     private final UtilisateurService utilisateurService;
+    private final ReportService reportService;
 
-    public EvaluationController(EvaluationService evaluationService, QuestionService questionService, CategorieService categorieService, ThemeService themeService, ReponseService reponseService, ReponseEvalService reponseEvalService, EvalQuestRepService evalQuestRepService, UtilisateurService utilisateurService) {
+    public EvaluationController(EvaluationService evaluationService , QuestionService questionService , CategorieService categorieService , ThemeService themeService , ReponseService reponseService , ReponseEvalService reponseEvalService , EvalQuestRepService evalQuestRepService , UtilisateurService utilisateurService , ReportService reportService) {
         this.evaluationService = evaluationService;
         this.questionService = questionService;
         this.categorieService = categorieService;
@@ -29,6 +32,7 @@ public class EvaluationController {
         this.reponseEvalService=reponseEvalService;
         this.evalQuestRepService = evalQuestRepService;
         this.utilisateurService = utilisateurService;
+        this.reportService = reportService;
     }
 
     //Fonction qui liste toutes les evaluations
@@ -37,10 +41,20 @@ public class EvaluationController {
         return evaluationService.getAllEvaluations();
     }
 
+    //Fonction qui liste toutes les evaluations
+    @GetMapping("print/{ideval}")
+    public void printEvaluation(@PathVariable("ideval") Long ideval) throws SQLException, IOException, JRException {
+        reportService.getPdfEval( ideval );
+    }
+
     //Fonction qui permet de retrouver toutes les evaluations d'un utilisateur
     @GetMapping("evaluationByUser/{idUser}")
     public ListEvaluation getEvaluationsByUser(@PathVariable Long idUser, @RequestParam int page){
         return evaluationService.findByUser(idUser, page);
+    }
+    @GetMapping("evaluationByUserGraph/{idUser}/{intitule}")
+    public List<Evaluation> EvaluationsGraph(@PathVariable("idUser") Long idUser, @PathVariable("intitule") String intitule){
+        return evaluationService.findByIntituleAndUer( intitule,idUser );
     }
     //Creation d'une evaluation
     @PostMapping("creerEvaluation/{idUser}/{idCategorie}/{nbreQuestions}")
@@ -166,7 +180,7 @@ public class EvaluationController {
             for( Question q : listNonRepondu
             ) {
                 if( compteur<nbreQuestions )
-                questionEval.add( q );
+                    questionEval.add( q );
                 compteur=compteur+1;
 
             }
@@ -213,13 +227,13 @@ public class EvaluationController {
 
             for( Question v : questionEval ) {
 
-                    EvalQuestRep evalQuestRep = new EvalQuestRep();
-                    evalQuestRep.setEval( eval );
-                    evalQuestRep.setQuest( v );
-                    tempsEval = tempsEval + v.getDuree();
-                    evalQuestRepService.createEvalQuestRep( evalQuestRep );
-                    System.out.println( "eqr "+evalQuestRep.getId() );
-                    leqr.add( evalQuestRep );
+                EvalQuestRep evalQuestRep = new EvalQuestRep();
+                evalQuestRep.setEval( eval );
+                evalQuestRep.setQuest( v );
+                tempsEval = tempsEval + v.getDuree();
+                evalQuestRepService.createEvalQuestRep( evalQuestRep );
+                System.out.println( "eqr "+evalQuestRep.getId() );
+                leqr.add( evalQuestRep );
 
 
             }
@@ -397,19 +411,19 @@ public class EvaluationController {
     //Fonction de modification d'une évaluation mais qui n'est pas utilisée
     @PutMapping("modifierEvaluatiion")
     public Evaluation updateEvaluation (@RequestBody Evaluation evaluation) throws Exception {
-            if (evaluation.getIdEvaluation() == null) {
-                throw new Exception("Evaluation non existante");
-            }
-
-            return evaluationService.updateEvaluation(evaluation);
+        if (evaluation.getIdEvaluation() == null) {
+            throw new Exception("Evaluation non existante");
         }
 
-        //fonction de suppression d'une evaluation mais qui n'est pas utilisée
-        @DeleteMapping("supprimerEvaluation/{idEvaluation}")
-        public void deleteEvaluation (@PathVariable Long idEvaluation){
-            evaluationService.deleteEvaluation(idEvaluation);
-        }
+        return evaluationService.updateEvaluation(evaluation);
     }
+
+    //fonction de suppression d'une evaluation mais qui n'est pas utilisée
+    @DeleteMapping("supprimerEvaluation/{idEvaluation}")
+    public void deleteEvaluation (@PathVariable Long idEvaluation){
+        evaluationService.deleteEvaluation(idEvaluation);
+    }
+}
 /*
 * package org.saclex.demo.restcontrollers;
 
@@ -816,6 +830,10 @@ public class EvaluationController {
             return evaluationService.updateEvaluation(evaluation);
         }
 
+        @GetMapping("printEval/{idEval}")
+        public void printEval(@PathVariable("idEval") Long idEval) throws SQLException, IOException, JRException {
+        reportService.getPdfEval( idEval );
+        }
         //fonction de suppression d'une evaluation mais qui n'est pas utilisée
         @DeleteMapping("supprimerEvaluation/{idEvaluation}")
         public void deleteEvaluation (@PathVariable Long idEvaluation){

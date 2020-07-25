@@ -32,6 +32,8 @@ public interface EvaluationService {
      // @RestResource
      List<Evaluation> findByIdUser(Long idUser);
 
+     List<Evaluation> findByIntituleAndUer(String intitule,Long idUser);
+
      ListEvaluation findByUser(Long idUser, int pageable);
 
 }

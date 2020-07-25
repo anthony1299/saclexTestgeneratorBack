@@ -12,6 +12,9 @@ import java.util.List;
 
 @RepositoryRestResource
 public interface EvaluationRepository extends JpaRepository<Evaluation,Long> {
-    Page<Evaluation> findByUser(Utilisateur utilisateur, Pageable pageable);
+    Page <Evaluation> findByUser(Utilisateur utilisateur, Pageable pageable);
+
+
+
 
 }
