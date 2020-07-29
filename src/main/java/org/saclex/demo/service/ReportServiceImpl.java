@@ -20,16 +20,17 @@ import java.util.Map;
 @Service
 public class ReportServiceImpl implements ReportService{
 
+    private final EvaluationRepository evaluationRepository;
     @Autowired
     JdbcTemplate jdbcTemplate;
 
-   private final EvaluationRepository evaluationRepository;
+
 
     public ReportServiceImpl(EvaluationRepository evaluationRepository) {
         this.evaluationRepository = evaluationRepository;
     }
 
-    public void getPdfEval(Long idEval) throws IOException, JRException, SQLException {
+    public String getPdfEval(Long idEval) throws IOException, JRException, SQLException {
 
 
         Evaluation evaluation=evaluationRepository.findById(idEval).get();
@@ -53,6 +54,7 @@ public class ReportServiceImpl implements ReportService{
 
         JasperExportManager.exportReportToPdfFile(jasperPrint,local.toString());
         connection.close();
+        return local.toString();
     }
 
     }

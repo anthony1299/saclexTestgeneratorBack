@@ -1,5 +1,6 @@
 package org.saclex.demo.restcontrollers;
 
+
 import net.sf.jasperreports.engine.JRException;
 import org.saclex.demo.entities.*;
 import org.saclex.demo.service.*;
@@ -23,13 +24,13 @@ public class EvaluationController {
     private final UtilisateurService utilisateurService;
     private final ReportService reportService;
 
-    public EvaluationController(EvaluationService evaluationService , QuestionService questionService , CategorieService categorieService , ThemeService themeService , ReponseService reponseService , ReponseEvalService reponseEvalService , EvalQuestRepService evalQuestRepService , UtilisateurService utilisateurService , ReportService reportService) {
+    public EvaluationController(EvaluationService evaluationService, QuestionService questionService, CategorieService categorieService, ThemeService themeService, ReponseService reponseService, ReponseEvalService reponseEvalService, EvalQuestRepService evalQuestRepService, UtilisateurService utilisateurService, ReportService reportService) {
         this.evaluationService = evaluationService;
         this.questionService = questionService;
         this.categorieService = categorieService;
         this.themeService = themeService;
-        this.reponseService=reponseService;
-        this.reponseEvalService=reponseEvalService;
+        this.reponseService = reponseService;
+        this.reponseEvalService = reponseEvalService;
         this.evalQuestRepService = evalQuestRepService;
         this.utilisateurService = utilisateurService;
         this.reportService = reportService;
@@ -43,64 +44,70 @@ public class EvaluationController {
 
     //Fonction qui liste toutes les evaluations
     @GetMapping("print/{ideval}")
-    public void printEvaluation(@PathVariable("ideval") Long ideval) throws SQLException, IOException, JRException {
-        reportService.getPdfEval( ideval );
+    public Evaluation printEvaluation(@PathVariable("ideval") Long ideval) throws SQLException, IOException, JRException {
+
+        Evaluation evaluation=new Evaluation();
+        evaluation.setIntitule(reportService.getPdfEval(ideval));
+
+        return evaluation ;
     }
 
     //Fonction qui permet de retrouver toutes les evaluations d'un utilisateur
     @GetMapping("evaluationByUser/{idUser}")
-    public ListEvaluation getEvaluationsByUser(@PathVariable Long idUser, @RequestParam int page){
+    public ListEvaluation getEvaluationsByUser(@PathVariable Long idUser, @RequestParam int page) {
         return evaluationService.findByUser(idUser, page);
     }
+
     @GetMapping("evaluationByUserGraph/{idUser}/{intitule}")
-    public List<Evaluation> EvaluationsGraph(@PathVariable("idUser") Long idUser, @PathVariable("intitule") String intitule){
-        return evaluationService.findByIntituleAndUer( intitule,idUser );
+    public List<Evaluation> EvaluationsGraph(@PathVariable("idUser") Long idUser, @PathVariable("intitule") String intitule) {
+        return evaluationService.findByIntituleAndUer(intitule, idUser);
     }
+
     //Creation d'une evaluation
     @PostMapping("creerEvaluation/{idUser}/{idCategorie}/{nbreQuestions}")
-    public List < QuestionReponses > createEvaluation(@RequestBody Evaluation evaluation , @PathVariable("idUser") Long idUser , @PathVariable("idCategorie") Long idCategorie , @PathVariable("nbreQuestions") int nbreQuestions) {
+    public List<QuestionReponses> createEvaluation(@RequestBody Evaluation evaluation, @PathVariable("idUser") Long idUser, @PathVariable("idCategorie") Long idCategorie, @PathVariable("nbreQuestions") int nbreQuestions) {
 
         //Creation de l'objet evaluation
-        evaluation.setDateCreation( new Date() );
-        evaluation.setDateModification( new Date() );
-        evaluation.setUser( utilisateurService.findById( idUser ) );
-        Categorie categorie = categorieService.findById( idCategorie ).get();
-        evaluation.setIntitule( categorie.getLibelle() );
-        evaluation.setTypeEvaluation( Evaluation.TypeEval.Formative );
-        Evaluation eval = evaluationService.createEvaluation( evaluation );
-        List < EvalQuestRep > leqr = new ArrayList <>();
+        evaluation.setDateCreation(new Date());
+        evaluation.setDateModification(new Date());
+        evaluation.setUser(utilisateurService.findById(idUser));
+        Categorie categorie = categorieService.findById(idCategorie).get();
+        evaluation.setIntitule(categorie.getLibelle());
+        evaluation.setTypeEvaluation(Evaluation.TypeEval.Formative);
+        Evaluation eval = evaluationService.createEvaluation(evaluation);
+        List<EvalQuestRep> leqr = new ArrayList<>();
         int tempsEval = 0;
         int compteur = 0;
 
         //Liste des questions de la categorie
-        List < Question > questions_de_la_categorie = categorie.getQuestions();
-        Collections.shuffle( questions_de_la_categorie , new Random( 3 ) );
+        List<Question> questions_de_la_categorie = categorie.getQuestions();
+        Collections.shuffle(questions_de_la_categorie, new Random(3));
 
-        List < QuestionReponses > lqp = new ArrayList <>();
+        List<QuestionReponses> lqp = new ArrayList<>();
 
         //objet qui contient la liste des questions pour l'evaluation en cours de creation
-        List < Question > questionEval = new ArrayList <>();
+        List<Question> questionEval = new ArrayList<>();
 
         //Si le nombre de questions demandé est superieur aux nombre de questions disponibles on lui renvoi toutes les questions disponible
-        if( questions_de_la_categorie.size() <nbreQuestions ){
+        if (questions_de_la_categorie.size() < nbreQuestions) {
             System.out.println("je suis dans if");
-            for( Question v : questions_de_la_categorie
+            for (Question v : questions_de_la_categorie
             ) {
                 EvalQuestRep evalQuestRep = new EvalQuestRep();
-                evalQuestRep.setEval( eval );
-                evalQuestRep.setQuest( v );
+                evalQuestRep.setEval(eval);
+                evalQuestRep.setQuest(v);
                 tempsEval = tempsEval + v.getDuree();
-                evalQuestRepService.createEvalQuestRep( evalQuestRep );
-                System.out.println( "question categorie "+evalQuestRep.getQuest().getLibelle());
-                leqr.add( evalQuestRep );
+                evalQuestRepService.createEvalQuestRep(evalQuestRep);
+                System.out.println("question categorie " + evalQuestRep.getQuest().getLibelle());
+                leqr.add(evalQuestRep);
 
             }
 
-            for( EvalQuestRep eqr : leqr
+            for (EvalQuestRep eqr : leqr
             ) {
                 QuestionReponses qp = new QuestionReponses();
-                qp.setEqr( eqr );
-                lqp.add( qp );
+                qp.setEqr(eqr);
+                lqp.add(qp);
 
 
             }
@@ -108,22 +115,22 @@ public class EvaluationController {
         } else {
 
             //Recuperation de la liste des EQR(eval quest rep) ayant pour statut Echoue pour cette categorie
-            List < EvalQuestRep > listEchec = evalQuestRepService.findByStatu( Evaluation.statuEval.Echoue );
-            List < Question > questionsRates = new ArrayList <>();
-            List < Question > questionsReussi = new ArrayList <>();
+            List<EvalQuestRep> listEchec = evalQuestRepService.findByStatu(Evaluation.statuEval.Echoue);
+            List<Question> questionsRates = new ArrayList<>();
+            List<Question> questionsReussi = new ArrayList<>();
             //Recuperation de la derniere evaluation
-            Evaluation lastEval =evaluationService.lastEval( idUser,idCategorie );
-            if( lastEval!=null ){
-                System.out.println("last eval"+lastEval.getIdEvaluation());
-                List < EvalQuestRep > listeqrlast=evalQuestRepService.findByEval( lastEval.getIdEvaluation() );
+            Evaluation lastEval = evaluationService.lastEval(idUser, idCategorie);
+            if (lastEval != null) {
+                System.out.println("last eval" + lastEval.getIdEvaluation());
+                List<EvalQuestRep> listeqrlast = evalQuestRepService.findByEval(lastEval.getIdEvaluation());
 
                 //Remplissage des listes de questions reussies et ratées
-                for( EvalQuestRep e:listeqrlast
+                for (EvalQuestRep e : listeqrlast
                 ) {
-                    if( e.getStatut()== Evaluation.statuEval.Echoue ){
-                        questionsRates.add( e.getQuest());
-                    }else{
-                        questionsReussi.add( e.getQuest() );
+                    if (e.getStatut() == Evaluation.statuEval.Echoue) {
+                        questionsRates.add(e.getQuest());
+                    } else {
+                        questionsReussi.add(e.getQuest());
                     }
 
                 }
@@ -141,13 +148,13 @@ public class EvaluationController {
 
                 }
 
-                if (questionsRates.size()!=0){
-                    for( Question q:questionsRates ){
-                        if( compteur<=(nbreQuestions*60)/100 ){
-                            int u = new Random().nextInt( questionsRates.size() );
-                            if (!questionEval.contains(questionsRates.get(u))){
-                                questionEval.add( questionsRates.get( u ) );
-                                compteur=compteur+1;
+                if (questionsRates.size() != 0) {
+                    for (Question q : questionsRates) {
+                        if (compteur <= (nbreQuestions * 60) / 100) {
+                            int u = new Random().nextInt(questionsRates.size());
+                            if (!questionEval.contains(questionsRates.get(u))) {
+                                questionEval.add(questionsRates.get(u));
+                                compteur = compteur + 1;
                             }
 
 
@@ -159,15 +166,15 @@ public class EvaluationController {
 
 
             //Construction de la liste des questions non repondues pour cette categorie
-            List < Question > listNonRepondu = new ArrayList <>();
-            for( Question q : questions_de_la_categorie
+            List<Question> listNonRepondu = new ArrayList<>();
+            for (Question q : questions_de_la_categorie
             ) {
-                if( !((questionsRates.contains( q )) || (questionsReussi.contains( q ))) ){
-                    listNonRepondu.add( q );
+                if (!((questionsRates.contains(q)) || (questionsReussi.contains(q)))) {
+                    listNonRepondu.add(q);
                 }
             }
 
-            Collections.shuffle( listNonRepondu , new Random( 2 ) );
+            Collections.shuffle(listNonRepondu, new Random(2));
 
             System.out.println("questions non repondues");
             for (Question q : listNonRepondu
@@ -177,18 +184,18 @@ public class EvaluationController {
             }
 
             //Ajout des questions non répondues à la liste des questions de l'évaluation
-            for( Question q : listNonRepondu
+            for (Question q : listNonRepondu
             ) {
-                if( compteur<nbreQuestions )
-                    questionEval.add( q );
-                compteur=compteur+1;
+                if (compteur < nbreQuestions)
+                    questionEval.add(q);
+                compteur = compteur + 1;
 
             }
-            if (questionEval.size()<nbreQuestions){
-                for( int i = 0; i < nbreQuestions - questionEval.size(); i++ ) {
-                    int u = new Random().nextInt( questionsReussi.size() );
-                    if (!questionEval.contains(questionsReussi.get(u))){
-                        questionEval.add( questionsReussi.get( u ) );
+            if (questionEval.size() < nbreQuestions) {
+                for (int i = 0; i < nbreQuestions - questionEval.size(); i++) {
+                    int u = new Random().nextInt(questionsReussi.size());
+                    if (!questionEval.contains(questionsReussi.get(u))) {
+                        questionEval.add(questionsReussi.get(u));
                     }
                 }
             }
@@ -223,31 +230,31 @@ public class EvaluationController {
                 }
             }
 */
-            Collections.shuffle( questionEval );
+            Collections.shuffle(questionEval);
 
-            for( Question v : questionEval ) {
+            for (Question v : questionEval) {
 
                 EvalQuestRep evalQuestRep = new EvalQuestRep();
-                evalQuestRep.setEval( eval );
-                evalQuestRep.setQuest( v );
+                evalQuestRep.setEval(eval);
+                evalQuestRep.setQuest(v);
                 tempsEval = tempsEval + v.getDuree();
-                evalQuestRepService.createEvalQuestRep( evalQuestRep );
-                System.out.println( "eqr "+evalQuestRep.getId() );
-                leqr.add( evalQuestRep );
+                evalQuestRepService.createEvalQuestRep(evalQuestRep);
+                System.out.println("eqr " + evalQuestRep.getId());
+                leqr.add(evalQuestRep);
 
 
             }
 
 
         }
-        eval.setTempsEvaluation( tempsEval );
-        evaluationService.updateEvaluation( eval );
+        eval.setTempsEvaluation(tempsEval);
+        evaluationService.updateEvaluation(eval);
 
-        for( EvalQuestRep eqr : leqr
+        for (EvalQuestRep eqr : leqr
         ) {
             QuestionReponses qp = new QuestionReponses();
-            qp.setEqr( eqr );
-            lqp.add( qp );
+            qp.setEqr(eqr);
+            lqp.add(qp);
 
 
         }
@@ -255,85 +262,85 @@ public class EvaluationController {
     }
 
     @PostMapping("correction")
-    public ResultatEval correctionEval(@RequestBody List<QuestionReponses> questionReponses){
+    public ResultatEval correctionEval(@RequestBody List<QuestionReponses> questionReponses) {
         System.out.println(questionReponses.get(0).getReponses().toString());
         List<Reponse> reponseList;
         List<ReponseEval> reponseEvals;
-        List<EvalQuestRep> evalQuestReps=new ArrayList<>();
-        for(QuestionReponses q:questionReponses
-        ){
-            List<Reponse> reponseuser= new ArrayList<>();
-            List<Long> r1= new ArrayList<>();
-            List<Long> r2= new ArrayList<>();
+        List<EvalQuestRep> evalQuestReps = new ArrayList<>();
+        for (QuestionReponses q : questionReponses
+        ) {
+            List<Reponse> reponseuser = new ArrayList<>();
+            List<Long> r1 = new ArrayList<>();
+            List<Long> r2 = new ArrayList<>();
             System.out.println(q.getEqr().getId());
-            reponseEvals=reponseEvalService.saveAllReponse(q.getReponses());
+            reponseEvals = reponseEvalService.saveAllReponse(q.getReponses());
 //terst
-            for(ReponseEval rep:reponseEvals
-            ){
+            for (ReponseEval rep : reponseEvals
+            ) {
 
                 reponseuser.add(rep.getRep());
             }
             //System.out.println("reponses user "+reponseuser.size());
-            for(Reponse r:reponseuser
-            ){
+            for (Reponse r : reponseuser
+            ) {
                 r1.add(r.getIdReponse());
 
             }
-            System.out.println("r1 "+r1.size());
-            reponseList=reponseService.findcorrectAnswer(q.getEqr().getQuest().getIdQuestion());
+            System.out.println("r1 " + r1.size());
+            reponseList = reponseService.findcorrectAnswer(q.getEqr().getQuest().getIdQuestion());
 
             System.out.println(reponseList.size());
 
-            for(Reponse r:reponseList
-            ){
+            for (Reponse r : reponseList
+            ) {
                 r2.add(r.getIdReponse());
 
 
             }
-            System.out.println("r2 "+r2.size());
+            System.out.println("r2 " + r2.size());
             Collections.sort(r1);
             System.out.println(r1);
             Collections.sort(r2);
             System.out.println(r2);
-            if(r1.equals(r2)){
+            if (r1.equals(r2)) {
 
                 q.getEqr().setStatut(Evaluation.statuEval.Reussi);
-            }else{
+            } else {
                 q.getEqr().setStatut(Evaluation.statuEval.Echoue);
             }
 
             evalQuestReps.add(evalQuestRepService.updateEvalQuestRep(q.getEqr()));
 
 
-
         }
-        int totalObtenu=0;
-        int total=0;
-        int tempsMis=0;
-        int tempsEval=0;
-        for(EvalQuestRep e:evalQuestReps
-        ){
-            total=total+e.getQuest().getScore();
-            tempsMis=tempsMis+e.getTempsMis();
-            tempsEval=tempsEval+e.getQuest().getDuree();
-            if(e.getStatut()==Evaluation.statuEval.Reussi){
-                totalObtenu=totalObtenu+e.getQuest().getScore();}
+        int totalObtenu = 0;
+        int total = 0;
+        int tempsMis = 0;
+        int tempsEval = 0;
+        for (EvalQuestRep e : evalQuestReps
+        ) {
+            total = total + e.getQuest().getScore();
+            tempsMis = tempsMis + e.getTempsMis();
+            tempsEval = tempsEval + e.getQuest().getDuree();
+            if (e.getStatut() == Evaluation.statuEval.Reussi) {
+                totalObtenu = totalObtenu + e.getQuest().getScore();
+            }
         }
-        Evaluation evaluation=(evalQuestReps.get(0).getEval());
+        Evaluation evaluation = (evalQuestReps.get(0).getEval());
         evaluation.setTotal(total);
         evaluation.setTotalObtenu(totalObtenu);
-        evaluation.setTempsEvaluation( tempsEval );
-        evaluation.setTempsApprenant( tempsMis );
-        if(totalObtenu<total/2){
+        evaluation.setTempsEvaluation(tempsEval);
+        evaluation.setTempsApprenant(tempsMis);
+        if (totalObtenu < total / 2) {
             evaluation.setStatut(Evaluation.statuEval.Echoue);
-        }else {
+        } else {
             evaluation.setStatut(Evaluation.statuEval.Reussi);
         }
 
         evaluationService.updateEvaluation(evaluation);
-        ResultatEval rev=new ResultatEval();
-        rev.setEvalQuestReps( evalQuestReps );
-        rev.setEvaluation( evaluation );
+        ResultatEval rev = new ResultatEval();
+        rev.setEvalQuestReps(evalQuestReps);
+        rev.setEvaluation(evaluation);
         return rev;
     }
     /*public List<EvalQuestRep>correctionEval(@RequestBody List<QuestionReponses> questionReponses){

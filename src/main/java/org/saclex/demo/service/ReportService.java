@@ -7,5 +7,5 @@ import java.sql.SQLException;
 
 public interface ReportService {
 
-    void getPdfEval(Long idEval) throws IOException, JRException, SQLException;
+    String getPdfEval(Long idEval) throws IOException, JRException, SQLException;
 }
