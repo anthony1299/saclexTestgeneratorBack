@@ -39,7 +39,7 @@ public class Categorie implements Serializable {
     private Date dateCreation;
 
     @Column(name = "seuil")
-    private int seuil;
+    private Integer seuil;
 
 
     @OneToMany(mappedBy = "categorie",fetch=FetchType.LAZY)

@@ -130,6 +130,7 @@ public class EvaluationController {
                 questionEval.addAll(questionsRates);
             }
 
+            System.out.println("raté"+questionsRates.size());
 
             //Construction de la liste des questions non repondues pour cette categorie
             List < Question > listNonRepondu = new ArrayList <>();
@@ -140,23 +141,25 @@ public class EvaluationController {
                 }
             }
 
+            System.out.println(listNonRepondu.size());
             //Collections.shuffle( listNonRepondu , new Random( 2 ) );
 
             //Ajout des questions non répondues à la liste des questions de l'évaluation
             Collections.shuffle( listNonRepondu );
-            int i=0;
+            questionEval.addAll(listNonRepondu);
+            /*int i=0;
             if (questionEval.size()<nbreQuestions){
                 while(i< nbreQuestions - questionEval.size() && i<listNonRepondu.size())
                 {
                     questionEval.add( listNonRepondu.get( i ) );
                     i=i+1;
                 }
-            }
-
+            }*/
+            System.out.println("questeval "+ questionEval.size());
 
             Collections.shuffle( questionEval );
             int c=0;
-            while (c<= nbreQuestions && c<questionEval.size()){
+            while (c< nbreQuestions && c<questionEval.size()){
 
                 EvalQuestRep evalQuestRep = new EvalQuestRep();
                 evalQuestRep.setEval( eval );
@@ -164,14 +167,12 @@ public class EvaluationController {
                 evalQuestRep.setQuest( questionEval.get( c ));
                 tempsEval = tempsEval + questionEval.get( c ).getDuree();
                 evalQuestRepService.createEvalQuestRep( evalQuestRep );
-                System.out.println( "eqr "+evalQuestRep.getId() );
-
                 leqr.add( evalQuestRep );
                 c=c+1;
 
             }
 
-
+            System.out.println("leqr "+leqr.size());
         }
         eval.setTempsEvaluation( tempsEval );
         evaluationService.updateEvaluation( eval );
@@ -184,6 +185,7 @@ public class EvaluationController {
 
 
         }
+        System.out.println("lqp "+lqp.size());
         return lqp;
     }
     @GetMapping("lasteval/{iduser}/{idcat}")

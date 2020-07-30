@@ -5,11 +5,11 @@
 # * 'ptr' and 'ptrp' create a POST request with a simple or parameter-like body",
 # * 'mptr' and 'fptr' create a POST request to submit a form with a text or file field (multipart/form-data)",
 
-POST  http://localhost:8088/utilisateur/creerUtilisateur
+POST  http://localhost:8088/utilisateur/modifierpwd
 Content-Type: application/json
 
 {
-  "nom": "mich",
+  "id": "4",
   "prenom": "mich",
   "email": "fodjomaximejr@gmail.com",
   "dateNaissance": null,
@@ -17,6 +17,26 @@ Content-Type: application/json
   "password": "1234",
   "description": null,
   "role": null,
+  "sexe": "masculin",
+  "envoiMails": [],
+  "forfait": null,
+  "active": true
+}
+
+###
+PUT  http://localhost:8088/utilisateur/modifierpwd
+Content-Type: application/json
+
+{
+  "id": "4",
+  "nom": "FODJO",
+  "prenom": "maxime",
+  "email": "fodjomaximejr@gmail.com",
+  "dateNaissance": null,
+  "login": "maxime",
+  "password": "1234",
+  "description": null,
+  "role": "ADMINISTRATEUR",
   "sexe": "masculin",
   "envoiMails": [],
   "forfait": null,

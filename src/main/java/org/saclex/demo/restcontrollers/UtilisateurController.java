@@ -121,6 +121,16 @@ public class UtilisateurController {
         return utilisateurService.updateUtilisateur(utilisateur);
     }
 
+    @PutMapping("/modifierpwd")
+    public Utilisateur updatepwd(@RequestBody Utilisateur utilisateur) throws Exception {
+        utilisateur.setPassword(encoder.encode(utilisateur.getPassword()));
+        if(utilisateur.getId() == null){
+            throw new Exception("Utilisateur inexistant");
+        }
+
+        return utilisateurService.updateUtilisateur(utilisateur);
+    }
+
     @GetMapping("/UnUtilisateur/{idUtilisateur}")
     public Utilisateur getUnUser(@PathVariable Long idUtilisateur) {
         return utilisateurService.findById(idUtilisateur);
