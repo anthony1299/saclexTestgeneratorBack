@@ -1,11 +1,8 @@
 package org.saclex.demo.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Date;
 
 @Entity
 @XmlRootElement
@@ -26,15 +23,23 @@ public class ApprenantCategorie {
     @JoinColumn(name = "categorie_id")
     private Categorie cat;
 
+
+    @Column(name = "date_creation")
+    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
+    private Date dateCreation;
+
+
     @Column(name = "active",nullable = false)
     private Boolean valeur;
 
     public ApprenantCategorie() {
     }
 
-    public ApprenantCategorie(Utilisateur user , Categorie cat) {
+    public ApprenantCategorie(Utilisateur user , Categorie cat , Date dateCreation) {
         this.user = user;
         this.cat = cat;
+        this.dateCreation = dateCreation;
+        this.valeur=false;
     }
 
     public Long getId() {
