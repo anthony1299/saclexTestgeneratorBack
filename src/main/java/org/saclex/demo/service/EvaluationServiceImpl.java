@@ -57,37 +57,7 @@ private final CategorieService categorieService;
 
     @Override
     public Evaluation lastEval(Long idUser , Long IdCategorie) {
-        List<Evaluation>lev=findByIdUser( idUser );
-        Categorie c = categorieService.findById( IdCategorie ).get();
-        List< EvalQuestRep >levq;
-        List<Evaluation> evalCat=new ArrayList <>();
-        for( Evaluation e:lev
-              ) {
-                    levq=evalQuestRepService.findByEval(e.getIdEvaluation());
-                    if(levq!=null){
-                        for(EvalQuestRep eva:levq
-                              ) {
-                            if( c.getQuestions().contains( eva.getQuest() ) ){
-                                evalCat.add( e );
-                            }
-                        }
-
-                        }
-
-        }
-        System.out.println("eval cat "+evalCat);
-        Collections.sort( evalCat , new Comparator < Evaluation >() {
-            @Override
-            public int compare(Evaluation o1 , Evaluation o2) {
-                return o1.getDateCreation().compareTo( o2.getDateCreation() );
-            }
-        } );
-        if( evalCat.size()!=0 ){
-            Collections.reverse(evalCat);
-            return evalCat.get( 0 );
-        }
-        else
-        return null ;
+        return evaluationRepository.getLastEval( idUser,IdCategorie );
     }
 
     @Override

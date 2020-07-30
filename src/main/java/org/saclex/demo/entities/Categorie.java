@@ -29,6 +29,7 @@ public class Categorie implements Serializable {
     @JoinColumn(name = "theme",nullable = false)
     private Theme theme;
 
+
     @ManyToOne
     @JoinColumn(name = "resp_cat",nullable = false)
     private Utilisateur respCat;
@@ -36,6 +37,9 @@ public class Categorie implements Serializable {
     @Column(name = "date_creation")
     @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     private Date dateCreation;
+
+    @Column(name = "seuil")
+    private int seuil;
 
 
     @OneToMany(mappedBy = "categorie",fetch=FetchType.LAZY)
@@ -45,16 +49,30 @@ public class Categorie implements Serializable {
     @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     private Date dateModification;
 
+    @JsonIgnore
+    @OneToMany(mappedBy = "cat",fetch = FetchType.LAZY)
+    private List<ApprenantCategorie> apprenantCategories = new ArrayList<>();
+
+
     public Categorie() {
     }
 
-    public Categorie(String libelle, String description, Theme theme, Utilisateur respCat, Date dateCreation, Date dateModification) {
+    public Categorie(String libelle , String description , Theme theme , Utilisateur respCat , Date dateCreation , int seuil , Date dateModification) {
         this.libelle = libelle;
         this.description = description;
         this.theme = theme;
         this.respCat=respCat;
         this.dateCreation = dateCreation;
+        this.seuil = seuil;
         this.dateModification = dateModification;
+    }
+
+    public List < ApprenantCategorie > getApprenantCategories() {
+        return apprenantCategories;
+    }
+
+    public void setApprenantCategories(List < ApprenantCategorie > apprenantCategories) {
+        this.apprenantCategories = apprenantCategories;
     }
 
     public Long getIdCategorie() {
@@ -87,6 +105,14 @@ public class Categorie implements Serializable {
 
     public void setTheme(Theme theme) {
         this.theme = theme;
+    }
+
+    public int getSeuil() {
+        return seuil;
+    }
+
+    public void setSeuil(int seuil) {
+        this.seuil = seuil;
     }
 
     public Date getDateCreation() {

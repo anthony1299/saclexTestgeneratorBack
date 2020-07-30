@@ -49,8 +49,8 @@ public class ReportServiceImpl implements ReportService{
         parameters.put("idEval",idEval);
         parameters.put("image", new File("src/main/resources/jasper/images/logoOrange.jpg").getAbsolutePath());
         JasperPrint jasperPrint= JasperFillManager.fillReport(jasperReport,parameters,connection);
-
         Path local= Paths.get(System.getProperty("user.home")+"/Documents/"+evaluation.getIdEvaluation()+".pdf");
+        System.out.println(local);
 
         JasperExportManager.exportReportToPdfFile(jasperPrint,local.toString());
         connection.close();

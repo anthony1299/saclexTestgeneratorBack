@@ -57,6 +57,8 @@ public class Utilisateur implements Serializable {
 
     @Enumerated(EnumType.STRING)
     private Sexe sexe;
+
+    @Transient
     @OneToMany(mappedBy = "utilisateur",fetch=FetchType.LAZY)
     private List <EnvoiMail> envoiMails = new ArrayList<>();
 
@@ -64,10 +66,17 @@ public class Utilisateur implements Serializable {
     @JoinColumn(name = "forfait")
     private Forfait forfait;
 
+    @Transient
     @JsonIgnore
     @OneToMany(mappedBy = "user",fetch = FetchType.LAZY)
     private List<Evaluation> evaluations = new ArrayList<>();
 
+    @Transient
+    @JsonIgnore
+    @OneToMany(mappedBy = "user",fetch = FetchType.LAZY)
+    private List<ApprenantCategorie> apprenantCategories = new ArrayList<>();
+
+    @Transient
     @JsonIgnore
     @OneToMany(mappedBy = "respCat",fetch = FetchType.LAZY)
     private List<Categorie> cat = new ArrayList<>();
@@ -104,6 +113,14 @@ public class Utilisateur implements Serializable {
         this.login = login;
         this.password = password;
         this.sexe = sexe;
+    }
+
+    public List < ApprenantCategorie > getApprenantCategories() {
+        return apprenantCategories;
+    }
+
+    public void setApprenantCategories(List < ApprenantCategorie > apprenantCategories) {
+        this.apprenantCategories = apprenantCategories;
     }
 
     public List<Categorie> getCat() {

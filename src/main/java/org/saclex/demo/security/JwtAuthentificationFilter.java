@@ -75,7 +75,7 @@ public class JwtAuthentificationFilter extends UsernamePasswordAuthenticationFil
       response.addHeader(JwtProperties.TIME_EXPIRATION,format.format(date));
        Utilisateur u = utilisateurService.findByLogin(detailsUtilisateur.getUsername());
        Gson gson =new Gson();
-        String utilisateurGson = gson.toJson(u);
+        String utilisateurGson = gson.toJson(u,u.getClass());
         PrintWriter out = response.getWriter();
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");

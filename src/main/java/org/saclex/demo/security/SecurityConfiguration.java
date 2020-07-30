@@ -13,6 +13,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.www.BasicAuthenticationEntryPoint;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
@@ -31,7 +32,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     private UtilisateurRepository utilisateurRepository;
     private UtilisateurService utilisateurService;
 
-    public SecurityConfiguration(DetailsUtilisateurService detailsUtilisateurService, UtilisateurRepository utilisateurRepository, UtilisateurService utilisateurService) {
+
+    public SecurityConfiguration(DetailsUtilisateurService detailsUtilisateurService , UtilisateurRepository utilisateurRepository , UtilisateurService utilisateurService ) {
         this.detailsUtilisateurService = detailsUtilisateurService;
         this.utilisateurRepository = utilisateurRepository;
         this.utilisateurService = utilisateurService;
@@ -52,83 +54,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .addFilter(new JwtAuthentificationFilter(authenticationManager(), utilisateurService))
-                .addFilter(new JwtAuthorizationFilter(authenticationManager(),utilisateurRepository))
+                .addFilter(new JwtAuthorizationFilter(authenticationManager(),this.utilisateurRepository))
                 .authorizeRequests()
-                .antMatchers("/login").permitAll()
-                .antMatchers("/utilisateur/creerUtilisateur").permitAll()
-                .antMatchers("evaluation/creerEvaluation/**").permitAll()
-                .antMatchers("evaluation/printEval/**").permitAll()
-                .antMatchers("evaluation/evaluationByUserGraph//**").permitAll()
-                .antMatchers("evalquest/evalquestbyeval/**").permitAll()
-                .antMatchers("theme/listerTheme").permitAll()
-                .antMatchers("/theme/creerTheme").hasRole(Utilisateur.Role.ADMINISTRATEUR.toString())
-                .antMatchers("/theme/creerTheme").hasRole(Utilisateur.Role.RESPONSABLE_THEME.toString())
-                .antMatchers("/theme/modifierTheme").hasRole(Utilisateur.Role.ADMINISTRATEUR.toString())
-                .antMatchers("/theme/modifierTheme").hasRole(Utilisateur.Role.RESPONSABLE_THEME.toString())
-                .antMatchers("/theme/supprimerTheme").hasRole(Utilisateur.Role.ADMINISTRATEUR.toString())
-                .antMatchers("/theme/supprimerTheme").hasRole(Utilisateur.Role.RESPONSABLE_THEME.toString())
-                .antMatchers("/question/creerQuestion").permitAll()
-                //Autorisations pour les categories
-                .antMatchers("/categorie/creerCategorie/**").permitAll()
-                //hasRole(Utilisateur.Role.RESPONSABLE_THEME.toString())
-                //.antMatchers("/categorie/creerCategorie/**").hasRole(Utilisateur.Role.ADMINISTRATEUR.toString())
-                .antMatchers("/categorie/modifierCategorie").permitAll()
-                //hasRole(Utilisateur.Role.RESPONSABLE_THEME.toString())
-                //.antMatchers("/categorie/modifierCategorie").hasRole(Utilisateur.Role.ADMINISTRATEUR.toString())
-                .antMatchers("/categorie/supprimerCategorie/**").permitAll()
-                //hasRole(Utilisateur.Role.RESPONSABLE_THEME.toString())
-                //.antMatchers("/categorie/supprimerCategorie/**").hasRole(Utilisateur.Role.ADMINISTRATEUR.toString())
-                .antMatchers("/categorie/listerCategories").permitAll()
-                //hasRole(Utilisateur.Role.ADMINISTRATEUR.toString())
-                .antMatchers("/categorie/getCatByTheme").permitAll()
-                //Autorisations pour le responsable
-               // .antMatchers("/utilisateur/creerUtilisateur").hasRole(Utilisateur.Role.ADMINISTRATEUR.toString())
-                .antMatchers("/utilisateur/creerUtilisateur").permitAll()
-                .antMatchers("/utilisateur/creerUtilisateur").permitAll()
-                .antMatchers("/utilisateur/listerResponsableTheme").permitAll()
-                .antMatchers("/utilisateur/listerResponsableCategorie").permitAll()
-                .antMatchers("/utilisateur/supprimerUtilisateur/**").hasRole(Utilisateur.Role.ADMINISTRATEUR.toString())
-                //Autorisations pour l'apprenant
-                .antMatchers("/utilisateur/creerApprenant").permitAll()
-                .antMatchers("/utilisateur/verif-token").permitAll()
-                //Autorisations pour les questions
-                .antMatchers("/question/creerQuestion").permitAll()
-                .antMatchers("/question/**").permitAll()
-                //hasRole(Utilisateur.Role.RESPONSABLE_CATEGORIE.toString())
-                .antMatchers("/question/modifierQuestion").permitAll()
-                //hasRole(Utilisateur.Role.RESPONSABLE_CATEGORIE.toString())
-                .antMatchers("/question/supprimerQuestion/**").permitAll()
-                //hasRole(Utilisateur.Role.RESPONSABLE_CATEGORIE.toString())
-                //Autorisations pour les reponses
-                .antMatchers("/reponse/creerReponse").permitAll()
-                .antMatchers("/reponse/correctAnswer").permitAll()
-                //hasRole(Utilisateur.Role.RESPONSABLE_CATEGORIE.toString())
-                .antMatchers("/reponse/modifierReponse").permitAll()
-                //hasRole(Utilisateur.Role.RESPONSABLE_CATEGORIE.toString())
-                //.antMatchers("/reponse/modifierReponse").hasRole(Utilisateur.Role.ADMINISTRATEUR.toString())
-                .antMatchers("/reponse/savereponses").permitAll()
-                //hasRole(Utilisateur.Role.RESPONSABLE_CATEGORIE.toString())
-                .antMatchers("/reponse/supprimerReponse").permitAll()
-                //hasRole(Utilisateur.Role.RESPONSABLE_CATEGORIE.toString())
-                //Autorisations sur les evaluations
-                .antMatchers("evaluation/creerEvaluation/**").permitAll()
-                //hasRole(Utilisateur.Role.APPRENANT.toString())
-                //Autorisation sur les reponses aux evaluations
-                .antMatchers("reponseEval/creerReponse/**").hasRole(Utilisateur.Role.APPRENANT.toString())
-
-                .antMatchers("/question/listerReponses").permitAll()
-                .antMatchers("/reponseEval/creerReponse/**").permitAll()
-                .antMatchers("/fichier/creerFichier").hasRole(Utilisateur.Role.RESPONSABLE_THEME.toString())
-                //hasRole(Utilisateur.Role.RESPONSABLE.toString())
-                .antMatchers("/reponse/creerReponse").permitAll()
-                .antMatchers("/question/listerQuestions").permitAll()
-                .antMatchers("/questionCategorie/**").permitAll()
-
-                //hasRole(Utilisateur.Role.RESPONSABLE.toString())
-               // .antMatchers("/utilisateur/creerUtilisateur").hasRole(Utilisateur.Role.ADMINISTRATEUR.toString())
-                .antMatchers("/typequestion/creerTypeQuestion").hasRole(Utilisateur.Role.ADMINISTRATEUR.toString())
-                .antMatchers("/typeevaluation/creerTypeEvaluation").hasRole(Utilisateur.Role.ADMINISTRATEUR.toString());
-    }
+                .antMatchers( "/login" ).permitAll()
+                .antMatchers("/evaluation/lasteval/**").hasRole( Utilisateur.Role.RESPONSABLE_THEME.toString() );
+                 }
 
     @Bean
     CorsConfigurationSource corsConfigurationSource(){

@@ -8,6 +8,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
 import javax.servlet.FilterChain;
@@ -17,11 +18,12 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
-    private UtilisateurRepository utilisateurRepository;
+   private UtilisateurRepository utilisateurRepository;
 
-    public JwtAuthorizationFilter(AuthenticationManager authenticationManager, UtilisateurRepository utilisateurRepository) {
+    public JwtAuthorizationFilter(AuthenticationManager authenticationManager , UtilisateurRepository utilisateurRepository
+                                  ) {
         super(authenticationManager);
-        this.utilisateurRepository = utilisateurRepository;
+       this.utilisateurRepository = utilisateurRepository;
     }
 
     //méthode utilisée pour extraire le login du token et obtenir l'objet utilisateur
