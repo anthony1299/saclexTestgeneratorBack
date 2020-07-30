@@ -65,4 +65,20 @@ public class ApprenantCategorie {
     public void setCat(Categorie cat) {
         this.cat = cat;
     }
+
+    public Date getDateCreation() {
+        return dateCreation;
+    }
+
+    public void setDateCreation(Date dateCreation) {
+        this.dateCreation = dateCreation;
+    }
+
+    public Boolean getValeur() {
+        return valeur;
+    }
+
+    public void setValeur(Boolean valeur) {
+        this.valeur = valeur;
+    }
 }
