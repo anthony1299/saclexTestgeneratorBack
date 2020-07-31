@@ -117,9 +117,7 @@ private final CategorieService categorieService;
 
     @Override
     public List<Evaluation> findByIdUser(Long idUser) {
-        Utilisateur u = utilisateurRepository.findById(idUser).get();
-
-        return u.getEvaluations();
+              return evaluationRepository.getEvalsByUser(idUser);
     }
 
     @Override

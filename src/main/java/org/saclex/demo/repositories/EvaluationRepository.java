@@ -24,6 +24,9 @@ public interface EvaluationRepository extends JpaRepository<Evaluation,Long> {
             "LIMIT 1",nativeQuery = true)
     Evaluation getLastEval(Long idUser,Long idCat);
 
+    @Query("select e from Evaluation e join e.user user where user.id=?1 ")
+    List<Evaluation> getEvalsByUser(Long idUser);
+
 
 
 
