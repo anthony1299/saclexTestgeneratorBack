@@ -56,6 +56,18 @@ public class EvaluationController {
     public List<Evaluation> EvaluationsGraph(@PathVariable("idUser") Long idUser, @PathVariable("intitule") String intitule){
         return evaluationService.findByIntituleAndUer( intitule,idUser );
     }
+    @GetMapping("nbEval/{idUser}")
+    public ListEntier nBEvaluations(@RequestBody List<Categorie> lcat, @PathVariable("idUser") Long idUser ){
+            ListEntier lent =new ListEntier( );
+            List<Integer> listNumber= new ArrayList<>( );
+        for( Categorie c:lcat
+              ) {
+             listNumber.add( evaluationService.findByIntituleAndUer(c.getLibelle() ,idUser ).size());
+        }
+        lent.setListNumber( listNumber );
+
+        return lent;
+    }
     //Creation d'une evaluation
     @PostMapping("creerEvaluation/{idUser}/{idCategorie}/{nbreQuestions}")
     public List < QuestionReponses > createEvaluation(@RequestBody Evaluation evaluation , @PathVariable("idUser") Long idUser , @PathVariable("idCategorie") Long idCategorie , @PathVariable("nbreQuestions") int nbreQuestions) {
