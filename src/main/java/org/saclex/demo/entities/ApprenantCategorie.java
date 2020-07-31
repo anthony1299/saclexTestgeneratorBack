@@ -33,6 +33,7 @@ public class ApprenantCategorie {
     private Boolean valeur;
 
     public ApprenantCategorie() {
+        this.valeur=false;
     }
 
     public ApprenantCategorie(Utilisateur user , Categorie cat , Date dateCreation) {

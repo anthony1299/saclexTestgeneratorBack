@@ -1,3 +1,188 @@
+GET http://localhost:8088/apprenantcategorie/activerCategorie/18/904
+
+<> 2020-07-31T121540.500.json
+
+###
+
+GET http://localhost:8088/apprenantcategorie/notSelect/18
+
+<> 2020-07-30T112851.200.json
+
+###
+
+GET http://localhost:8088/creerAppCategorie/notSelect/18
+
+<> 2020-07-30T112821.404.json
+
+###
+
+GET http://localhost:8088/creerAppCategorie/notSelected/18
+
+<> 2020-07-30T112815.404.json
+
+###
+
+GET http://localhost:8088/creerAppCategorie/notselected/18
+
+<> 2020-07-30T112803.404.json
+
+###
+
+POST http://localhost:8088/evaluation/creerEvaluation/4/2/7
+Content-Type: application/json
+
+{
+  "libelle": "python",
+  "description": null,
+  "dateCreation": "2020-06-10T11:15:03.000+0000",
+  "dateModification": "2020-06-10T11:15:03.000+0000"
+    }
+
+<> 2020-07-30T095206.200.json
+
+###
+
+POST http://localhost:8088/evaluation/creerEvaluation/4/2/7
+Content-Type: application/json
+
+{
+  "libelle": "python",
+  "description": null,
+  "dateCreation": "2020-06-10T11:15:03.000+0000",
+  "dateModification": "2020-06-10T11:15:03.000+0000"
+    }
+
+<> 2020-07-30T094606.200.json
+
+###
+
+POST http://localhost:8088/evaluation/creerEvaluation/4/2/7
+Content-Type: application/json
+
+{
+  "libelle": "python",
+  "description": null,
+  "dateCreation": "2020-06-10T11:15:03.000+0000",
+  "dateModification": "2020-06-10T11:15:03.000+0000"
+    }
+
+<> 2020-07-30T092726.200.json
+
+###
+
+POST http://localhost:8088/evaluation/creerEvaluation/4/2/7
+Content-Type: application/json
+
+{
+  "libelle": "python",
+  "description": null,
+  "dateCreation": "2020-06-10T11:15:03.000+0000",
+  "dateModification": "2020-06-10T11:15:03.000+0000"
+    }
+
+<> 2020-07-30T091827.200.json
+
+###
+
+POST http://localhost:8088/evaluation/creerEvaluation/4/2/7
+Content-Type: application/json
+
+{
+  "libelle": "python",
+  "description": null,
+  "dateCreation": "2020-06-10T11:15:03.000+0000",
+  "dateModification": "2020-06-10T11:15:03.000+0000"
+    }
+
+<> 2020-07-30T091041.200.json
+
+###
+
+PUT http://localhost:8088/utilisateur/modifierpwd
+Content-Type: application/json
+
+{
+  "id": "4",
+  "nom": "FODJO",
+  "prenom": "maxime",
+  "email": "fodjomaximejr@gmail.com",
+  "dateNaissance": null,
+  "login": "maxime",
+  "password": "1234",
+  "description": null,
+  "role": "ADMINISTRATEUR",
+  "sexe": "masculin",
+  "envoiMails": [],
+  "forfait": null,
+  "active": true
+}
+
+<> 2020-07-30T123516.200.json
+
+###
+
+PUT http://localhost:8088/utilisateur/modifierpwd
+Content-Type: application/json
+
+{
+  "id": "4",
+  "prenom": "maxime",
+  "email": "fodjomaximejr@gmail.com",
+  "dateNaissance": null,
+  "login": "maxime",
+  "password": "1234",
+  "description": null,
+  "role": "ADMINISTRATEUR",
+  "sexe": "masculin",
+  "envoiMails": [],
+  "forfait": null,
+  "active": true
+}
+
+<> 2020-07-30T123446.500.json
+
+###
+
+PUT http://localhost:8088/utilisateur/modifierpwd
+Content-Type: application/json
+
+{
+  "id": "4",
+  "prenom": "maxime",
+  "email": "fodjomaximejr@gmail.com",
+  "dateNaissance": null,
+  "login": "maxime",
+  "password": "1234",
+  "description": null,
+  "role": "ADMINISTRATEUR",
+  "sexe": "masculin",
+  "envoiMails": [],
+  "forfait": null,
+  "active": true
+}
+
+<> 2020-07-30T123436.500.json
+
+###
+
+PUT http://localhost:8088/utilisateur/modifierpwd
+Content-Type: application/json
+
+{
+  "id": "4",
+  "password": "1234"
+}
+
+<> 2020-07-30T123258.500.json
+
+###
+
+GET http://localhost:8088/categorie/getCatByTheme/0
+
+<> 2020-07-30T123228.500.json
+
+###
+
 POST http://localhost:8088/logout
 Content-Type: application/json
 
@@ -293,146 +478,4 @@ GET http://localhost:8088/apprenantcategorie/categorieUser/4
 GET http://localhost:8088/apprenantcategorie/categorieUser/4
 
 <> 2020-07-29T025227.200.json
-
-###
-
-POST http://localhost:8088/evaluation/creerEvaluation/4/2/2
-Content-Type: application/json
-
-{
-  "libelle": "python",
-  "description": null,
-  "dateCreation": "2020-06-10T11:15:03.000+0000",
-  "dateModification": "2020-06-10T11:15:03.000+0000"
-    }
-
-<> 2020-07-27T115159.200.json
-
-###
-
-POST http://localhost:8088/evaluation/creerEvaluation/4/2/2
-Content-Type: application/json
-
-{
-  "libelle": "python",
-  "description": null,
-  "dateCreation": "2020-06-10T11:15:03.000+0000",
-  "dateModification": "2020-06-10T11:15:03.000+0000"
-    }
-
-<> 2020-07-27T114410.500.json
-
-###
-
-GET http://localhost:8088/evaluation/evaluationByUserGraph/4/installation
-
-<> 2020-07-25T064918.200.json
-
-###
-
-GET http://localhost:8088/evaluation/printEval/743
-
-###
-
-GET http://localhost:8088/evaluation/printEval/743
-
-###
-
-GET http://localhost:8088/evaluation/printEval/743
-
-<> 2020-07-25T043748.500.json
-
-###
-
-GET http://localhost:8088/evaluation/printEval/743
-
-<> 2020-07-25T022555.500.json
-
-###
-
-GET http://localhost:8088/evaluation/printEval/743
-
-<> 2020-07-25T021736.500.json
-
-###
-
-GET http://localhost:8088/evaluation/printEval/743
-
-<> 2020-07-25T021245.500.json
-
-###
-
-GET http://localhost:8088/evaluation/printEval/743
-
-<> 2020-07-25T021050.500.json
-
-###
-
-POST http://localhost:8088/evaluation/creerEvaluation/4/2/2
-Content-Type: application/json
-
-{
-  "libelle": "python",
-  "description": null,
-  "dateCreation": "2020-06-10T11:15:03.000+0000",
-  "dateModification": "2020-06-10T11:15:03.000+0000"
-    }
-
-<> 2020-07-20T021306.200.json
-
-###
-
-POST http://localhost:8088/evaluation/creerEvaluation/4/2/2
-Content-Type: application/json
-
-{
-  "libelle": "python",
-  "description": null,
-  "dateCreation": "2020-06-10T11:15:03.000+0000",
-  "dateModification": "2020-06-10T11:15:03.000+0000"
-    }
-
-<> 2020-07-20T020833.500.json
-
-###
-
-POST http://localhost:8088/evaluation/creerEvaluation/4/2/2
-Content-Type: application/json
-
-{
-  "libelle": "python",
-  "description": null,
-  "dateCreation": "2020-06-10T11:15:03.000+0000",
-  "dateModification": "2020-06-10T11:15:03.000+0000"
-    }
-
-<> 2020-07-20T020523.500.json
-
-###
-
-POST http://localhost:8088/evaluation/creerEvaluation/4/2/2
-Content-Type: application/json
-
-{
-  "libelle": "python",
-  "description": null,
-  "dateCreation": "2020-06-10T11:15:03.000+0000",
-  "dateModification": "2020-06-10T11:15:03.000+0000"
-    }
-
-<> 2020-07-20T014905.500.json
-
-###
-
-POST http://localhost:8088/evaluation/creerEvaluation/4/1/2
-Content-Type: application/json
-
-{
-  "libelle": "python",
-  "description": null,
-  "dateCreation": "2020-06-10T11:15:03.000+0000",
-  "dateModification": "2020-06-10T11:15:03.000+0000"
-    }
-
-<> 2020-07-20T014720.500.json
 

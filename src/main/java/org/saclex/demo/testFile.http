@@ -270,6 +270,12 @@ GET  http://localhost:8086/cartesParTheme/1
 GET  http://localhost:8086/questionsParTheme/1
 
 ###
+GET  http://localhost:8088/apprenantcategorie/notSelect/18
+
+###
+GET http://localhost:8088/apprenantcategorie/activerCategorie/18/904
+
+###
 
 GET http://localhost:8088/question/questionCategorie/2
 Accept: application/json

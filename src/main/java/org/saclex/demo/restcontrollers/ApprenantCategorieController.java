@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -28,6 +29,7 @@ public class ApprenantCategorieController {
 
     @PostMapping("creerAppCategorie")
         public ApprenantCategorie createCategorie (@RequestBody ApprenantCategorie app){
+            app.setDateCreation(new Date());
             return apprenantCategorieService.createAppCategorie( app );
         }
 
@@ -54,7 +56,7 @@ public class ApprenantCategorieController {
     }
 
     @GetMapping("/activerCategorie/{userId}/{catId}")
-    public ApprenantCategorie getApprenantCat(@PathVariable("userID") Long userId,@PathVariable("catId") Long catId) throws MessagingException {
+    public ApprenantCategorie getApprenantCat(@PathVariable("userId") Long userId,@PathVariable("catId") Long catId) throws MessagingException {
         ApprenantCategorie apc=apprenantCategorieService.getAppCategorieByUserAndCat( userId,catId );
         apc.setValeur( true );
         apc=apprenantCategorieService.updateAppCategorie( apc );
@@ -94,7 +96,7 @@ public class ApprenantCategorieController {
                 "div.preheader \n" +
                 "{ display: none !important; } \n" +
                 "</style>\n" +
-                "<div class=\"preheader\" style=\"font-size: 1px; display: none !important;\">Mute videos until you’re ready</div>\n" +
+                "<div class=\"preheader\" style=\"font-size: 1px; display: none !important;\"></div>\n" +
                 "    <table id=\"backgroundTable\" width=\"100%\" cellspacing=\"0\" cellpadding=\"0\" border=\"0\" style=\"background:#e1e1e1;\">\n" +
                 "        <tr>\n" +
                 "            <td class=\"body\" align=\"center\" valign=\"top\" style=\"background:#e1e1e1;\" width=\"100%\">\n" +
@@ -127,7 +129,7 @@ public class ApprenantCategorieController {
                 "            <table cellspacing=\"0\" cellpadding=\"0\">\n" +
                 "             <tr>\n" +
                 "              <td style=\"font-family: Geneva, Tahoma, Verdana, sans-serif; font-size: 22px; color: #464646;\" width=\"400\" align=\"left\">\n" +
-                "                Autorisation d'accès pour "+apc.getUser().getNom()+" "+apc.getUser().getPrenom()+"\n"+
+                "                Autorisation d'accès pour "+apc.getUser().getNom().toUpperCase()+" "+apc.getUser().getPrenom()+"\n"+
                 "              </td>\n" +
                 "             </tr>\n" +
                 "            </table>\n" +
@@ -138,7 +140,7 @@ public class ApprenantCategorieController {
                 "            <table cellspacing=\"0\" cellpadding=\"0\">\n" +
                 "             <tr>\n" +
                 "              <td style=\"font-family: Geneva, Tahoma, Verdana, sans-serif; font-size: 16px; line-height: 22px; color: #555555; padding-top: 16px;\" align=\"left\">\n" +
-                "                Vous avez sollicité l'accès au contenu de la catégorie"+ apc.getCat().getLibelle() +"du thème"+apc.getCat().getTheme().getLibelle()+".Sute à cette demande nous vous avons donné l'accès à cette catégorie, ainsi il est dès à présent possible pour vous de passer vos tests.<br><br>\n" +
+                "                Vous avez sollicité l'accès au contenu de la catégorie <strong>"+ apc.getCat().getLibelle() +"</strong> du thème <strong>"+apc.getCat().getTheme().getLibelle()+"</strong>.Suite à cette demande nous vous avons donné l'accès à cette catégorie, ainsi il est dès à présent possible pour vous de passer vos tests.<br><br>\n" +
                 "                A bientôt sur le SACLEX TEST GENERATOR.\n" +
                 "              </td>\n" +
                 "             </tr>\n" +
@@ -201,7 +203,7 @@ public class ApprenantCategorieController {
                 "\n";
         helper.setText( htmlmsg,true );
         helper.setTo( "fodjomaximejr@gmail.com" );
-        helper.setSubject("Inscription terminée"  );
+        helper.setSubject("Acceptation de la demande"  );
         javaMailSender.send(mimeMessage );
         return apc;
     }
