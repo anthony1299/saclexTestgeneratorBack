@@ -56,7 +56,7 @@ public class EvaluationController {
     public List<Evaluation> EvaluationsGraph(@PathVariable("idUser") Long idUser, @PathVariable("intitule") String intitule){
         return evaluationService.findByIntituleAndUer( intitule,idUser );
     }
-    @GetMapping("nbEval/{idUser}")
+    @PostMapping("nbEval/{idUser}")
     public ListEntier nBEvaluations(@RequestBody List<Categorie> lcat, @PathVariable("idUser") Long idUser ){
             ListEntier lent =new ListEntier( );
             List<Integer> listNumber= new ArrayList<>( );
