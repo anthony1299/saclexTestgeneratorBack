@@ -57,6 +57,17 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .addFilter(new JwtAuthorizationFilter(authenticationManager(),this.utilisateurRepository))
                 .authorizeRequests()
                 .antMatchers( "/login" ).permitAll()
+                .antMatchers("/theme/creerTheme").hasRole( Utilisateur.Role.ADMINISTRATEUR.toString() )
+                .antMatchers("/theme/modifierTheme").hasRole( Utilisateur.Role.ADMINISTRATEUR.toString() )
+                .antMatchers("/theme/supprimerTheme/**").hasRole( Utilisateur.Role.ADMINISTRATEUR.toString() )
+                .antMatchers("/categorie/creercategorie").hasRole( Utilisateur.Role.ADMINISTRATEUR.toString() )
+                .antMatchers("/categorie/modifiercategorie").hasRole( Utilisateur.Role.ADMINISTRATEUR.toString() )
+                .antMatchers("/categorie/supprimercategorie/**").hasRole( Utilisateur.Role.ADMINISTRATEUR.toString() )
+                .antMatchers("/utilisateur/creerUtilisateur/**").hasRole( Utilisateur.Role.ADMINISTRATEUR.toString() )
+                .antMatchers("/utilisateur/creerRespCategorie/**").hasRole( Utilisateur.Role.ADMINISTRATEUR.toString() )
+                .antMatchers("/categorie/creercategorie").hasRole( Utilisateur.Role.RESPONSABLE_THEME.toString() )
+                .antMatchers("/categorie/modifiercategorie").hasRole( Utilisateur.Role.RESPONSABLE_THEME.toString() )
+                .antMatchers("/categorie/supprimercategorie/**").hasRole( Utilisateur.Role.RESPONSABLE_THEME.toString() )
                 .antMatchers("/evaluation/lasteval/**").hasRole( Utilisateur.Role.RESPONSABLE_THEME.toString() );
                  }
 
