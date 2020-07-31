@@ -276,6 +276,12 @@ GET  http://localhost:8088/apprenantcategorie/notSelect/18
 GET http://localhost:8088/apprenantcategorie/activerCategorie/18/904
 
 ###
+GET http://localhost:8088/apprenantcategorie/categorieUser/18
+
+###
+GET http://localhost:8088/evaluation/evaluationByUserGraph/18/python
+
+###
 
 GET http://localhost:8088/question/questionCategorie/2
 Accept: application/json

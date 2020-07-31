@@ -41,6 +41,7 @@ public class ApprenantCategorieController {
             Categorie c= new Categorie(  );
             c.setIdCategorie( a.getCat().getIdCategorie() );
             c.setLibelle( a.getCat().getLibelle() );
+            c.setSeuil(a.getCat().getSeuil());
             lcat.add( c );
         }
         return lcat;
