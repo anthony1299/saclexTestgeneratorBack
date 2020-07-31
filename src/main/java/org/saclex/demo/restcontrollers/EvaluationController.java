@@ -116,7 +116,6 @@ public class EvaluationController {
             Evaluation lastEval =evaluationService.lastEval( idUser,idCategorie );
             if( lastEval!=null ){
                 List < EvalQuestRep > listeqrlast=evalQuestRepService.findByEval( lastEval.getIdEvaluation() );
-
                 //Remplissage des listes de questions reussies et ratées
                 for( EvalQuestRep e:listeqrlast
                 ) {
@@ -144,19 +143,24 @@ public class EvaluationController {
 
             //Ajout des questions non répondues à la liste des questions de l'évaluation
             Collections.shuffle( listNonRepondu );
-            int i=0;
+            /*int i=0;
             if (questionEval.size()<nbreQuestions){
+                int d =nbreQuestions-questionEval.size();
                 while(i< nbreQuestions - questionEval.size() && i<listNonRepondu.size())
                 {
                     questionEval.add( listNonRepondu.get( i ) );
                     i=i+1;
                 }
+            }*/
+
+            questionEval.addAll(listNonRepondu);
+            Collections.shuffle( questionEval );
+            if( questionEval.size()< nbreQuestions ){
+                questionEval.addAll( questionsReussi );
             }
-
-
             Collections.shuffle( questionEval );
             int c=0;
-            while (c<= nbreQuestions && c<questionEval.size()){
+            while (c< nbreQuestions && c<questionEval.size()){
 
                 EvalQuestRep evalQuestRep = new EvalQuestRep();
                 evalQuestRep.setEval( eval );

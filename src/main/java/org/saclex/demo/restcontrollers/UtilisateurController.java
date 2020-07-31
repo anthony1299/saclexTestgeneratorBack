@@ -1,13 +1,19 @@
 package org.saclex.demo.restcontrollers;
 
+import groovy.text.Template;
 import org.saclex.demo.entities.Utilisateur;
 import org.saclex.demo.entities.VerificationToken;
 import org.saclex.demo.service.UtilisateurService;
 import org.saclex.demo.service.VerificationTokenService;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
+
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
+import java.io.File;
 import java.util.List;
 
 @RestController
@@ -69,9 +75,9 @@ public class UtilisateurController {
 
     //Fonction qui cree les utilisateurs ayant pour rôle apprenant
     @PostMapping("/creerApprenant")
-    public String createApprennant(@RequestBody Utilisateur utilisateur){
+    public String createApprennant(@RequestBody Utilisateur utilisateur) throws MessagingException {
         //On definit son role et on le sauvegarde en BD son champs isActive est à false
-        utilisateur.setRole(Utilisateur.Role.APPRENANT);
+       utilisateur.setRole(Utilisateur.Role.APPRENANT);
         utilisateur.setPassword(encoder.encode(utilisateur.getPassword()));
         utilisateurService.createUtilisateur(utilisateur);
 
@@ -81,13 +87,16 @@ public class UtilisateurController {
 
         //On envoi un mail à l'utilisateur avec un lien qui permettra d'activer son comppte pour
         // se rassurer que l'adresse mail saisie est valide
-        SimpleMailMessage message = new SimpleMailMessage();
-        message.setTo(utilisateur.getEmail());
-        message.setSubject("Inscription terminée");
-        message.setText("Pour valider votre compte, cliquez ici: "
-                    +"http://localhost:8087/verif-token?token="+verificationToken.getToken());
 
-        javaMailSender.send(message);
+        SimpleMailMessage message = new SimpleMailMessage();
+
+        message.setTo("fouda.anthony12@gmail.com");
+        message.setSubject("Inscription terminée");
+        message.setText("<b>Pour valider votre compte, cliquez ici:</b> "
+                   +"http://localhost:8087/verif-token?token="+verificationToken.getToken()
+                );
+
+        javaMailSender.send(message );
 
         return "mail envoye";
 

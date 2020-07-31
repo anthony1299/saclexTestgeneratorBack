@@ -38,7 +38,7 @@ public class ApprenantCategorie {
     public ApprenantCategorie(Utilisateur user , Categorie cat , Date dateCreation) {
         this.user = user;
         this.cat = cat;
-        this.dateCreation = dateCreation;
+        this.dateCreation = new Date(  );
         this.valeur=false;
     }
 

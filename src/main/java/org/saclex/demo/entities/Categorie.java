@@ -39,9 +39,9 @@ public class Categorie implements Serializable {
     private Date dateCreation;
 
     @Column(name = "seuil")
-    private int seuil;
+    private Integer seuil;
 
-
+    @JsonIgnore
     @OneToMany(mappedBy = "categorie",fetch=FetchType.LAZY)
     private List<Question> questions = new ArrayList<>();
 
