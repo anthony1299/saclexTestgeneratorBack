@@ -46,7 +46,7 @@ public class ApprenantCategorieServiceImpl implements ApprenantCategorieService 
 
     @Override
     public List < Categorie > getCatsNotSelect(Long idUser) {
-        List < ApprenantCategorie > lcatuser= apprenantCategorieRepository.getUserCategories( idUser );
+        List < ApprenantCategorie > lcatuser= apprenantCategorieRepository.getUserCategoriInAppCat( idUser );
         List < Categorie > lcattotal= categorieRepository.findAll();
         List < Categorie > lcat= new ArrayList <>(  );
         List < Categorie > lcatnonutilise= new ArrayList <>(  );

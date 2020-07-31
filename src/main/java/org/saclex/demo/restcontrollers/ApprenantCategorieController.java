@@ -36,6 +36,7 @@ public class ApprenantCategorieController {
     @GetMapping("categorieUser/{idUser}")
     public List < Categorie >getcategories(@PathVariable Long idUser){
         List < ApprenantCategorie > list=apprenantCategorieService.getUserCats( idUser );
+        //Création de la liste des categories à partir de la liste des apprenants categories
         List < Categorie > lcat=new ArrayList <>(  );
         for( ApprenantCategorie a: list ){
             Categorie c= new Categorie(  );

@@ -15,6 +15,9 @@ public interface ApprenantCategorieRepository extends JpaRepository < ApprenantC
     @Query("SELECT ap from ApprenantCategorie ap join ap.user user where user.id=?1 and ap.valeur= true ")
      List< ApprenantCategorie> getUserCategories(Long userId);
 
+    @Query("SELECT ap from ApprenantCategorie ap join ap.user user where user.id=?1")
+     List< ApprenantCategorie> getUserCategoriInAppCat(Long userId);
+
     @Query("select ap from ApprenantCategorie ap join ap.user user join ap.cat ctg where user.id=?1 and ctg.idCategorie=?2")
     ApprenantCategorie getApprenantCategorie(Long userId,Long catId);
 
