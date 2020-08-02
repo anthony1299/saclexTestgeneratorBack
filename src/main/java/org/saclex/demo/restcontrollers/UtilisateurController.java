@@ -1,6 +1,7 @@
 package org.saclex.demo.restcontrollers;
 
 import groovy.text.Template;
+import org.saclex.demo.entities.ListEntier;
 import org.saclex.demo.entities.Utilisateur;
 import org.saclex.demo.entities.VerificationToken;
 import org.saclex.demo.service.UtilisateurService;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -288,6 +290,18 @@ public class UtilisateurController {
     @GetMapping("/UnUtilisateur/{idUtilisateur}")
     public Utilisateur getUnUser(@PathVariable Long idUtilisateur) {
         return utilisateurService.findById(idUtilisateur);
+    }
+    @GetMapping("/nbreUtilisateur")
+    public ListEntier getNbreUtilisateur() {
+        ListEntier listEntier = new ListEntier(  );
+        List<Integer> listNumber= new ArrayList <>( );
+        listNumber.add( utilisateurService.findByRole( Utilisateur.Role.ADMINISTRATEUR ).size() );
+        listNumber.add( utilisateurService.findByRole( Utilisateur.Role.RESPONSABLE_THEME ).size() );
+        listNumber.add( utilisateurService.findByRole( Utilisateur.Role.RESPONSABLE_CATEGORIE ).size() );
+        listNumber.add( utilisateurService.findByRole( Utilisateur.Role.APPRENANT ).size() );
+
+        listEntier.setListNumber( listNumber );
+        return listEntier;
     }
 
     @DeleteMapping("/supprimerUtilisateur/{idUtilisateur}")
