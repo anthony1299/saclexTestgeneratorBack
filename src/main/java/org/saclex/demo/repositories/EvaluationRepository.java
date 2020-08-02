@@ -24,8 +24,14 @@ public interface EvaluationRepository extends JpaRepository<Evaluation,Long> {
             "LIMIT 1",nativeQuery = true)
     Evaluation getLastEval(Long idUser,Long idCat);
 
+    //Fonction qui récupère les évaluations d'un user
     @Query("select e from Evaluation e join e.user user where user.id=?1 ")
     List<Evaluation> getEvalsByUser(Long idUser);
+
+    //Fonction qui récupère toutes les évaluations sur une certaine période
+    @Query(value = "SELECT * from evaluation \n" +
+            "WHERE TIMESTAMPDIFF(DAY,CAST(evaluation.date_creation AS Date),CURRENT_DATE) BETWEEN 0 and ?1",nativeQuery = true)
+    List<Evaluation> getEvalsByDate(int idUser);
 
 
 
