@@ -295,7 +295,6 @@ public class UtilisateurController {
     public ListEntier getNbreUtilisateur() {
         ListEntier listEntier = new ListEntier(  );
         List<Integer> listNumber= new ArrayList <>( );
-        listNumber.add( utilisateurService.findByRole( Utilisateur.Role.ADMINISTRATEUR ).size() );
         listNumber.add( utilisateurService.findByRole( Utilisateur.Role.RESPONSABLE_THEME ).size() );
         listNumber.add( utilisateurService.findByRole( Utilisateur.Role.RESPONSABLE_CATEGORIE ).size() );
         listNumber.add( utilisateurService.findByRole( Utilisateur.Role.APPRENANT ).size() );
