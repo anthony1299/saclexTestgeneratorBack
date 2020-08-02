@@ -1,12 +1,14 @@
 package org.saclex.demo.restcontrollers;
 
 import org.saclex.demo.entities.Categorie;
+import org.saclex.demo.entities.ListEntier;
 import org.saclex.demo.entities.Question;
 import org.saclex.demo.entities.Reponse;
 import org.saclex.demo.service.CategorieService;
 import org.saclex.demo.service.QuestionService;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -56,6 +58,22 @@ public class QuestionController {
         }
 
         return questionService.updateQuestion(question);
+    }
+    @GetMapping("nbrequestioCategorie")
+    public ListEntier getquestionCategorie( ){
+        List<Categorie> categories=categorieService.getAllCategories();
+        ListEntier a= new ListEntier(  );
+        List<String> listcat=new ArrayList <>(  );
+        List<Integer> listnumber=new ArrayList <>(  );
+
+        for( Categorie c:categories
+              ) {
+            listcat.add( c.getLibelle() );
+           listnumber.add( questionService.findByCategorie( c ).size());
+        }
+        a.setListNumber( listnumber );
+        a.setListString( listcat );
+        return a;
     }
 
     //Suppression d'une question à travers l'Id
