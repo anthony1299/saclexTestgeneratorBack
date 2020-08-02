@@ -315,4 +315,12 @@ public class EvaluationController {
         listEntier.setListNumber( listNumber );
         return listEntier;
     }
+    @GetMapping("evaluationByDate/{duree}")
+    public ListEntier getNumber(@PathVariable int duree ){
+        ListEntier listEntier = new ListEntier(  );
+        List<Integer> listNumber= new ArrayList<>( );
+        listNumber.add( evaluationService.getEvalsByDate( duree ).size() );
+        listEntier.setListNumber( listNumber );
+        return listEntier;
+    }
 }

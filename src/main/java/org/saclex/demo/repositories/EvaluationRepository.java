@@ -31,7 +31,7 @@ public interface EvaluationRepository extends JpaRepository<Evaluation,Long> {
     //Fonction qui récupère toutes les évaluations sur une certaine période
     @Query(value = "SELECT * from evaluation \n" +
             "WHERE TIMESTAMPDIFF(DAY,CAST(evaluation.date_creation AS Date),CURRENT_DATE) BETWEEN 0 and ?1",nativeQuery = true)
-    List<Evaluation> getEvalsByDate(int idUser);
+    List<Evaluation> getEvalsByDate(int duree);
 
 
 

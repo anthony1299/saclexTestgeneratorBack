@@ -25,12 +25,14 @@ public interface EvaluationService {
 
      Evaluation findById(Long idEvaluation);
 
+     //Fonction qui permet de retrouver la dernière évaluation d'un apprenant
      Evaluation lastEval(Long idUser,Long IdCategorie);
 
      Evaluation lastEval(Long idUser,Long IdCategorie,String niveau);
 
-     // @RestResource
      List<Evaluation> findByIdUser(Long idUser);
+     //liste des évaluations sur un nombre de jour à partir de la date actuelle en reculant
+    List<Evaluation> getEvalsByDate(int duree);
 
      List<Evaluation> findByIntituleAndUer(String intitule,Long idUser);
 

@@ -121,6 +121,11 @@ private final CategorieService categorieService;
     }
 
     @Override
+    public List < Evaluation > getEvalsByDate(int duree) {
+        return evaluationRepository.getEvalsByDate( duree);
+    }
+
+    @Override
     public List < Evaluation > findByIntituleAndUer(String intitule , Long idUser) {
         List < Evaluation > listev1=findByIdUser( idUser );
         List < Evaluation > listev2=new ArrayList <>(  );
